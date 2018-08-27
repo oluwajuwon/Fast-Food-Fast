@@ -1,2 +1,2 @@
 # Fast-Food-Fast
-A a food delivery service application for a restaurant.
+A food delivery service application for a restaurant, to enable a restaurant manage customer orders better.
