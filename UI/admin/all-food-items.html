@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../assets/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/css/modal.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Home ¦ Fast-Food-Fast</title>
+</head>
+
+<body>
+    <!-- Modal Starts -->
+    <div id="modal" class="modal">
+            <div class="modal-content">
+                <div class="text-center">
+                    <h1 class="red-text">Delete Food item</h1>
+                    <div class="">
+                        <img src="../assets/images/delete.png" alt="success" />
+                    </div>
+                    <div class="">
+                        <h1>Are you sure ?</h1>
+                        <form onsubmit="redirectTo('delete-food-successful.html'); return false;">
+                            <input type="submit" class="btn secondary-colour white-text" value="Yes" />
+                            <button type="button" onclick="modalClosePopup(); return false;" class="btn btn-secondary modal-close">No</button>
+                        </form>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Ends -->
+
+
+    <header>
+        <!-- Navigation bar Starts -->
+        <nav class="navbar" id="myNav">
+            <a href="#" class="nav-brand">Fast-Food-Fast [Admin]</a>
+            <div class="dropdown">
+                <button class="dropbtn">Food Menu
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="add-food.html">Add item</a>
+                    <a href="all-food-items.html">View all items</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Orders
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="all-orders.html">All Orders</a>
+                    <a href="pending-orders.html">Pending Orders</a>
+                    <a href="processed-orders.html">Processed Orders</a>
+                </div>
+            </div>
+            <div class="dropdown profile">
+                <button class="dropbtn">Howdy, Admin
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="admin-account.html">My Account</a>
+                    <a href="login.html">Logout</a>
+                </div>
+            </div>
+            <a href="javascript:void(0);"  class="icon" onclick="myFunction()">&#9776;</a>
+        </nav>
+        <!-- Navigation bar Ends -->
+    </header>
+
+    <!-- Main content Starts -->
+    <main>
+        <div class="container">
+            <h2 class="text-center">All menu items</h2>
+            <hr>
+            <div class="meals">
+                <h2>Pasteries</h2>
+                <hr>
+                <div class="flex-container">
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/pastery-1.jpg" alt="pastery" />
+                            </div>
+
+                            <div class="item-details">
+                                <h5>#1230</h5>
+                                <h3>Traditional French dessert</h3>
+                                <p>Price: &#8358;1500</p>
+                            </div>
+                            <button class="white-text green-bg">
+                                <a href="edit-food-items.html" class="white-text">Edit</a>
+                            </button>
+                            <button class="secondary-colour">
+                                <a href="" class="white-text" onclick="modalPopup(); return false;">Delete</a>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/pastery-2.jpg" alt="pastery" />
+                            </div>
+                            <div class="item-details">
+                                <h5>#1220</h5>
+                                <h3>Sweet italian pastery</h3>
+                                <p>Price: &#8358;1500</p>
+                            </div>
+                            <button class="white-text green-bg">
+                                <a href="edit-food-items.html" class="white-text">Edit</a>
+                            </button>
+                            <button class="secondary-colour">
+                                <a href="" class="white-text" onclick="modalPopup(); return false;">Delete</a>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/pastery-3.jpg" alt="pastery" />
+                            </div>
+                            <div class="item-details">
+                                <h5>#1250</h5>
+                                <h3>Decadent Sugary Fruit Puff</h3>
+                                <p>Price: &#8358;1500</p>
+                            </div>
+                            <button class="white-text green-bg">
+                                <a href="edit-food-items.html" class="white-text">Edit</a>
+                            </button>
+                            <button class="secondary-colour">
+                                <a href="" class="white-text" onclick="modalPopup(); return false;">Delete</a>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/pastery-4.jpg" alt="pastery" />
+                            </div>
+                            <div class="item-details">
+                                <h5>#1270</h5>
+                                <h3>Freshly Baked Sausages</h3>
+                                <p>Price: &#8358;1500</p>
+                            </div>
+                            <button class="white-text green-bg">
+                                <a href="edit-food-items.html" class="white-text">Edit</a>
+                            </button>
+                            <button class="secondary-colour">
+                                <a href="" class="white-text" onclick="modalPopup(); return false;">Delete</a>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <h2>Drinks</h2>
+                <hr>
+                <div class="flex-container">
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/drink-1.jpg" alt="pastery" />
+                            </div>
+
+                            <div class="item-details">
+                                <h5>#1270</h5>
+                                <h3>Coffee</h3>
+                                <p>Price: &#8358;1500</p>
+                            </div>
+                            <button class="white-text green-bg">
+                                <a href="edit-food-items.html" class="white-text">Edit</a>
+                            </button>
+                            <button class="secondary-colour">
+                                <a href="" class="white-text" onclick="modalPopup(); return false;">Delete</a>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/drink-2.jpg" alt="pastery" />
+                            </div>
+                            <div class="item-details">
+                                <h5>#1330</h5>
+                                <h3>Latte</h3>
+                                <p>Price: &#8358;1500</p>
+                            </div>
+                            <button class="white-text green-bg">
+                                <a href="edit-food-items.html" class="white-text">Edit</a>
+                            </button>
+                            <button class="secondary-colour">
+                                <a href="" class="white-text" onclick="modalPopup(); return false;">Delete</a>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/drink-3.jpg" alt="pastery" />
+                            </div>
+                            <div class="item-details">
+                                <h5>#1340</h5>
+                                <h3>Clean Clear Water</h3>
+                                <p>Price: &#8358;1500</p>
+                            </div>
+                            <button class="white-text green-bg">
+                                <a href="edit-food-items.html" class="white-text">Edit</a>
+                            </button>
+                            <button class="secondary-colour">
+                                <a href="" class="white-text" onclick="modalPopup(); return false;">Delete</a>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/drink-4.jpg" alt="pastery" />
+                            </div>
+                            <div class="item-details">
+                                <h5>#1430</h5>
+                                <h3>Cuba Libre cocktail</h3>
+                                <p>Price: &#8358;1500</p>
+                            </div>
+                            <button class="green-bg">
+                                <a href="edit-food-items.html" class="white-text">Edit</a>
+                            </button>
+                            <button class="secondary-colour">
+                                <a href="" class="white-text" onclick="modalPopup(); return false;">Delete</a>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="text-center">
+                    <button class="">
+                        <a>Show More</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <!-- Main content Ends -->
+
+
+    
+    <footer>
+        <div class="primary-colour">
+            <div class="text-center white-text">
+                Fast-Food-Fast &copy; 2018 &nbsp; Developed by
+                <b>Juwon.</b>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="../assets/js/script.js"></script>
+    <script type="text/javascript" src="../assets/js/modal.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!--User pages Skeleton-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../assets/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Home ¦ Fast-Food-Fast</title>
+</head>
+
+<body>
+    <header>
+        <!-- Navigation bar Starts -->
+        <nav class="navbar" id="myNav">
+            <a href="#home" class="nav-brand">Fast-Food-Fast</a>
+            <a href="all-food-items.html">View Menu</a>
+            <div class="dropdown">
+                <button class="dropbtn">Orders
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="pending-orders.html">Pending Orders</a>
+                    <a href="order-history.html">Order history</a>
+                </div>
+            </div>
+            <div class="dropdown profile">
+                <button class="dropbtn">Howdy, Lebagerian
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="my-account.html">My Account</a>
+                    <a href="../login.html">Logout</a>
+                </div>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        </nav>
+        <!-- Navigation bar Ends -->
+    </header>
+
+    <!-- Main content Starts -->
+    <main>
+        <div class="container">
+            <h2 class="text-center">My Order History</h2>
+            <hr>
+           
+            <div class="meals">
+                    <p>Sort by: <a href="#">Date,</a> <a href="#">Order No</a></p>
+                    <p>Filter by Date</p>
+                    <input type="date" class="datepicker"/>
+                    <button class="primary-colour white-text">Filter</button>
+
+                <!--Flex container for food item display starts here-->
+                <div class="flex-container">
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/pastery-1.jpg" />
+                            </div>
+
+                            <div class="item-details">
+                                <h5>#1530</h5>
+                                <p>23-08-2018 12:09:34PM</p>
+                                <h3>Traditional French dessert</h3>
+                                <p>
+                                    <b>Price: </b> &#8358;1500</p>
+                                <p>
+                                    <b>Quantity: </b> 5</p>
+                                <p>
+                                    <b>Amount Paid: </b> &#8358;7500</p>
+                                <p>
+                                    <b>Status: </b>
+                                    <span class="red-text"> Pending</span>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/pastery-2.jpg" />
+                            </div>
+                            <div class="item-details">
+
+                                <h5>#1390</h5>
+                                <p>23-08-2018 12:09:34PM</p>
+                                <h3>Sweet italian pastery</h3>
+                                <p>
+                                    <b>Price: </b> &#8358;1500</p>
+                                <p>
+                                    <b>Quantity: </b> 5</p>
+                                <p>
+                                    <b>Amount Paid: </b> &#8358;7500</p>
+                                <p>
+                                    <b>Status: </b>
+                                    <span class="green-text"> Completed</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/pastery-3.jpg" />
+                            </div>
+                            <div class="item-details">
+
+                                <h5>#1230</h5>
+                                <p>23-08-2018 12:09:34PM</p>
+                                <h3>Decadent Sugary Fruit Puff</h3>
+                                <p>
+                                    <b>Price: </b> &#8358;1500</p>
+                                <p>
+                                    <b>Quantity: </b> 4</p>
+                                <p>
+                                    <b>Amount Paid: </b> &#8358;6000</p>
+                                <p>
+                                    <b>Status: </b>
+                                    <span class="green-text"> Completed</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="item-container">
+                            <div class="img-container">
+                                <img class="img-fluid" src="../assets/images/pastery-4.jpg" />
+                            </div>
+                            <div class="item-details">
+
+                                <h5>#1330</h5>
+                                <p>20-08-2018 10:09:34PM</p>
+                                <h3>Freshly Baked Sausages</h3>
+                                <p>
+                                    <b>Price: </b> &#8358;1500</p>
+                                <p>
+                                    <b>Quantity: </b> 5</p>
+                                <p>
+                                    <b>Amount Paid: </b> &#8358;7500</p>
+                                <p>
+                                    <b>Status: </b>
+                                    <span class="green-text"> Completed</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Flex container for food item display ends here-->
+            </div>
+        </div>
+
+    </main>
+    <!-- Main content Ends -->
+
+
+    <footer>
+        <div class="primary-colour">
+            <div class="text-center white-text">
+                Fast-Food-Fast &copy; 2018 &nbsp; Developed by
+                <b>Juwon.</b>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="../assets/js/script.js"></script>
+</body>
+
+</html>
