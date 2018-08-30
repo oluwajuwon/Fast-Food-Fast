@@ -1,0 +1,30 @@
+.modal {
+    position: fixed;
+    display: none;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .modal-content{
+    margin: 2% auto;
+    width: 50%;
+    background-color: #fefefe;
+    overflow: hidden;
+  }
+
+  .modal img{
+      width: inherit
+  }
+  
+  /* Media queries to target for smaller screen Starts */
+  @media (min-width:320px) and (max-width:720px) {
+    .modal-content {
+      width: 90%;
+    }
+  }
+  
+  /* Media queries to target smaller screens Ends */
+  
