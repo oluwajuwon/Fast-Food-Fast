@@ -362,7 +362,7 @@ Show the link that contains should open and close the navbar (.icon) */
     width: 40%
 }
 
-.order-container .item-details{
+.order-container .order-details{
     float: right;
     width: 60%
 }
