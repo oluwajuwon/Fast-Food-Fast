@@ -32,10 +32,18 @@ button{
     font-size: 15px
 }
 
+button:hover{
+    cursor: pointer
+}
+
 .btn{
     padding: 10px 25px;
     border: 0;
     font-size: 15px
+}
+
+.btn:hover{
+    cursor: pointer
 }
 
 .img-container{
@@ -96,8 +104,16 @@ footer >div{
     background-color: #5d53e7
 }
 
+.primary-colour:hover{
+    background-color: #4b3eff
+}
+
 .secondary-colour{
     background-color: rgb(209, 32, 32);
+}
+
+.secondary-colour:hover{
+    background-color: rgb(221, 51, 51)
 }
 
 .red-text{
@@ -106,6 +122,10 @@ footer >div{
 
 .green-bg{
     background-color: #0dd160
+}
+
+.green-bg:hover{
+    background-color: #24c266
 }
 
 .green-text{
@@ -348,7 +368,7 @@ Show the link that contains should open and close the navbar (.icon) */
 }
 
 .order-details #quantity{
-    padding: 10px
+    padding: 5px
 }
 
 
