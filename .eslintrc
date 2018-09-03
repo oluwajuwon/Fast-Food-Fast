@@ -4,5 +4,9 @@
     "es6": true
     },
     "extends": "airbnb-base",
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "rules": {
+        "import/no-unresolved": "off",
+        "import/extensions": "off"
+    }
 }
