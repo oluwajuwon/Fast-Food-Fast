@@ -25,6 +25,7 @@
   "homepage": "https://github.com/oluwajuwon/Fast-Food-Fast#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
     "express": "^4.16.3"
   },
   "devDependencies": {
@@ -35,6 +36,7 @@
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0"
   }
 }
