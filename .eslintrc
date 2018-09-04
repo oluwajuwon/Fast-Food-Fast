@@ -3,10 +3,13 @@
     "node": true,
     "es6": true
     },
-    "extends": "airbnb-base",
+    "extends": "airbnb",
     "parser": "babel-eslint",
     "rules": {
         "import/no-unresolved": "off",
-        "import/extensions": "off"
+        "import/extensions": "off",
+        "no-console":"off",
+        "linebreak-style":"off",
+        "class-methods-use-this": 0
     }
 }
