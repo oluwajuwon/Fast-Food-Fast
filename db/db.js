@@ -2,10 +2,11 @@ const orders = [
   {
     orderId: 1,
     foodName: 'Robert Downey',
-    food: 'chicken and chips',
-    price: 'N2000',
-    quantity: '5',
-    status: 'Pending',
+    price: 'chicken and chips',
+    quantity: 'N2000',
+    orderedBy: '5',
+    orderDatetime: '24-08-2018 20:00:09',
+    orderStatus: 'Pending',
   },
 ];
 
