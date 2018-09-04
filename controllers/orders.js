@@ -1,9 +1,9 @@
 import db from '../db/db';
 
-class orderController {
+class OrderControllers {
   //    controller to retrieve all orders
-  getAllorders(request, response) {
-    return response.status(200).send(
+  getAllorders(req, res) {
+    return res.status(200).send(
       {
         success: 'true',
         message: 'Retrieved orders successfully',
@@ -13,4 +13,5 @@ class orderController {
   }
 }
 
+const orderController = new OrderControllers();
 export default orderController;
