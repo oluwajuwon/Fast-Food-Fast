@@ -5,5 +5,6 @@ const router = express.Router();
 router.get('/api/v1/orders', orderController.getAllorders);
 router.get('/api/v1/orders/:id', orderController.getOrder);
 router.post('/api/v1/orders', orderController.createOrder);
+router.put('/api/v1/orders/:id', orderController.updateOrder);
 
 export default router;
