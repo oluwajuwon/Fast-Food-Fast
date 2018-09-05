@@ -27,7 +27,7 @@ class OrderControllers {
     }
     return res.status(404).send({
       success: 'false',
-      message: `todo with the ID: ${id} does not exist`,
+      message: `Order with the ID: ${id} does not exist`,
     });
   }
 
