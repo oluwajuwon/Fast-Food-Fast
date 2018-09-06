@@ -11,6 +11,7 @@
         "no-console":"off",
         "no-else-return":"off",
         "linebreak-style":"off",
-        "class-methods-use-this":"off"
+        "class-methods-use-this":"off",
+        "array-callback-return":"off"
     }
 }

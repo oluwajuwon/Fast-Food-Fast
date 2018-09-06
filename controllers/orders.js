@@ -27,7 +27,7 @@ class OrderControllers {
     }
     return res.status(404).send({
       success: 'false',
-      message: `todo with the ID: ${id} does not exist`,
+      message: `Order with the ID: ${id} does not exist`,
     });
   }
 
@@ -80,6 +80,70 @@ class OrderControllers {
       success: 'true',
       message: 'a new order has been successfully',
       order,
+    });
+  }
+
+  //  controller to update an order -- works fine
+  updateOrder(req, res) {
+    const id = parseInt(req.params.id, 10);
+    let orderFound;
+    let itemIndex;
+    db.map((order, index) => {
+      if (order.orderId === id) {
+        orderFound = order;
+        itemIndex = index;
+      }
+    });
+
+    if (!orderFound) {
+      return res.status(404).send({
+        success: 'false',
+        message: 'order not found',
+      });
+    }
+
+    if (!req.body.foodName) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'Food name is required',
+      });
+    } else if (!req.body.price) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'Price of food is required',
+      });
+    } else if (!req.body.quantity) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'Quantity of order is required',
+      });
+    } else if (!req.body.orderedBy) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'Customer name is required',
+      });
+    } else if (!req.body.orderStatus) {
+      return res.status(400).send({
+        success: 'false',
+        message: 'The status of the order is required',
+      });
+    }
+
+    const updatedOrder = {
+      orderId: orderFound.orderId,
+      foodName: req.body.foodName || orderFound.foodName,
+      price: req.body.price || orderFound.price,
+      quantity: req.body.quantity || orderFound.quantity,
+      orderedBy: req.body.orderedBy || orderFound.orderedBy,
+      orderDatetime: req.body.orderDatetime || orderFound.orderDatetime,
+      orderStatus: req.body.orderStatus || orderFound.orderStatus,
+    };
+
+    db.splice(itemIndex, 1, updatedOrder);
+    return res.status(201).send({
+      success: 'true',
+      message: 'Order updated successfully',
+      updatedOrder,
     });
   }
 }
