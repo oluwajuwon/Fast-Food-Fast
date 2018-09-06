@@ -5,7 +5,7 @@ import app from '../app';
 const request = require('supertest');
 
 // run API test
-describe('Test suite for API endpoint', () => {
+describe('Test suite for API endpoints', () => {
   it('should return all orders', (done) => {
     request(app)
       .get('/api/v1/orders')
