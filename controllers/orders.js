@@ -7,7 +7,7 @@ class OrderControllers {
       {
         success: 'true',
         message: 'Retrieved orders successfully',
-        orders: db,
+        db,
       },
     );
   }
@@ -21,7 +21,7 @@ class OrderControllers {
         {
           success: 'true',
           message: 'The order was retrieved successfully',
-          order: result,
+          result,
         },
       );
     }
@@ -78,7 +78,7 @@ class OrderControllers {
     db.push(order);
     return res.status(201).send({
       success: 'true',
-      message: 'a new order has been successfully',
+      message: 'Your order has been placed successfully',
       order,
     });
   }
