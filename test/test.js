@@ -81,15 +81,11 @@ describe('Test suite for API endpoints', () => {
           expect(response.body).to.be.an('object').with.property('orderFound');
           expect(response.body).to.be.an('object').with.property('orderFound').to.be.an('object').with.property('orderId');
           expect(response.body).to.be.an('object').with.property('orderFound').to.be.an('object').with.property('orderId').to.be.a('number');
-          expect(response.body).to.be.an('object').with.property('orderFound').to.be.an('object').with.property('foodName').to.be.a('string');
           expect(response.body).to.be.an('object').with.property('orderFound').to.be.an('object').with.property('price');
           expect(response.body).to.be.an('object').with.property('orderFound').to.be.an('object').with.property('quantity');
           expect(response.body).to.be.an('object').with.property('orderFound').to.be.an('object').with.property('orderedBy');
-          expect(response.body).to.be.an('object').with.property('orderFound').to.be.an('object').with.property('orderedBy').to.be.a('string');
           expect(response.body).to.be.an('object').with.property('orderFound').to.be.an('object').with.property('orderDatetime');
           expect(response.body).to.be.an('object').with.property('updatedOrder');
-          expect(response.body).to.be.an('object').with.property('updatedOrder').to.be.an('object').with.property('orderId').to.be.a('number');
-          expect(response.body).to.be.an('object').with.property('updatedOrder').to.be.an('object').with.property('foodName').to.be.a('string');
           done();
         }
         if (response.body.status === '201') {
