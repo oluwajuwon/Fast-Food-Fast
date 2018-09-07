@@ -10,6 +10,12 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./test/test.js --timeout 10000 --exit"
   },
+
+  "engines":{
+    "node": "8.9.3",
+    "npm": "5.5.1"
+  },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oluwajuwon/Fast-Food-Fast.git"
@@ -31,6 +37,8 @@
     "chai": "^4.1.2",
     "express": "^4.16.3"
   },
+
+
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
