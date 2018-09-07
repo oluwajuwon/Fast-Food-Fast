@@ -1,12 +1,13 @@
-env:
-  global:
-    - CC_TEST_REPORTER_ID=9894e7b58a743078c9316e16e3456ba1565a8a054eae857c03150a0d7d3aca31
-
 language: node_js
 
 node_js:
   - "node"
   - "8"
+
+addons:
+  code_climate:
+      repo_token:
+        secure: "9894e7b58a743078c9316e16e3456ba1565a8a054eae857c03150a0d7d3aca31"
 
 script:
   - npm run test
