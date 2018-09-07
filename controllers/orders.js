@@ -39,6 +39,11 @@ class OrderControllers {
         success: 'false',
         message: 'Food name is required',
       });
+    } else if (request.body.orderId) {
+      return response.status(400).send({
+        success: 'false',
+        message: 'No need to input OrderId',
+      });
     } else if (!request.body.price) {
       return response.status(400).send({
         success: 'false',
