@@ -106,26 +106,6 @@ class OrderControllers {
         success: 'false',
         message: 'order not found',
       });
-    } else if (!request.body.foodName) {
-      return response.status(400).send({
-        success: 'false',
-        message: 'Food name is required',
-      });
-    } else if (!request.body.price) {
-      return response.status(400).send({
-        success: 'false',
-        message: 'Price of food is required',
-      });
-    } else if (!request.body.quantity) {
-      return response.status(400).send({
-        success: 'false',
-        message: 'Quantity of order is required',
-      });
-    } else if (!request.body.orderedBy) {
-      return response.status(400).send({
-        success: 'false',
-        message: 'Customer name is required',
-      });
     } else if (!request.body.orderStatus) {
       return response.status(400).send({
         success: 'false',
