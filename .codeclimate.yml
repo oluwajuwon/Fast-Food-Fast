@@ -3,6 +3,6 @@ plugins:
   eslint:
     enabled: true
 
-    exclude_patterns:
+exclude_patterns:
   - "**/node_modules/"
   - "db/"
