@@ -46,6 +46,15 @@ describe('Test suite for API endpoints', () => {
       });
   });
 
+  it('should return 404 error if not found', (done) => {
+    request(app)
+      .get('/api/v1/orders/5')
+      .end((err, response) => {
+        expect(response.status).to.equal(404);
+        done();
+      });
+  });
+
   it('should add new order', (done) => {
     request(app)
       .post('/api/v1/orders/')

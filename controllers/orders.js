@@ -24,11 +24,12 @@ class OrderControllers {
           result,
         },
       );
+    } else {
+      return response.status(404).send({
+        success: 'false',
+        message: `Order with the ID: ${id} does not exist`,
+      });
     }
-    return response.status(404).send({
-      success: 'false',
-      message: `Order with the ID: ${id} does not exist`,
-    });
   }
 
   //  controller to place a new order
