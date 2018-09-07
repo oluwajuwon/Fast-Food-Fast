@@ -8,7 +8,7 @@ script:
   - npm run test
   
 after_success:
-- npm run coveralls
+  - npm run coveralls
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 before_script:
