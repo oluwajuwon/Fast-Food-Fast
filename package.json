@@ -6,7 +6,9 @@
   "scripts": {
     "build": "babel src -d lib",
     "start": "nodemon app.js --exec babel-node --",
-    "test": "mocha --compilers js:babel-core/register ./test/test.js --timeout 10000 --exit"
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --compilers js:babel-core/register ./test/test.js",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./test/test.js --timeout 10000 --exit"
   },
   "repository": {
     "type": "git",
@@ -41,9 +43,11 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
+    "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.4",
+    "nyc": "^13.0.1",
     "supertest": "^3.2.0"
   }
 }

@@ -2,8 +2,8 @@ import db from '../db/db';
 
 class OrderControllers {
   //    controller to retrieve all orders
-  getAllorders(req, res) {
-    return res.status(200).send(
+  getAllorders(request, response) {
+    return response.status(200).send(
       {
         success: 'true',
         message: 'Retrieved orders successfully',
@@ -13,11 +13,11 @@ class OrderControllers {
   }
 
   //  controller to get a specific order
-  getOrder(req, res) {
-    const id = parseInt(req.params.id, 10);
+  getOrder(request, response) {
+    const id = parseInt(request.params.id, 10);
     const result = db.find(order => order.orderId === id);
     if (result) {
-      return res.status(200).send(
+      return response.status(200).send(
         {
           success: 'true',
           message: 'The order was retrieved successfully',
@@ -25,41 +25,41 @@ class OrderControllers {
         },
       );
     }
-    return res.status(404).send({
+    return response.status(404).send({
       success: 'false',
       message: `Order with the ID: ${id} does not exist`,
     });
   }
 
   //  controller to place a new order
-  createOrder(req, res) {
-    if (!req.body.foodName) {
-      return res.status(400).send({
+  createOrder(request, response) {
+    if (!request.body.foodName) {
+      return response.status(400).send({
         success: 'false',
         message: 'Food name is required',
       });
-    } else if (!req.body.price) {
-      return res.status(400).send({
+    } else if (!request.body.price) {
+      return response.status(400).send({
         success: 'false',
         message: 'The price is required',
       });
-    } else if (!req.body.quantity) {
-      return res.status(400).send({
+    } else if (!request.body.quantity) {
+      return response.status(400).send({
         success: 'false',
         message: 'How much food i.e. the quantity is required',
       });
-    } else if (!req.body.orderedBy) {
-      return res.status(400).send({
+    } else if (!request.body.orderedBy) {
+      return response.status(400).send({
         success: 'false',
         message: 'Customer name is required',
       });
-    } else if (!req.body.orderDatetime) {
-      return res.status(400).send({
+    } else if (!request.body.orderDatetime) {
+      return response.status(400).send({
         success: 'false',
         message: 'The date and time of the order is required',
       });
-    } else if (!req.body.orderStatus) {
-      return res.status(400).send({
+    } else if (!request.body.orderStatus) {
+      return response.status(400).send({
         success: 'false',
         message: 'The status of the order is required',
       });
@@ -67,16 +67,16 @@ class OrderControllers {
     //  initialize the order object
     const order = {
       orderId: db.length + 1,
-      foodName: req.body.foodName,
-      price: req.body.price,
-      quantity: req.body.quantity,
-      orderedBy: req.body.orderedBy,
-      orderDatetime: req.body.orderDatetime,
-      orderStatus: req.body.orderStatus,
+      foodName: request.body.foodName,
+      price: request.body.price,
+      quantity: request.body.quantity,
+      orderedBy: request.body.orderedBy,
+      orderDatetime: request.body.orderDatetime,
+      orderStatus: request.body.orderStatus,
     };
 
     db.push(order);
-    return res.status(201).send({
+    return response.status(201).send({
       success: 'true',
       message: 'Your order has been placed successfully',
       order,
@@ -84,8 +84,8 @@ class OrderControllers {
   }
 
   //  controller to update an order -- works fine
-  updateOrder(req, res) {
-    const id = parseInt(req.params.id, 10);
+  updateOrder(request, response) {
+    const id = parseInt(request.params.id, 10);
     let orderFound;
     let itemIndex;
     db.map((order, index) => {
@@ -96,55 +96,53 @@ class OrderControllers {
     });
 
     if (!orderFound) {
-      return res.status(404).send({
+      return response.status(404).send({
         success: 'false',
         message: 'order not found',
       });
-    }
-
-    if (!req.body.foodName) {
-      return res.status(400).send({
+    } else if (!request.body.foodName) {
+      return response.status(400).send({
         success: 'false',
         message: 'Food name is required',
       });
-    } else if (!req.body.price) {
-      return res.status(400).send({
+    } else if (!request.body.price) {
+      return response.status(400).send({
         success: 'false',
         message: 'Price of food is required',
       });
-    } else if (!req.body.quantity) {
-      return res.status(400).send({
+    } else if (!request.body.quantity) {
+      return response.status(400).send({
         success: 'false',
         message: 'Quantity of order is required',
       });
-    } else if (!req.body.orderedBy) {
-      return res.status(400).send({
+    } else if (!request.body.orderedBy) {
+      return response.status(400).send({
         success: 'false',
         message: 'Customer name is required',
       });
-    } else if (!req.body.orderStatus) {
-      return res.status(400).send({
+    } else if (!request.body.orderStatus) {
+      return response.status(400).send({
         success: 'false',
         message: 'The status of the order is required',
       });
+    } else {
+      const updatedOrder = {
+        orderId: orderFound.orderId,
+        foodName: request.body.foodName || orderFound.foodName,
+        price: request.body.price || orderFound.price,
+        quantity: request.body.quantity || orderFound.quantity,
+        orderedBy: request.body.orderedBy || orderFound.orderedBy,
+        orderDatetime: request.body.orderDatetime || orderFound.orderDatetime,
+        orderStatus: request.body.orderStatus || orderFound.orderStatus,
+      };
+
+      db.splice(itemIndex, 1, updatedOrder);
+      return response.status(201).send({
+        success: 'true',
+        message: 'Order updated successfully',
+        updatedOrder,
+      });
     }
-
-    const updatedOrder = {
-      orderId: orderFound.orderId,
-      foodName: req.body.foodName || orderFound.foodName,
-      price: req.body.price || orderFound.price,
-      quantity: req.body.quantity || orderFound.quantity,
-      orderedBy: req.body.orderedBy || orderFound.orderedBy,
-      orderDatetime: req.body.orderDatetime || orderFound.orderDatetime,
-      orderStatus: req.body.orderStatus || orderFound.orderStatus,
-    };
-
-    db.splice(itemIndex, 1, updatedOrder);
-    return res.status(201).send({
-      success: 'true',
-      message: 'Order updated successfully',
-      updatedOrder,
-    });
   }
 }
 
