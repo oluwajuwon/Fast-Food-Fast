@@ -6,11 +6,46 @@ const request = require('supertest');
 
 // run API test
 describe('Test suite for API endpoints', () => {
-  it('should return all orders', (done) => {
+  it('GET /api/v1/orders should return status 200', (done) => {
     request(app)
       .get('/api/v1/orders')
       .end((err, response) => {
         expect(response.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('GET /api/v1/orders should return an object', (done) => {
+    request(app)
+      .get('/api/v1/orders')
+      .end((err, response) => {
+        expect(response.body).to.be.an('object');
+        done();
+      });
+  });
+
+  it('GET /api/v1/orders should return an object with the db property', (done) => {
+    request(app)
+      .get('/api/v1/orders')
+      .end((err, response) => {
+        expect(response.body).to.be.an('object').with.property('db');
+        done();
+      });
+  });
+
+  it('GET /api/v1/orders should return an object with a message that says the order was retrieved successfully', (done) => {
+    request(app)
+      .get('/api/v1/orders')
+      .end((err, response) => {
+        expect(response.body.message).to.be.equal('Retrieved orders successfully');
+        done();
+      });
+  });
+
+  it('should return all orders', (done) => {
+    request(app)
+      .get('/api/v1/orders')
+      .end((err, response) => {
         expect(response.body).to.be.an('object');
         expect(response.body).to.be.an('object').with.property('db');
         expect(response.body.message).to.be.equal('Retrieved orders successfully');
