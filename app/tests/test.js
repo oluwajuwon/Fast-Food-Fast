@@ -28,16 +28,12 @@ describe('Test suite for API endpoints', () => {
         expect(response.body).to.be.an('object').with.property('result');
         expect(response.body.message).to.be.equal('The order was retrieved successfully');
         expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('orderId');
-        expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('orderId').is.a('number');
         expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('foodName');
-        expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('foodName').is.a('string');
         expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('price');
         expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('quantity');
         expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('orderedBy');
-        expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('orderedBy').is.a('string');
         expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('orderDatetime');
         expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('orderStatus');
-        expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('orderStatus').is.a('string');
         if (response.body.status === '404') {
           expect(response.body.message).to.equal('order with the ID: 1 does not exist');
           done();
@@ -90,7 +86,6 @@ describe('Test suite for API endpoints', () => {
         }
         if (response.body.status === '201') {
           expect(response.body).to.be.an('object').with.property('updatedOrder').to.be.an('object').to.not.be.equal('orderFound');
-          expect(response.body).to.be.an('object').with.property('orderFound').to.be.an('object').with.property('id').to.be.equal('updatedOrder').to.be.an('object').with.property('id');
           done();
         }
         done();

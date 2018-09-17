@@ -1,16 +1,15 @@
 
-/* Toggle between adding and removing the "responsive" class to navbar when the user clicks on the icon */
+/* Toggle between adding and removing the "responsive" class to navbar */
 
-const myFunction =() =>{
-    const x = document.getElementById("myNav");
+const myFunction = () => {
+  const x = document.getElementById('myNav');
 
-    if (x.className === "navbar") {
-        x.className += " responsive";
-    } 
-    else {
-        x.className = "navbar";
-    }
-}
+  if (x.className === 'navbar') {
+    x.className += 'responsive';
+  } else {
+    x.className = 'navbar';
+  }
+};
 
 const redirectTo = location => {
     window.location.href = location;

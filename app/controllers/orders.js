@@ -3,7 +3,7 @@ import db from '../db/db';
 class OrderControllers {
   //    controller to retrieve all orders
   getAllorders(request, response) {
-    return response.status(200).send(
+    return response.status(200).json(
       {
         success: 'true',
         message: 'Retrieved orders successfully',
@@ -17,7 +17,7 @@ class OrderControllers {
     const id = parseInt(request.params.id, 10);
     const result = db.find(order => order.orderId === id);
     if (result) {
-      return response.status(200).send(
+      return response.status(200).json(
         {
           success: 'true',
           message: 'The order was retrieved successfully',
@@ -25,7 +25,7 @@ class OrderControllers {
         },
       );
     } else {
-      return response.status(404).send({
+      return response.status(404).json({
         success: 'false',
         message: `Order with the ID: ${id} does not exist`,
       });
@@ -35,37 +35,37 @@ class OrderControllers {
   //  controller to place a new order
   createOrder(request, response) {
     if (!request.body.foodName) {
-      return response.status(400).send({
+      return response.status(400).json({
         success: 'false',
         message: 'Food name is required',
       });
     } else if (request.body.orderId) {
-      return response.status(400).send({
+      return response.status(400).json({
         success: 'false',
         message: 'No need to input OrderId',
       });
     } else if (!request.body.price) {
-      return response.status(400).send({
+      return response.status(400).json({
         success: 'false',
         message: 'The price is required',
       });
     } else if (!request.body.quantity) {
-      return response.status(400).send({
+      return response.status(400).json({
         success: 'false',
         message: 'How much food i.e. the quantity is required',
       });
     } else if (!request.body.orderedBy) {
-      return response.status(400).send({
+      return response.status(400).json({
         success: 'false',
         message: 'Customer name is required',
       });
     } else if (!request.body.orderDatetime) {
-      return response.status(400).send({
+      return response.status(400).json({
         success: 'false',
         message: 'The date and time of the order is required',
       });
     } else if (!request.body.orderStatus) {
-      return response.status(400).send({
+      return response.status(400).json({
         success: 'false',
         message: 'The status of the order is required',
       });
@@ -82,7 +82,7 @@ class OrderControllers {
     };
 
     db.push(order);
-    return response.status(201).send({
+    return response.status(201).json({
       success: 'true',
       message: 'Your order has been placed successfully',
       order,
@@ -102,12 +102,12 @@ class OrderControllers {
     });
 
     if (!orderFound) {
-      return response.status(404).send({
+      return response.status(404).json({
         success: 'false',
         message: 'order not found',
       });
     } else if (!request.body.orderStatus) {
-      return response.status(400).send({
+      return response.status(400).json({
         success: 'false',
         message: 'The status of the order is required',
       });
@@ -123,7 +123,7 @@ class OrderControllers {
       };
 
       db.splice(itemIndex, 1, updatedOrder);
-      return response.status(201).send({
+      return response.status(201).json({
         success: 'true',
         message: 'Order updated successfully',
         updatedOrder,
