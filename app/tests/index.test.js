@@ -13,4 +13,13 @@ describe('Test suite for Index route', () => {
         done();
       });
   });
+
+  it('GET / should return status 404 if unknown URI is entered', (done) => {
+    request(app)
+      .get('/ap')
+      .end((err, response) => {
+        expect(response.status).to.equal(404);
+        done();
+      });
+  });
 });

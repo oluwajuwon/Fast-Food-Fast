@@ -7,7 +7,7 @@ const request = require('supertest');
 // run API test
 describe('Test suite for Order API endpoints', () => {
   describe('GET /api/v1/orders', () => {
-    it('should return status 200', (done) => {
+    it('should return status 200 if all orders were retrieved', (done) => {
       request(app)
         .get('/api/v1/orders')
         .end((err, response) => {
@@ -16,11 +16,11 @@ describe('Test suite for Order API endpoints', () => {
         });
     });
 
-    it('should return an object', (done) => {
+    it('should return an object containing the orders', (done) => {
       request(app)
         .get('/api/v1/orders')
         .end((err, response) => {
-          expect(response.body).to.be.an('object');
+          expect(response.body).to.be.an('object').with.property('db');
           done();
         });
     });
@@ -34,7 +34,7 @@ describe('Test suite for Order API endpoints', () => {
         });
     });
 
-    it('should return an object with a message that says the order was retrieved successfully', (done) => {
+    it('should return an object with a message saying all the orders were retrieved successfully', (done) => {
       request(app)
         .get('/api/v1/orders')
         .end((err, response) => {
@@ -49,7 +49,6 @@ describe('Test suite for Order API endpoints', () => {
         .end((err, response) => {
           expect(response.body).to.be.an('object');
           expect(response.body).to.be.an('object').with.property('db');
-          expect(response.body.message).to.be.equal('Retrieved orders successfully');
           expect(response.body).to.be.an('object').with.property('db').to.be.an('array');
           done();
         });
@@ -98,7 +97,6 @@ describe('Test suite for Order API endpoints', () => {
       request(app)
         .get('/api/v1/orders/5')
         .end((err, response) => {
-          expect(response.status).to.equal(404);
           expect(response.body.message).to.equal('Order with the ID: 5 does not exist');
           done();
         });
@@ -125,18 +123,6 @@ describe('Test suite for Order API endpoints', () => {
         .end((err, response) => {
           if (response.body.success === 'true') {
             expect(response.status).to.equal(201);
-            done();
-          }
-          done();
-        });
-    });
-
-    it('should return a message saying a new order was added succesfully', (done) => {
-      request(app)
-        .post('/api/v1/orders')
-        .end((err, response) => {
-          if (response.body.success === 'true') {
-            expect(response.body.message).to.equal('a new order has been successfully');
             done();
           }
           done();
