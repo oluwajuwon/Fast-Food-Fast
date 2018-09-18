@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//  Initialize the express validator to handle the incoming requests
+//  Initialize the express validator to validate the incoming requests
 app.use(expressValidator());
 
 app.use(indexRoute);
