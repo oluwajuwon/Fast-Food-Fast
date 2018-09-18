@@ -13,4 +13,15 @@ describe('Test suite for User API endpoints', () => {
         done();
       });
   });
+
+  describe('POST /api/v1/users/auth/signup', () => {
+    it('should return status code 201 if the new user was added succesfully', (done) => {
+      request(app)
+        .post('/api/v1/users/auth/signup')
+        .end((err, response) => {
+          expect(response.status).to.equal(201);
+          done();
+        });
+    });
+  });
 });
