@@ -16,11 +16,11 @@ describe('Test suite for Order API endpoints', () => {
         });
     });
 
-    it('should return an object containing all the orders', (done) => {
+    it('should return an object containing the orders', (done) => {
       request(app)
         .get('/api/v1/orders')
         .end((err, response) => {
-          expect(response.body).to.be.an('object').with.property('db').to.be.an('object');
+          expect(response.body).to.be.an('object').with.property('db');
           done();
         });
     });
