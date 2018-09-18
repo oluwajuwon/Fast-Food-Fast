@@ -39,11 +39,6 @@ class OrderControllers {
         success: 'false',
         message: 'Food name is required',
       });
-    } else if (request.body.orderId) {
-      return response.status(400).json({
-        success: 'false',
-        message: 'No need to input OrderId',
-      });
     } else if (!request.body.price) {
       return response.status(400).json({
         success: 'false',
@@ -54,38 +49,23 @@ class OrderControllers {
         success: 'false',
         message: 'How much food i.e. the quantity is required',
       });
-    } else if (!request.body.orderedBy) {
-      return response.status(400).json({
-        success: 'false',
-        message: 'Customer name is required',
-      });
-    } else if (!request.body.orderDatetime) {
-      return response.status(400).json({
-        success: 'false',
-        message: 'The date and time of the order is required',
-      });
-    } else if (!request.body.orderStatus) {
-      return response.status(400).json({
-        success: 'false',
-        message: 'The status of the order is required',
-      });
     }
     //  initialize the order object
-    const order = {
+    const newOrder = {
       orderId: db.length + 1,
       foodName: request.body.foodName,
       price: request.body.price,
       quantity: request.body.quantity,
-      orderedBy: request.body.orderedBy,
-      orderDatetime: request.body.orderDatetime,
-      orderStatus: request.body.orderStatus,
+      orderedBy: 'Customer name',
+      orderDatetime: 'order date and time',
+      orderStatus: 'temporary order status',
     };
 
-    db.push(order);
+    db.push(newOrder);
     return response.status(201).json({
       success: 'true',
       message: 'Your order has been placed successfully',
-      order,
+      newOrder,
     });
   }
 

@@ -6,9 +6,9 @@
   "scripts": {
     "build": "babel src -d lib",
     "start": "nodemon ./app/app.js --exec babel-node --",
-    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --compilers js:babel-core/register ./app/tests/test.js",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --compilers js:babel-core/register ./app/tests/**/*.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./app/tests/test.js --timeout 10000 --exit"
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./app/tests/**/*.test.js --timeout 10000 --exit"
   },
 
   "engines":{
