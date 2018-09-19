@@ -57,8 +57,8 @@ class OrderControllers {
       price: request.body.price,
       quantity: request.body.quantity,
       orderedBy: 'Customer name',
-      orderDatetime: 'order date and time',
-      orderStatus: 'temporary order status',
+      orderDatetime: '23-08-2018 19:00:00',
+      orderStatus: 'Pending',
     };
 
     db.push(newOrder);
