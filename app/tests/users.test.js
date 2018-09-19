@@ -1,7 +1,20 @@
 import { expect } from 'chai';
+import moment from 'moment';
 import app from '../app';
 
+
 const request = require('supertest');
+
+const userId = 2;
+const username = 'jay';
+const fullName = 'Robert Downey';
+const email = 'jayy@gmail.com';
+const password = '123456';
+const passwordMatch = '123456';
+const userType = 'Customer';
+const token = '123456';
+const createdAt = moment.now();
+const updatedAt = moment.now();
 
 // run API test
 describe('Test suite for User API endpoints', () => {
@@ -12,5 +25,59 @@ describe('Test suite for User API endpoints', () => {
         expect(response.status).to.equal(200);
         done();
       });
+  });
+
+  describe('POST /api/v1/users/auth/signup', () => {
+    it('should return status code 201 if the new user was added succesfully', (done) => {
+      request(app)
+        .post('/api/v1/users/auth/signup')
+        .send({
+          userId,
+          username,
+          fullName,
+          email,
+          password,
+          passwordMatch,
+          userType,
+          token,
+          createdAt,
+          updatedAt,
+        })
+        .end((err, response) => {
+          expect(response.status).to.equal(201);
+          done();
+        });
+    });
+
+    it('should return status code 400 if the fields were left empty', (done) => {
+      request(app)
+        .post('/api/v1/users/auth/signup')
+        .send({})
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
+          done();
+        });
+    });
+
+    it('should add the new user succesfully', (done) => {
+      request(app)
+        .post('/api/v1/users/auth/signup')
+        .send({
+          userId,
+          username,
+          fullName,
+          email,
+          password,
+          passwordMatch,
+          userType,
+          token,
+          createdAt,
+          updatedAt,
+        })
+        .end((err, response) => {
+          expect(response.body).to.be.an('object');
+          done();
+        });
+    });
   });
 });
