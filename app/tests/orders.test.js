@@ -4,6 +4,11 @@ import app from '../app';
 
 const request = require('supertest');
 
+const foodName = 'Chicken and chips';
+const price = '2000';
+const quantity = '2';
+const orderStatus = 'Completed';
+
 // run API test
 describe('Test suite for Order API endpoints', () => {
   describe('GET /api/v1/orders', () => {
@@ -104,27 +109,23 @@ describe('Test suite for Order API endpoints', () => {
   });
 
   describe('POST /api/v1/orders/', () => {
-    it('should add new order', (done) => {
+    it('should return status code 201 if order was added succesfully', (done) => {
       request(app)
-        .post('/api/v1/orders/')
+        .post('/api/v1/orders')
+        .send({ foodName, price, quantity })
         .end((err, response) => {
-          if (response.body.success === 'true') {
-            expect(response.body).to.be.an('object').with.property('newOrder');
-            expect(response.body).to.be.an('object').with.property('newOrder').to.be.an('object');
-            done();
-          }
+          expect(response.status).to.equal(201);
           done();
         });
     });
 
-    it('should return status code 201 if order was added succesfully', (done) => {
+    it('should add new order', (done) => {
       request(app)
-        .post('/api/v1/orders')
+        .post('/api/v1/orders/')
+        .send({ foodName, price, quantity })
         .end((err, response) => {
-          if (response.body.success === 'true') {
-            expect(response.status).to.equal(201);
-            done();
-          }
+          expect(response.body).to.be.an('object').with.property('newOrder');
+          expect(response.body).to.be.an('object').with.property('newOrder').to.be.an('object');
           done();
         });
     });
@@ -132,11 +133,9 @@ describe('Test suite for Order API endpoints', () => {
     it('should return a message saying a new order was added succesfully', (done) => {
       request(app)
         .post('/api/v1/orders')
+        .send({ foodName, price, quantity })
         .end((err, response) => {
-          if (response.body.success === 'true') {
-            expect(response.body.message).to.equal('a new order has been successfully');
-            done();
-          }
+          expect(response.body.message).to.equal('Your order has been placed successfully');
           done();
         });
     });
@@ -146,27 +145,29 @@ describe('Test suite for Order API endpoints', () => {
     it('should update an order', (done) => {
       request(app)
         .put('/api/v1/orders/1')
+        .send({ orderStatus })
         .end((err, response) => {
-          if (response.body.success === 'true') {
-            expect(response.status).to.equal(201);
-            expect(response.body).to.be.an('object');
-            expect(response.body.message).to.be.equal('Order updated successfully');
-            expect(response.body).to.be.an('object').with.property('orderFound');
-            expect(response.body).to.be.an('object').with.property('orderFound').to.be.an('object').with.property('orderId');
-            expect(response.body).to.be.an('object').with.property('updatedOrder');
-            done();
-          }
-          if (response.body.status === '201') {
-            expect(response.body).to.be.an('object').with.property('updatedOrder').to.be.an('object').to.not.be.equal('orderFound');
-            done();
-          }
+          expect(response.body).to.be.an('object');
+          expect(response.body.message).to.be.equal('Order updated successfully');
+          expect(response.body).to.be.an('object').with.property('updatedOrder');
+          done();
+        });
+    });
+
+    it('should return status code 201 if the order was updated successfully', (done) => {
+      request(app)
+        .put('/api/v1/orders/1')
+        .send({ orderStatus })
+        .end((err, response) => {
+          expect(response.status).to.equal(201);
           done();
         });
     });
 
     it('should return status code 404 if order to be updated was not found', (done) => {
       request(app)
-        .put('/api/v1/orders/5')
+        .put('/api/v1/orders/7')
+        .send({ orderStatus })
         .end((err, response) => {
           expect(response.status).to.equal(404);
           done();
