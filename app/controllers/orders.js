@@ -93,7 +93,7 @@ class OrderControllers {
         quantity: request.body.quantity || orderFound.quantity,
         orderedBy: request.body.orderedBy || orderFound.orderedBy,
         orderDatetime: request.body.orderDatetime || orderFound.orderDatetime,
-        orderStatus: request.body.orderStatus || orderFound.orderStatus,
+        orderStatus: request.body.orderStatus,
       };
 
       db.splice(itemIndex, 1, updatedOrder);
