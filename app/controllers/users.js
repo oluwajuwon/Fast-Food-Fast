@@ -15,26 +15,26 @@ class UserControllers {
 
     if (errors) {
       return response.status(400).json({ errors });
-    } else {
-      //  initialize the order object
-      const newUser = {
-        userId: db.length + 1,
-        fullName: request.body.fullName,
-        email: request.body.email,
-        password: request.body.password,
-        userType: 'Customer',
-        token: '123456',
-        createdAt: moment.now(),
-        updatedAt: moment.now(),
-      };
-
-      db.push(newUser);
-      return response.status(201).json({
-        success: 'true',
-        message: 'A new user has been created successfully',
-        newUser,
-      });
     }
+    //  initialize the new user object
+    const newUser = {
+      userId: db.length + 1,
+      username: request.body.username,
+      fullName: request.body.fullName,
+      email: request.body.email,
+      password: request.body.password,
+      userType: 'Customer',
+      token: '123456',
+      createdAt: moment.now(),
+      updatedAt: moment.now(),
+    };
+
+    db.push(newUser);
+    return response.status(201).json({
+      success: 'true',
+      message: 'A new user has been created successfully',
+      newUser,
+    });
   }
 }
 
