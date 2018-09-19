@@ -80,4 +80,16 @@ describe('Test suite for User API endpoints', () => {
         });
     });
   });
+
+  describe('POST /api/v1/users/auth/signin', () => {
+    it('should return status code 200 if the sign in was successful ', (done) => {
+      request(app)
+        .post('/api/v1/users/auth/signin')
+        .send({ email, password })
+        .end((err, response) => {
+          expect(response.status).to.equal(200);
+          done();
+        });
+    });
+  });
 });
