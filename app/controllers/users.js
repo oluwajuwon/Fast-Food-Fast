@@ -39,9 +39,7 @@ class UserControllers {
 
     db.push(newUser);
     return response.status(201).json({
-      success: 'true',
-      message: 'A new user has been created successfully',
-      newUser,
+      success: 'true', message: 'A new user has been created successfully', newUser,
     });
   }
 }
