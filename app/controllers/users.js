@@ -4,6 +4,13 @@ import db from '../db/users';
 
 class UserControllers {
   signUp(request, response) {
+    const userFound = db.find(user => user.username === request.body.username);
+    if (userFound) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'username already exists',
+      });
+    }
     request.check('username', 'Username is required').notEmpty();
     request.check('fullName', 'Your full name is required').notEmpty();
     request.check('email', 'Your email is required').notEmpty();
@@ -16,6 +23,7 @@ class UserControllers {
     if (errors) {
       return response.status(400).json({ errors });
     }
+
     //  initialize the new user object
     const newUser = {
       userId: db.length + 1,
