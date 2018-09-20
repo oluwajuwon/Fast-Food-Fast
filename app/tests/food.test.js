@@ -110,7 +110,7 @@ describe('Test suite for Food API endpoints', () => {
       request(app)
         .post('/api/v1/food')
         .send({
-          userId, foodId, amount, quantity,
+          foodName, price, categoryId, description, image,
         })
         .end((err, response) => {
           expect(response.body.message).to.equal('New food has been added successfully');
