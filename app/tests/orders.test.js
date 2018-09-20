@@ -200,15 +200,5 @@ describe('Test suite for Order API endpoints', () => {
           done();
         });
     });
-
-    it('should return status code 400 if the order status was empty', (done) => {
-      request(app)
-        .put('/api/v1/orders/1')
-        .send({})
-        .end((err, response) => {
-          expect(response.status).to.equal(400);
-          done();
-        });
-    });
   });
 });

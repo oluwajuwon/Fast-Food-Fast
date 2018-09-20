@@ -118,4 +118,54 @@ describe('Test suite for Food API endpoints', () => {
         });
     });
   });
+
+  describe('PUT /api/v1/food/:foodId', () => {
+    it('should update a food item', (done) => {
+      request(app)
+        .put('/api/v1/food/1')
+        .send({
+          foodName, price, categoryId, description, image,
+        })
+        .end((err, response) => {
+          expect(response.body).to.be.an('object');
+          expect(response.body.message).to.be.equal('Food item updated successfully');
+          expect(response.body).to.be.an('object').with.property('updatedFood');
+          done();
+        });
+    });
+
+    it('should return status code 201 if the food was updated successfully', (done) => {
+      request(app)
+        .put('/api/v1/food/1')
+        .send({
+          foodName, price, categoryId, description, image,
+        })
+        .end((err, response) => {
+          expect(response.status).to.equal(201);
+          done();
+        });
+    });
+
+    it('should return status code 400 if the food values were not inputted', (done) => {
+      request(app)
+        .put('/api/v1/food/1')
+        .send({})
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
+          done();
+        });
+    });
+
+    it('should return status code 404 if the food to be updated was not found', (done) => {
+      request(app)
+        .put('/api/v1/food/7')
+        .send({
+          foodName, price, categoryId, description, image,
+        })
+        .end((err, response) => {
+          expect(response.status).to.equal(404);
+          done();
+        });
+    });
+  });
 });
