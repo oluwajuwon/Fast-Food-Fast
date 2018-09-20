@@ -67,7 +67,7 @@ class OrderControllers {
     });
   }
 
-  //  controller to update an order -- works fine
+  //  controller to update an order
   updateOrder(request, response) {
     const id = parseInt(request.params.id, 10);
     let orderFound;
