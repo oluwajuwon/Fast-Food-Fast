@@ -87,6 +87,32 @@ class FoodControllers {
       });
     }
   }
+
+  //  controller to delete food item
+  deleteFood(request, response) {
+    const id = parseInt(request.params.foodId, 10);
+    let foodFound;
+    let itemIndex;
+    db.map((food, index) => {
+      if (food.foodId === id) {
+        foodFound = food;
+        itemIndex = index;
+      }
+    });
+
+    if (!foodFound) {
+      return response.status(404).json({
+        success: 'false',
+        message: 'Food item not found',
+      });
+    }
+
+    db.splice(itemIndex, 1);
+    return response.status(200).json({
+      success: 'true',
+      message: 'Food item deleted successfuly',
+    });
+  }
 }
 
 
