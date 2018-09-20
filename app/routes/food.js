@@ -1,9 +1,8 @@
 import express from 'express';
+import foodController from '../controllers/food';
 
 const router = express.Router();
-router.get('/api/v1/food', (request, response) => response.status(200).json(
-  { hello: 'Food API enpoint' },
-));
+router.get('/api/v1/food', foodController.getAllfood);
 
 
 export default router;
