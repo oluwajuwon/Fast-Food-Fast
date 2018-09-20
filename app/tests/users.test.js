@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import moment from 'moment';
 import app from '../app';
+import db from '../db/users';
 
 
 const request = require('supertest');
@@ -78,6 +79,43 @@ describe('Test suite for User API endpoints', () => {
           expect(response.body).to.be.an('object');
           done();
         });
+    });
+  });
+
+  describe('POST /api/v1/users/auth/signin', () => {
+    it('should return status code 200 if the sign in was successful ', (done) => {
+      request(app)
+        .post('/api/v1/users/auth/signin')
+        .send({ email, password })
+        .end((err, response) => {
+          expect(response.status).to.equal(200);
+          done();
+        });
+    });
+
+    it('should return status code 400 if the values were not entered', (done) => {
+      request(app)
+        .post('/api/v1/users/auth/signin')
+        .send({})
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
+          done();
+        });
+    });
+
+    describe('POST /api/v1/users/auth/signin', () => {
+      beforeEach(() => {
+        db.pop();
+      });
+      it('should return status code 404 if the values entered do not exist', (done) => {
+        request(app)
+          .post('/api/v1/users/auth/signin')
+          .send({ email, password })
+          .end((err, response) => {
+            expect(response.status).to.equal(404);
+            done();
+          });
+      });
     });
   });
 });
