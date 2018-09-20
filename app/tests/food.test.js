@@ -168,4 +168,24 @@ describe('Test suite for Food API endpoints', () => {
         });
     });
   });
+
+  describe('DELETE /api/v1/food/:foodId', () => {
+    it('should return status 200 if it deletes item successfully', (done) => {
+      request(app)
+        .delete('/api/v1/food/1')
+        .end((err, response) => {
+          expect(response.status).to.equal(200);
+          done();
+        });
+    });
+
+    it('should return status code 404 if the food to be deleted was not found', (done) => {
+      request(app)
+        .delete('/api/v1/food/7')
+        .end((err, response) => {
+          expect(response.status).to.equal(404);
+          done();
+        });
+    });
+  });
 });
