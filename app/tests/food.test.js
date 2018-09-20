@@ -53,7 +53,7 @@ describe('Test suite for Food API endpoints', () => {
       request(app)
         .get('/api/v1/food')
         .end((err, response) => {
-          expect(response.body.message).to.be.equal('Retrieved food successfully');
+          expect(response.body.message).to.be.equal('Retrieved food items successfully');
           done();
         });
     });
@@ -103,7 +103,7 @@ describe('Test suite for Food API endpoints', () => {
       request(app)
         .get('/api/v1/food/1')
         .end((err, response) => {
-          expect(response.body.message).to.be.equal('The food was retrieved successfully');
+          expect(response.body.message).to.be.equal('The food item was retrieved successfully');
           done();
         });
     });

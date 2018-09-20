@@ -8,7 +8,7 @@ class FoodControllers {
     return response.status(200).json(
       {
         success: 'true',
-        message: 'Retrieved food successfully',
+        message: 'Retrieved food items successfully',
         db,
       },
     );
@@ -16,7 +16,22 @@ class FoodControllers {
 
   //  controller to retrieve a single food item
   getFood(request, response) {
-
+    const id = parseInt(request.params.foodId, 10);
+    const result = db.find(food => food.foodId === id);
+    if (result) {
+      return response.status(200).json(
+        {
+          success: 'true',
+          message: 'The food item was retrieved successfully',
+          result,
+        },
+      );
+    } else {
+      return response.status(404).json({
+        success: 'false',
+        message: `Food item with the ID: ${id} does not exist`,
+      });
+    }
   }
 
   //  controller to add a new food item
