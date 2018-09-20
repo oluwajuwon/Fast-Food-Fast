@@ -122,13 +122,13 @@ describe('Test suite for Food API endpoints', () => {
   describe('PUT /api/v1/food/:foodId', () => {
     it('should update a food item', (done) => {
       request(app)
-        .put('/api/v1/foods/1')
+        .put('/api/v1/food/1')
         .send({
           foodName, price, categoryId, description, image,
         })
         .end((err, response) => {
           expect(response.body).to.be.an('object');
-          expect(response.body.message).to.be.equal('Food updated successfully');
+          expect(response.body.message).to.be.equal('Food item updated successfully');
           expect(response.body).to.be.an('object').with.property('updatedFood');
           done();
         });
@@ -149,9 +149,7 @@ describe('Test suite for Food API endpoints', () => {
     it('should return status code 400 if the food values were not inputted', (done) => {
       request(app)
         .put('/api/v1/food/1')
-        .send({
-          foodName, price, categoryId, description, image,
-        })
+        .send({})
         .end((err, response) => {
           expect(response.status).to.equal(400);
           done();
