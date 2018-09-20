@@ -22,4 +22,44 @@ describe('Test suite for Food API endpoints', () => {
         done();
       });
   });
+
+  describe('GET /api/v1/food', () => {
+    it('should return status 200 if all foods were retrieved', (done) => {
+      request(app)
+        .get('/api/v1/food')
+        .end((err, response) => {
+          expect(response.status).to.equal(200);
+          done();
+        });
+    });
+
+    it('should return an object containing the foods', (done) => {
+      request(app)
+        .get('/api/v1/food')
+        .end((err, response) => {
+          expect(response.body).to.be.an('object').with.property('db');
+          done();
+        });
+    });
+
+    it('should return an object with a message saying all the foods were retrieved successfully', (done) => {
+      request(app)
+        .get('/api/v1/food')
+        .end((err, response) => {
+          expect(response.body.message).to.be.equal('Retrieved food successfully');
+          done();
+        });
+    });
+
+    it('should return all food', (done) => {
+      request(app)
+        .get('/api/v1/food')
+        .end((err, response) => {
+          expect(response.body).to.be.an('object');
+          expect(response.body).to.be.an('object').with.property('db');
+          expect(response.body).to.be.an('object').with.property('db').to.be.an('array');
+          done();
+        });
+    });
+  });
 });

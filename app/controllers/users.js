@@ -33,8 +33,8 @@ class UserControllers {
       password: request.body.password,
       userType: 'Customer',
       token: '123456',
-      createdAt: moment.now(),
-      updatedAt: moment.now(),
+      createdAt: moment().format(),
+      updatedAt: moment().format(),
     };
 
     db.push(newUser);
