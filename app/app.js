@@ -4,7 +4,6 @@ import expressValidator from 'express-validator';
 import indexRoute from './routes/index';
 import orderRoute from './routes/orders';
 import userRoute from './routes/users';
-
 //  setting up the express application
 const app = express();
 const PORT = process.env.PORT || 3000;
