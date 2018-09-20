@@ -14,6 +14,11 @@ class FoodControllers {
     );
   }
 
+  //  controller to retrieve a single food item
+  getFood(request, response) {
+
+  }
+
   //  controller to add a new food item
   createFood(request, response) {
     request.check('foodName', 'Name of food is required').notEmpty();
