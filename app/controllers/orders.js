@@ -1,4 +1,6 @@
+import moment from 'moment';
 import db from '../db/orders';
+
 
 class OrderControllers {
   //    controller to retrieve all orders
@@ -34,8 +36,9 @@ class OrderControllers {
 
   //  controller to place a new order
   createOrder(request, response) {
-    request.check('foodName', 'Name of food is needed').notEmpty();
-    request.check('price', 'Price of food is required').notEmpty();
+    request.check('userId', 'customer is required').notEmpty();
+    request.check('foodId', 'Food is required').notEmpty();
+    request.check('amount', 'Total amount of food is required').notEmpty();
     request.check('quantity', 'How much food i.e quntity is required').notEmpty();
 
     const errors = request.validationErrors();
@@ -47,12 +50,13 @@ class OrderControllers {
     //  initialize the order object
     const newOrder = {
       orderId: db.length + 1,
-      foodName: request.body.foodName,
-      price: request.body.price,
+      foodId: request.body.foodId,
+      userId: request.body.userId,
       quantity: request.body.quantity,
-      orderedBy: 'Customer name',
-      orderDatetime: 'order date and time',
-      orderStatus: 'temporary order status',
+      amount: request.body.amount,
+      orderStatus: 'pending',
+      orderDatetime: moment().format(),
+      updatedAt: moment().format(),
     };
 
     db.push(newOrder);
@@ -88,12 +92,13 @@ class OrderControllers {
     } else {
       const updatedOrder = {
         orderId: orderFound.orderId,
-        foodName: request.body.foodName || orderFound.foodName,
-        price: request.body.price || orderFound.price,
+        foodId: orderFound.foodId,
+        userId: orderFound.userId,
+        amount: request.body.amount || orderFound.amount,
         quantity: request.body.quantity || orderFound.quantity,
-        orderedBy: request.body.orderedBy || orderFound.orderedBy,
-        orderDatetime: request.body.orderDatetime || orderFound.orderDatetime,
-        orderStatus: request.body.orderStatus,
+        orderStatus: request.body.orderStatus || orderFound.orderStatus,
+        orderDatetime: orderFound.orderDatetime,
+        updatedAt: moment().format() || orderFound.updatedAt,
       };
 
       db.splice(itemIndex, 1, updatedOrder);

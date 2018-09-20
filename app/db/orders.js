@@ -1,21 +1,23 @@
 const orders = [
   {
     orderId: 1,
-    foodName: 'chicken and chips',
-    price: 'N2000',
+    foodId: 2,
+    userId: 3,
     quantity: '5',
-    orderedBy: 'Robert Downey',
-    orderDatetime: '24-08-2018 20:00:09',
+    amount: 'N2000',
     orderStatus: 'Pending',
+    orderDatetime: '24-08-2018 20:00:09',
+    updatedAt: '24-08-2018 20:00:09',
   },
   {
     orderId: 2,
-    foodName: 'Shawarma and sauce',
-    price: 'N5000',
+    foodId: 2,
+    userId: 4,
     quantity: '5',
-    orderedBy: 'Dr Strange',
-    orderDatetime: '24-08-2018 20:00:09',
+    amount: 'N2000',
     orderStatus: 'Pending',
+    orderDatetime: '24-08-2018 20:00:09',
+    updatedAt: '24-08-2018 20:00:09',
   },
 ];
 

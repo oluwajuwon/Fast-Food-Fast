@@ -4,8 +4,9 @@ import app from '../app';
 
 const request = require('supertest');
 
-const foodName = 'Chicken and chips';
-const price = '2000';
+const userId = 3;
+const foodId = 3;
+const amount = '2000';
 const quantity = '2';
 const orderStatus = 'Completed';
 
@@ -112,7 +113,9 @@ describe('Test suite for Order API endpoints', () => {
     it('should return status code 201 if order was added succesfully', (done) => {
       request(app)
         .post('/api/v1/orders')
-        .send({ foodName, price, quantity })
+        .send({
+          userId, foodId, amount, quantity,
+        })
         .end((err, response) => {
           expect(response.status).to.equal(201);
           done();
@@ -132,7 +135,9 @@ describe('Test suite for Order API endpoints', () => {
     it('should add new order', (done) => {
       request(app)
         .post('/api/v1/orders/')
-        .send({ foodName, price, quantity })
+        .send({
+          userId, foodId, amount, quantity,
+        })
         .end((err, response) => {
           expect(response.body).to.be.an('object').with.property('newOrder');
           expect(response.body).to.be.an('object').with.property('newOrder').to.be.an('object');
@@ -143,7 +148,9 @@ describe('Test suite for Order API endpoints', () => {
     it('should return a message saying a new order was added succesfully', (done) => {
       request(app)
         .post('/api/v1/orders')
-        .send({ foodName, price, quantity })
+        .send({
+          userId, foodId, amount, quantity,
+        })
         .end((err, response) => {
           expect(response.body.message).to.equal('Your order has been placed successfully');
           done();
@@ -170,6 +177,16 @@ describe('Test suite for Order API endpoints', () => {
         .send({ orderStatus })
         .end((err, response) => {
           expect(response.status).to.equal(201);
+          done();
+        });
+    });
+
+    it('should return status code 400 if the order status was not inputted', (done) => {
+      request(app)
+        .put('/api/v1/orders/1')
+        .send({})
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
           done();
         });
     });
