@@ -53,7 +53,7 @@ describe('Test suite for Food API endpoints', () => {
       request(app)
         .get('/api/v1/food')
         .end((err, response) => {
-          expect(response.body.message).to.be.equal('Retrieved food successfully');
+          expect(response.body.message).to.be.equal('Retrieved food items successfully');
           done();
         });
     });
@@ -65,6 +65,54 @@ describe('Test suite for Food API endpoints', () => {
           expect(response.body).to.be.an('object');
           expect(response.body).to.be.an('object').with.property('db');
           expect(response.body).to.be.an('object').with.property('db').to.be.an('array');
+          done();
+        });
+    });
+  });
+
+  describe('GET /api/v1/food/:foodId', () => {
+    it('should return a specific food item', (done) => {
+      request(app)
+        .get('/api/v1/food/1')
+        .end((err, response) => {
+          expect(response.body).to.be.an('object').with.property('result');
+          expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('foodId');
+          done();
+        });
+    });
+
+    it('should return status code 200 if food item was found', (done) => {
+      request(app)
+        .get('/api/v1/food/1')
+        .end((err, response) => {
+          expect(response.status).to.equal(200);
+          done();
+        });
+    });
+
+    it('should return status code 404 if food item was not found', (done) => {
+      request(app)
+        .get('/api/v1/food/5')
+        .end((err, response) => {
+          expect(response.status).to.equal(404);
+          done();
+        });
+    });
+
+    it('should return a message saying the food item was retrieved successfully', (done) => {
+      request(app)
+        .get('/api/v1/food/1')
+        .end((err, response) => {
+          expect(response.body.message).to.be.equal('The food item was retrieved successfully');
+          done();
+        });
+    });
+
+    it('should return a message saying the order does not exist if order was not found', (done) => {
+      request(app)
+        .get('/api/v1/food/5')
+        .end((err, response) => {
+          expect(response.body.message).to.equal('Food item with the ID: 5 does not exist');
           done();
         });
     });

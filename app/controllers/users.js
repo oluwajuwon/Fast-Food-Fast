@@ -3,6 +3,7 @@ import db from '../db/users';
 
 
 class UserControllers {
+  //  Controller to sign up a user
   signUp(request, response) {
     request.check('username', 'Username is required').notEmpty();
     request.check('fullName', 'Your full name is required').notEmpty();
@@ -45,6 +46,7 @@ class UserControllers {
     });
   }
 
+  //  controller to sign in a user
   signIn(request, response) {
     request.check('email', 'Please enter your email address').notEmpty();
     request.check('email', 'Please enter a valid email address').isEmail();
