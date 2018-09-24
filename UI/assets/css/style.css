@@ -140,12 +140,12 @@ footer >div{
 /*-----------Style for the navigation starts here----------*/
 .navbar {
     overflow: hidden;
-    background-color: #5d53e7;
+    background-color: #4139ac;
   }
 
 .nav-brand{
     font-weight: bold;
-    background-color: #4e46c0;
+    background-color: #38319e;
 }
   
   .navbar a {
@@ -203,12 +203,12 @@ footer >div{
   }
   
   .navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: #524acf;
+    background-color: #483fc4;
     color: white;
   }
   
   .dropdown-content a:hover {
-    background-color: #524acf;
+    background-color: #483fc4;
     color: #fff;
   }
   
