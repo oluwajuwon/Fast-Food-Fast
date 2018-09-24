@@ -100,19 +100,20 @@ footer >div{
 /*-----------Style for the Universal elements ends here----------*/
 
 /*-----------Colours Start here----------*/
-.primary-colour{
-    background-color: #5d53e7
-}
 
-.primary-colour:hover{
+.blue-bg-colour:hover{
     background-color: #4b3eff
 }
 
-.secondary-colour{
+.blue-bg-colour{
+  background-color: #483fc4;
+}
+
+.red-bg-colour{
     background-color: rgb(209, 32, 32);
 }
 
-.secondary-colour:hover{
+.red-bg-colour:hover{
     background-color: rgb(221, 51, 51)
 }
 
