@@ -44,6 +44,11 @@ class OrderControllers {
         success: 'false',
         message: 'please enter a number',
       });
+    } else if (request.body.quantity < 0) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'please enter a positive value',
+      });
     }
     //  initialize the order object
     const newOrder = {
