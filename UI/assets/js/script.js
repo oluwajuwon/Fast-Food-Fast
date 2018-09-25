@@ -10,8 +10,9 @@ const myFunction =() =>{
     else {
         x.className = "navbar";
     }
-}
+};
 
 const redirectTo = location => {
     window.location.href = location;
-  }
+  };
+
