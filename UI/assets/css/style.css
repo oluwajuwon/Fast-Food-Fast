@@ -64,6 +64,10 @@ hr{
     border: 1px solid #ccc
 }
 
+footer{
+  background-color: #4139ac
+}
+
 footer >div{
     padding: 20px
 }
