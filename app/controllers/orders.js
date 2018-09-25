@@ -37,7 +37,7 @@ class OrderControllers {
     if (!request.body.quantity) {
       return response.status(400).json({
         success: 'false',
-        message: 'How much food i.e. the quantity is required',
+        message: '"quantity" is required',
       });
     }
     //  initialize the order object
@@ -79,7 +79,7 @@ class OrderControllers {
     } else if (!request.body.orderStatus) {
       return response.status(400).json({
         success: 'false',
-        message: 'The status of the order is required',
+        message: '"orderStatus" is required',
       });
     } else {
       const updatedOrder = {
