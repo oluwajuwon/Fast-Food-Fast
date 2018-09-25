@@ -1,10 +1,14 @@
 import express from 'express';
 import orderController from '../controllers/orders';
 
+const {
+  getAllorders, getOrder, createOrder, updateOrder,
+} = orderController;
+
 const router = express.Router();
-router.get('/api/v1/orders', orderController.getAllorders);
-router.get('/api/v1/orders/:id', orderController.getOrder);
-router.post('/api/v1/orders', orderController.createOrder);
-router.put('/api/v1/orders/:id', orderController.updateOrder);
+router.get('/api/v1/orders', getAllorders);
+router.get('/api/v1/orders/:id', getOrder);
+router.post('/api/v1/orders', createOrder);
+router.put('/api/v1/orders/:id', updateOrder);
 
 export default router;
