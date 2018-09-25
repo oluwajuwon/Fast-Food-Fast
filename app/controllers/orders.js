@@ -39,6 +39,11 @@ class OrderControllers {
         success: 'false',
         message: '"quantity" is required',
       });
+    } else if (Number.isNaN(Number(request.body.quantity))) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'please enter a number',
+      });
     }
     //  initialize the order object
     const newOrder = {
