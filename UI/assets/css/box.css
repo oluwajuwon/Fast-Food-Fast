@@ -5,16 +5,23 @@
 }
 
 .box-container{
-    padding:20px;
+    padding:5px 10px;
+    line-height: 15px;
 }
 
 .innerbox-container{
     background-color: #fff;
     width: 40%;
-    padding: 20px 20px;
+    padding: 10px 20px;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid #9c9c9c
+    border: 1px solid #9c9c9c;
+    font-size: auto
+}
+
+footer {
+  bottom: 0;
+  position: fixed
 }
 
 /*Form style starts here*/
@@ -23,9 +30,10 @@
     margin-right: auto;
 }
 
-.textbox{
+.innerbox-container .textbox{
     padding: 10px 10px;
-    width: 90%
+    width: 95%;
+    /* margin-top: -5px */
 }
 
 textarea{

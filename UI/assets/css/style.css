@@ -9,8 +9,12 @@ body{
 }
 
 a{
-    text-decoration: none;
-    color: inherit
+    text-decoration: underline;
+}
+
+button >a{
+  color: inherit;
+  text-decoration: none
 }
 
 .container{
@@ -65,11 +69,13 @@ hr{
 }
 
 footer{
-  background-color: #4139ac
+  background-color: #4139ac;
+  bottom:0;
+  width: 100%;
 }
 
 footer >div{
-    padding: 20px
+    padding: 10px
 }
 
 /* MEdia queries for universal elements starts here*/
@@ -364,7 +370,7 @@ Show the link that contains should open and close the navbar (.icon) */
     width:80%;
     margin-left: auto;
     margin-right: auto;
-    padding: 30px 0 80px 0
+    padding: 35px 0 60px 0
 }
 
 .order-container .img-container{
