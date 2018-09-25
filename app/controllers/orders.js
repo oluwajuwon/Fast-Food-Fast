@@ -34,17 +34,7 @@ class OrderControllers {
 
   //  controller to place a new order
   createOrder(request, response) {
-    if (!request.body.foodName) {
-      return response.status(400).json({
-        success: 'false',
-        message: 'Food name is required',
-      });
-    } else if (!request.body.price) {
-      return response.status(400).json({
-        success: 'false',
-        message: 'The price is required',
-      });
-    } else if (!request.body.quantity) {
+    if (!request.body.quantity) {
       return response.status(400).json({
         success: 'false',
         message: 'How much food i.e. the quantity is required',
