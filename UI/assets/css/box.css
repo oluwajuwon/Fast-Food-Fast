@@ -1,0 +1,126 @@
+/*box section style starts*/
+.box-section{
+    min-height: 90vh;
+    background-image: url('../images/form-bg.png')
+}
+
+.box-container{
+    padding:5px 10px;
+    line-height: 15px;
+}
+
+.innerbox-container{
+    background-color: #fff;
+    width: 40%;
+    padding: 10px 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #9c9c9c;
+    font-size: auto
+}
+
+footer {
+  bottom: 0;
+  position: fixed
+}
+
+/*Form style starts here*/
+.form{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.innerbox-container .textbox{
+    padding: 10px 10px;
+    width: 95%;
+    /* margin-top: -5px */
+}
+
+textarea{
+    width: 90%;
+    min-height: 60px
+}
+
+/*Form style ends here*/
+
+/*Table style starts here */
+.table-container{
+    background-color: #fff;
+    width: 90%;
+    padding: 20px 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #9c9c9c;
+    overflow-x:auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th{
+    background-color: #5d53e7;
+    color: #fff
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #ececec;
+}
+
+.pagination >a{
+    padding: 5px
+}
+
+.text-wrap {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  /*Table style ends here */
+
+
+/*Media queries to target smaller devices starts here*/
+@media screen and (max-width: 900px) {
+    .innerbox-container{
+        width: 80%
+    }
+    
+    .innerbox-container img{
+        width: inherit
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .innerbox-container{
+        width: 80%
+    }
+
+
+    .table-container{
+        background-color: #fff;
+        width: 90%;
+        padding: 10px 10px;
+    }
+}
+
+@media screen and (max-width: 428px) {
+    .innerbox-container{
+        
+        margin-left: 10px
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .innerbox-container{
+        margin-left: 0
+    }
+}
+/*Media queries to target smaller devices ends here*/
