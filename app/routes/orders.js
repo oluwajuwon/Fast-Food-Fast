@@ -1,5 +1,5 @@
 import express from 'express';
-import orderController from '../controllers/orders';
+import orderController from '../controllers/orderController';
 
 const {
   getAllorders, getOrder, createOrder, updateOrder,

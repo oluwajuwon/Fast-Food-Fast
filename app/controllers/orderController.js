@@ -1,4 +1,4 @@
-import db from '../db/db';
+import db from '../db/orders.db';
 
 class OrderControllers {
   //    controller to retrieve all orders
