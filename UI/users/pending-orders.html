@@ -1,167 +1,197 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../assets/css/style.css" type="text/css" />
-    <link rel="stylesheet" href="../assets/css/modal.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Fast-Food-Fast ¦ My Pending Orders</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../assets/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../assets/css/modal.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Fast-Food-Fast ¦ My Pending Orders</title>
 </head>
 
 <body>
 
-    <!-- Modal Starts -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="text-center">
-                <h1 class="red-text">Cancel your Order</h1>
-                <div class="">
-                    <img src="../assets/images/delete.png" alt="Cancel" />
-                </div>
-                <div class="">
-                    <h1>Are you sure ?</h1>
-                    <form onsubmit="redirectTo('cancel-order-successful.html'); return false;">
-                        <input type="submit" class="btn secondary-colour white-text" value="Yes" />
-                        <button type="button" onclick="modalClosePopup(); return false;" class="btn btn-secondary modal-close">No</button>
-                    </form>
-                    <br />
-                </div>
-            </div>
+  <!-- Modal Starts -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="text-center">
+        <h1 class="red-text">Cancel your Order</h1>
+        <div class="">
+          <img src="../assets/images/delete.png" alt="Cancel"/>
         </div>
+        <div class="">
+          <h1>Are you sure ?</h1>
+          <form id="user-pending">
+            <button type="submit" class="btn red-bg-colour white-text">Yes</button>
+            <button type="button" id="close-modal" class="btn btn-secondary modal-close">No</button>
+          </form>
+          <br />
+        </div>
+      </div>
     </div>
-    <!-- Modal Ends -->
+  </div>
+  <!-- Modal Ends -->
 
-    <header>
-        <!-- Navigation bar Starts -->
-        <nav class="navbar" id="myNav">
-            <a href="#home" class="nav-brand">Fast-Food-Fast</a>
-            <a href="all-food-items.html">View Menu</a>
-            <div class="dropdown">
-                <button class="dropbtn">Orders
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="pending-orders.html">Pending Orders</a>
-                    <a href="order-history.html">Order history</a>
-                </div>
-            </div>
-            <div class="dropdown profile">
-                <button class="dropbtn">Howdy, Lebagerian
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="my-account.html">My Account</a>
-                    <a href="../login.html">Logout</a>
-                </div>
-            </div>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-        </nav>
-        <!-- Navigation bar Ends -->
-    </header>
-
-    <!-- Main content Starts -->
-    <main>
-        <div class="container">
-            <h2 class="text-center">Pending Orders</h2>
-            <hr>
-            <div class="meals">
-                <div class="flex-container">
-                    <div class="item">
-                        <div class="item-container">
-                            <div class="img-container">
-                                <img class="img-fluid" src="../assets/images/pastery-1.jpg" />
-                            </div>
-
-                            <div class="item-details">
-                                <h3>Traditional French dessert</h3>
-                                <p>Price: &#8358;1500</p>
-                            </div>
-                            <button class="green-bg white-text">
-                                <a href="edit-order.html" class="white-text">Edit</a>
-                            </button>
-                            <button class="secondary-colour white-text">
-                                <a href="" onclick="modalPopup(); return false;" class="white-text">Cancel</a>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="item-container">
-                            <div class="img-container">
-                                <img class="img-fluid" src="../assets/images/pastery-2.jpg" />
-                            </div>
-                            <div class="item-details">
-                                <h3>Sweet italian pastery</h3>
-                                <p>Price: &#8358;1500</p>
-                            </div>
-                            <button class="green-bg white-text">
-                                <a href="edit-order.html" class="white-text">Edit</a>
-                            </button>
-                            <button class="secondary-colour white-text">
-                                <a href="" onclick="modalPopup(); return false;" class="white-text">Cancel</a>
-                            </button>
-
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="item-container">
-                            <div class="img-container">
-                                <img class="img-fluid" src="../assets/images/pastery-3.jpg" />
-                            </div>
-                            <div class="item-details">
-                                <h3>Decadent Sugary Fruit Puff</h3>
-                                <p>Price: &#8358;1500</p>
-                            </div>
-                            <button class="green-bg white-text">
-                                <a href="edit-order.html" class="white-text">Edit</a>
-                            </button>
-                            <button class="secondary-colour white-text">
-                                <a href="" onclick="modalPopup(); return false;" class="white-text">Cancel</a>
-                            </button>
-
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="item-container">
-                            <div class="img-container">
-                                <img class="img-fluid" src="../assets/images/pastery-4.jpg" />
-                            </div>
-                            <div class="item-details">
-                                <h3>Freshly Baked Sausages</h3>
-                                <p>Price: &#8358;1500</p>
-                            </div>
-                            <button class="green-bg white-text">
-                                <a href="edit-order.html" class="white-text">Edit</a>
-                            </button>
-                            <button class="secondary-colour white-text">
-                                <a href="" onclick="modalPopup(); return false;" class="white-text">Cancel</a>
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <header>
+    <!-- Navigation bar Starts -->
+    <nav class="navbar" id="myNav">
+      <a href="all-food-items.html" class="nav-brand">Fast-Food-Fast</a>
+      <a href="all-food-items.html">View Menu</a>
+      <div class="dropdown">
+        <button class="dropbtn">Orders
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="pending-orders.html">Pending Orders</a>
+          <a href="order-history.html">Order history</a>
         </div>
-
-    </main>
-    <!-- Main content Ends -->
-
-
-    <footer>
-        <div class="primary-colour">
-            <div class="text-center white-text">
-                Fast-Food-Fast &copy; 2018 &nbsp; Developed by
-                <b>Juwon.</b>
-            </div>
+      </div>
+      <div class="dropdown profile">
+        <button class="dropbtn">Howdy, Lebagerian
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="my-account.html">My Account</a>
+          <a href="../login.html">Logout</a>
         </div>
-    </footer>
-    <script type="text/javascript" src="../assets/js/script.js"></script>
-    <script type="text/javascript" src="../assets/js/modal.js"></script>
+      </div>
+      <a id="nav-icon" class="icon">&#9776;</a>
+    </nav>
+    <!-- Navigation bar Ends -->
+  </header>
+
+  <!-- Main content Starts -->
+  <main>
+    <div class="container">
+      <h2 class="text-center">Pending Orders</h2>
+      <hr>
+      <div class="meals">
+        <div class="flex-container">
+          <div class="item">
+            <div class="item-container">
+              <div class="img-container">
+                <img class="img-fluid" src="../assets/images/pastery-1.jpg"/>
+              </div>
+              <div class="item-details">
+                <p>23-08-2018 12:09:34PM</p>
+                <h3>Traditional French dessert</h3>
+                <p>
+                  <span class="price-figure">&#8358;1500</span>
+                </p>
+                <b>Quantity: </b> 5
+                </p>
+                <p>
+                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
+                </p>
+              </div>
+              <button class="green-bg white-text">
+                <a href="edit-order.html" class="white-text">Edit</a>
+              </button>
+              <button class="red-bg-colour white-text">
+                <a onclick="modalPopup()" class="white-text">Cancel</a>
+              </button>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-container">
+              <div class="img-container">
+                <img class="img-fluid" src="../assets/images/pastery-2.jpg"/>
+              </div>
+              <div class="item-details">
+                <p>23-08-2018 12:09:34PM</p>
+                <h3>Sweet italian pastery</h3>
+                <p>
+                  <span class="price-figure">&#8358;1500</span>
+                </p>
+                <b>Quantity: </b> 5
+                </p>
+                <p>
+                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
+                </p>
+              </div>
+              <button class="green-bg white-text">
+                <a href="edit-order.html" class="white-text">Edit</a>
+              </button>
+              <button class="red-bg-colour white-text">
+                <a onclick="modalPopup()" class="white-text">Cancel</a>
+              </button>
+
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-container">
+              <div class="img-container">
+                <img class="img-fluid" src="../assets/images/pastery-3.jpg"/>
+              </div>
+              <div class="item-details">
+                <p>23-08-2018 12:09:34PM</p>
+                <h3>Decadent Sugary Fruit Puff</h3>
+                <p>
+                  <span class="price-figure">&#8358;1500</span>
+                </p>
+                <b>Quantity: </b> 5
+                </p>
+                <p>
+                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
+                </p>
+              </div>
+              <button class="green-bg white-text">
+                <a href="edit-order.html" class="white-text">Edit</a>
+              </button>
+              <button class="red-bg-colour white-text">
+                <a onclick="modalPopup()" class="white-text">Cancel</a>
+              </button>
+            </div>
+          </div>
+          <div class="item">
+            <div class="item-container">
+              <div class="img-container">
+                <img class="img-fluid" src="../assets/images/pastery-4.jpg"/>
+              </div>
+              <div class="item-details">
+                <p>23-08-2018 12:09:34PM</p>
+                <h3>Freshly Baked Sausages</h3>
+                <p>
+                  <span class="price-figure">&#8358;1500</span>
+                </p>
+                <b>Quantity: </b> 5
+                </p>
+                <p>
+                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
+                </p>
+              </div>
+              <button class="green-bg white-text">
+                <a href="edit-order.html" class="white-text">Edit</a>
+              </button>
+              <button class="red-bg-colour white-text">
+                <a onclick="modalPopup()" class="white-text">Cancel</a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <!-- Main content Ends -->
+
+
+  <footer>
+    <div class="blue-bg-colour">
+      <div class="text-center white-text">
+        Fast-Food-Fast &copy; 2018 &nbsp; Developed by
+        <b>Juwon.</b>
+      </div>
+    </div>
+  </footer>
+  <script type="text/javascript" src="../assets/js/script.js"></script>
+  <script type="text/javascript" src="../assets/js/modal.js"></script>
+  <script type="text/javascript" src="../assets/js/redirect.js"></script>
+
 </body>
 
 </html>
