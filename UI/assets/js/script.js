@@ -1,7 +1,13 @@
+//  Get and initialize navbar icon
+const navIcon = document.getElementById('nav-icon');
 
-/* Toggle between adding and removing the "responsive" class to navbar when the user clicks on the icon */
+//  On click event listener that triggers
+navIcon.onclick = () => {
+  navToggle();
+}
 
-const myFunction =() =>{
+//  Toggle between adding and removing the "responsive" class to navbar when the user clicks on the icon
+const navToggle =() =>{
   const nav = document.getElementById('myNav');
 
   if (nav.className === 'navbar') {
@@ -11,6 +17,7 @@ const myFunction =() =>{
     nav.className = 'navbar';
   }
 };
+
 
 const redirectTo = location => {
   window.location.href = location;
