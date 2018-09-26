@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import indexRoute from './routes/index';
-import orderRoute from './routes/orders';
+import indexRoute from './routes/indexRoute';
+import orderRoute from './routes/orderRoute';
 //  setting up the express application
 const app = express();
 const PORT = process.env.PORT || 3000;
