@@ -24,9 +24,9 @@
         </div>
         <div class="">
           <h1>Are you sure?</h1>
-          <form onsubmit="redirectTo('decline-confirmation.html'); return false;">
+          <form id="admin-view-order">
             <input type="submit" class="btn red-bg-colour white-text" value="Yes" />
-            <button type="button" onclick="modalClosePopup(); return false;" class="btn btn-secondary modal-close">No</button>
+            <button type="button" id="close-modal" class="btn btn-secondary modal-close">No</button>
           </form>
           <br />
         </div>
@@ -92,7 +92,7 @@
             <a href="accept-order-successful.html" class="white-text">Accept</a>
           </button>
           <button class="red-bg-colour white-text">
-            <a href="" onclick="modalPopup(); return false;" class="white-text">Decline</a>
+            <a onclick="modalPopup()" class="white-text">Decline</a>
           </button>
         </div>
         <br>
@@ -114,6 +114,7 @@
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
   <script type="text/javascript" src="../assets/js/modal.js"></script>
+  <script type="text/javascript" src="../assets/js/redirect.js"></script>
 </body>
 
 </html>

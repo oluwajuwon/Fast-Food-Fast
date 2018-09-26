@@ -1,7 +1,7 @@
 //  Get and initialize navbar icon
 const navIcon = document.getElementById('nav-icon');
 
-//  On click event listener that triggers
+//  On click event listener that triggers nav toggle
 navIcon.onclick = () => {
   navToggle();
 }

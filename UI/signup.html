@@ -28,7 +28,7 @@
         <div class="innerbox-container">
           <div class="form">
             <h2>Create an account</h2>
-            <form onsubmit="redirectTo('./users/all-food-items.html'); return false;">
+            <form id="user-Signup">
               <div>
                 <p class="">Full name</p>
                 <input type="text" class="textbox" required placeholder="Enter full name here..."/>
@@ -51,7 +51,7 @@
               </div>
               <br/>
               <div class="">
-                <input type="submit" class="btn blue-bg-colour white-text" value="Sign Up" />
+                <button type="submit" class="btn blue-bg-colour white-text">Sign Up</button>
                 <a href="login.html" class="secondary-text-color">Already have an account? Login</a>
               </div>
             </form>
@@ -71,6 +71,7 @@
     </div>
   </footer>
   <script type="text/javascript" src="./assets/js/script.js"></script>
+  <script type="text/javascript" src="./assets/js/redirect.js"></script>
 </body>
 
 </html>

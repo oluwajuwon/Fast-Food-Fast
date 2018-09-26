@@ -56,7 +56,7 @@
         <div class="innerbox-container">
           <div class="form">
             <h2>Add new food</h2>
-            <form onsubmit="redirectTo('add-food-successful.html'); return false;">
+            <form id="add-food-form">
               <div>
                 <p class="">Name of food</p>
                 <input type="text" class="textbox" required placeholder="Enter the food name here..." />
@@ -79,7 +79,7 @@
               </div>
               <br/>
               <div class="">
-                <input type="submit" class="btn blue-bg-colour white-text" value="Add food" />
+                <button type="submit" class="btn blue-bg-colour white-text">Add food</button>
               </div>
 
             </form>
@@ -115,6 +115,7 @@
     </div>
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
+  <script type="text/javascript" src="../assets/js/redirect.js"></script>
 </body>
 
 </html>

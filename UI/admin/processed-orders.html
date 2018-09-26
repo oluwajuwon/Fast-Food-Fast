@@ -24,9 +24,9 @@
         </div>
         <div class="">
           <h1>Are you sure ?</h1>
-          <form onsubmit="redirectTo('order-complete.html'); return false;">
+          <form id="mark-complete">
             <input type="submit" class="btn green-bg white-text" value="Yes" />
-            <button type="button" onclick="modalClosePopup(); return false;" class="btn red-bg-colour white-text modal-close">No</button>
+            <button type="button" id="close-modal" class="btn red-bg-colour white-text modal-close">No</button>
           </form>
           <br />
         </div>
@@ -104,7 +104,7 @@
               <td>4</td>
               <td class="text-wrap">in progress...</td>
               <td>
-                <a href="" onclick="modalPopup(); return false;">Mark as Complete</a>
+                <a onclick="modalPopup()">Mark as Complete</a>
               </td>
             </tr>
             <tr>
@@ -116,7 +116,7 @@
               <td>4</td>
               <td class="text-wrap">in progress...</td>
               <td>
-                <a href="" onclick="modalPopup(); return false;">Mark as Complete</a>
+                <a onclick="modalPopup()">Mark as Complete</a>
               </td>
             </tr>
           </table>
@@ -145,6 +145,7 @@
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
   <script type="text/javascript" src="../assets/js/modal.js"></script>
+  <script type="text/javascript" src="../assets/js/redirect.js"></script>
 </body>
 
 </html>
