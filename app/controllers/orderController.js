@@ -34,17 +34,19 @@ class OrderControllers {
 
   //  controller to place a new order
   createOrder(request, response) {
-    if (!request.body.quantity) {
+    const { body } = request;
+    const { quantity } = body;
+    if (!quantity) {
       return response.status(400).json({
         success: 'false',
         message: '"quantity" is required',
       });
-    } else if (Number.isNaN(Number(request.body.quantity))) {
+    } else if (Number.isNaN(Number(quantity))) {
       return response.status(400).json({
         success: 'false',
         message: 'please enter a number',
       });
-    } else if (request.body.quantity < 0) {
+    } else if (quantity < 0) {
       return response.status(400).json({
         success: 'false',
         message: 'please enter a positive value',
@@ -53,12 +55,13 @@ class OrderControllers {
     //  initialize the order object
     const newOrder = {
       orderId: db.length + 1,
-      foodName: request.body.foodName,
-      price: request.body.price,
-      quantity: request.body.quantity,
-      orderedBy: 'Customer name',
-      orderDatetime: '23-08-2018 19:00:00',
+      foodId: 2,
+      userId: 3,
+      quantity,
+      amount: '4000',
       orderStatus: 'Pending',
+      orderDatetime: Date(),
+      updatedAt: Date(),
     };
 
     db.push(newOrder);
@@ -71,6 +74,8 @@ class OrderControllers {
 
   //  controller to update an order -- works fine
   updateOrder(request, response) {
+    const { body } = request;
+    const { orderStatus } = body;
     const id = parseInt(request.params.id, 10);
     let orderFound;
     let itemIndex;
@@ -86,7 +91,7 @@ class OrderControllers {
         success: 'false',
         message: 'order not found',
       });
-    } else if (!request.body.orderStatus) {
+    } else if (!orderStatus) {
       return response.status(400).json({
         success: 'false',
         message: '"orderStatus" is required',
@@ -94,12 +99,13 @@ class OrderControllers {
     } else {
       const updatedOrder = {
         orderId: orderFound.orderId,
-        foodName: request.body.foodName || orderFound.foodName,
-        price: request.body.price || orderFound.price,
-        quantity: request.body.quantity || orderFound.quantity,
-        orderedBy: request.body.orderedBy || orderFound.orderedBy,
-        orderDatetime: request.body.orderDatetime || orderFound.orderDatetime,
-        orderStatus: request.body.orderStatus || orderFound.orderStatus,
+        foodId: orderFound.foodId,
+        userId: orderFound.userId,
+        amount: orderFound.amount,
+        quantity: orderFound.quantity,
+        orderStatus: orderStatus || orderFound.orderStatus,
+        orderDatetime: orderFound.orderDatetime,
+        updatedAt: Date(),
       };
 
       db.splice(itemIndex, 1, updatedOrder);
