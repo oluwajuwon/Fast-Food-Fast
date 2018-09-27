@@ -62,3 +62,8 @@ https://www.pivotaltracker.com/n/projects/2193674
 ```
 ## Testing
   To test the API endpoints Run `npm run test`
+  
+###Test Tools
+ - Mocha - A JavaScript Test Framework for API Tests
+ - Chai - A TDD/BDD Assertion Library for Node
+ - Supertest - A Super-agent driven library for testing node.js HTTP servers
