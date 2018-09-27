@@ -1,4 +1,4 @@
-<!--Admin Pages Skeleton-->
+<!--User pages Skeleton-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,36 +15,27 @@
   <header>
     <!-- Navigation bar Starts -->
     <nav class="navbar" id="myNav">
-      <a href="#home" class="nav-brand">Fast-Food-Fast [Admin]</a>
-      <div class="dropdown">
-        <button class="dropbtn">Food Menu
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <a href="#">Add item</a>
-          <a href="all-food-items.html">View all items</a>
-        </div>
-      </div>
+      <a href="#home" class="nav-brand">Fast-Food-Fast</a>
+      <a href="all-food-items.html">View Menu</a>
       <div class="dropdown">
         <button class="dropbtn">Orders
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="all-orders.html">All Orders</a>
-          <a href="#">Pending Orders</a>
-          <a href="#">In-Process Orders</a>
+          <a href="pending-orders.html">Pending Orders</a>
+          <a href="#">Order history</a>
         </div>
       </div>
       <div class="dropdown profile">
-        <button class="dropbtn">Howdy, Admin
+        <button class="dropbtn">Howdy, Lebagerian
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="#">My Account</a>
-          <a href="login.html">Logout</a>
+          <a href="">My Account</a>
+          <a href="../login.html">Logout</a>
         </div>
       </div>
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      <a id="nav-icon" class="icon">&#9776;</a>
     </nav>
     <!-- Navigation bar Ends -->
   </header>
@@ -54,8 +45,10 @@
 
   </main>
   <!-- Main content Ends -->
+
+
   <footer>
-    <div class="primary-colour">
+    <div class="">
       <div class="text-center white-text">
         Fast-Food-Fast &copy; 2018 &nbsp; Developed by
         <b>Juwon.</b>

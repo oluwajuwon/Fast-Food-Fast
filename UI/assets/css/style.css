@@ -9,8 +9,12 @@ body{
 }
 
 a{
-    text-decoration: none;
-    color: none
+    text-decoration: underline;
+}
+
+button >a{
+  color: inherit;
+  text-decoration: none
 }
 
 .container{
@@ -57,15 +61,21 @@ button:hover{
 }
 
 .datepicker{
-    padding: 10px
+    padding: 7px
 }
 
 hr{
     border: 1px solid #ccc
 }
 
+footer{
+  background-color: #4139ac;
+  bottom:0;
+  width: 100%;
+}
+
 footer >div{
-    padding: 20px
+    padding: 10px
 }
 
 /* MEdia queries for universal elements starts here*/
@@ -100,19 +110,20 @@ footer >div{
 /*-----------Style for the Universal elements ends here----------*/
 
 /*-----------Colours Start here----------*/
-.primary-colour{
-    background-color: #5d53e7
-}
 
-.primary-colour:hover{
+.blue-bg-colour:hover{
     background-color: #4b3eff
 }
 
-.secondary-colour{
+.blue-bg-colour{
+  background-color: #483fc4;
+}
+
+.red-bg-colour{
     background-color: rgb(209, 32, 32);
 }
 
-.secondary-colour:hover{
+.red-bg-colour:hover{
     background-color: rgb(221, 51, 51)
 }
 
@@ -140,12 +151,12 @@ footer >div{
 /*-----------Style for the navigation starts here----------*/
 .navbar {
     overflow: hidden;
-    background-color: #5d53e7;
+    background-color: #4139ac;
   }
 
 .nav-brand{
     font-weight: bold;
-    background-color: #4e46c0;
+    background-color: #38319e;
 }
   
   .navbar a {
@@ -203,12 +214,12 @@ footer >div{
   }
   
   .navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: #524acf;
+    background-color: #483fc4;
     color: white;
   }
   
   .dropdown-content a:hover {
-    background-color: #524acf;
+    background-color: #483fc4;
     color: #fff;
   }
   
@@ -322,6 +333,11 @@ Show the link that contains should open and close the navbar (.icon) */
     padding: 20px 40px 40px 40px
 }
 
+.price-figure{
+  font-weight: bolder;
+  font-size: larger
+}
+
 .flex-container {
     display: flex;
     flex-direction: row;
@@ -354,7 +370,7 @@ Show the link that contains should open and close the navbar (.icon) */
     width:80%;
     margin-left: auto;
     margin-right: auto;
-    padding: 30px 0 80px 0
+    padding: 35px 0 60px 0
 }
 
 .order-container .img-container{

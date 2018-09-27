@@ -6,12 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="../assets/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../assets/css/modal.css" type="text/css" />
   <link rel="stylesheet" href="../assets/css/box.css" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Home ¦ Fast-Food-Fast</title>
 </head>
 
 <body>
+
+  <!-- Modal Starts -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="text-center">
+        <h1 class="">Complete Order</h1>
+        <div class="">
+          <img src="../assets/images/check.png" alt="Cancel" />
+        </div>
+        <div class="">
+          <h1>Are you sure ?</h1>
+          <form id="mark-complete">
+            <input type="submit" class="btn green-bg white-text" value="Yes" />
+            <button type="button" id="close-modal" class="btn red-bg-colour white-text modal-close">No</button>
+          </form>
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Ends -->
+  
   <header>
     <!-- Navigation bar Starts -->
     <nav class="navbar" id="myNav">
@@ -44,7 +67,7 @@
           <a href="login.html">Logout</a>
         </div>
       </div>
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      <a id="nav-icon" class="icon">&#9776;</a>
     </nav>
     <!-- Navigation bar Ends -->
   </header>
@@ -58,7 +81,7 @@
           <div>
             <h3>Filter orders by date</h3>
             <input type="date" class="datepicker" />
-            <button class="primary-colour white-text">Filter</button>
+            <button class="blue-bg-colour white-text">Filter</button>
           </div>
           <!--Table for orders starts here-->
           <table>
@@ -81,8 +104,7 @@
               <td>4</td>
               <td class="text-wrap">in progress...</td>
               <td>
-                <input type="checkbox" id="statusCheck" onclick="redirectTo('order-complete.html'); return false;">
-                <a href="order-complete.html">Mark as Complete</a>
+                <a onclick="modalPopup()">Mark as Complete</a>
               </td>
             </tr>
             <tr>
@@ -94,8 +116,7 @@
               <td>4</td>
               <td class="text-wrap">in progress...</td>
               <td>
-                <input type="checkbox" id="statusCheck" onclick="redirectTo('order-complete.html'); return false;">
-                <a href="order-complete.html">Mark as Complete</a>
+                <a onclick="modalPopup()">Mark as Complete</a>
               </td>
             </tr>
           </table>
@@ -115,7 +136,7 @@
   <!-- Main content Ends -->
 
   <footer>
-    <div class="primary-colour">
+    <div class="blue-bg-colour">
       <div class="text-center white-text">
         Fast-Food-Fast &copy; 2018 &nbsp; Developed by
         <b>Juwon.</b>
@@ -123,6 +144,8 @@
     </div>
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
+  <script type="text/javascript" src="../assets/js/modal.js"></script>
+  <script type="text/javascript" src="../assets/js/redirect.js"></script>
 </body>
 
 </html>

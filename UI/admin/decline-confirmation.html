@@ -44,7 +44,7 @@
           <a href="login.html">Logout</a>
         </div>
       </div>
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      <a id="nav-icon" class="icon">&#9776;</a>
     </nav>
     <!-- Navigation bar Ends -->
   </header>
@@ -58,14 +58,14 @@
             <h2>Decline confirmation</h2>
             <p>Please state in the box below the reason for declining</p>
             <p>reason will be sent to user</p>
-            <form onsubmit="redirectTo('pending-orders.html'); return false;">
+            <form id="decline-confirm">
               <div>
                 <p class="">Reason</p>
                 <textarea></textarea>
               </div>
               <br />
               <div class="">
-                <input type="submit" class="btn" value="Submit" />
+                <input type="submit" class="btn blue-bg-colour white-text" value="Submit" />
               </div>
               <br/>
               <br />
@@ -73,13 +73,12 @@
           </div>
         </div>
       </div>
-
-
     </section>
   </main>
   <!-- Main content Ends -->
+  
   <footer>
-    <div class="primary-colour">
+    <div class="blue-bg-colour">
       <div class="text-center white-text">
         Fast-Food-Fast &copy; 2018 &nbsp; Developed by
         <b>Juwon.</b>
@@ -87,6 +86,7 @@
     </div>
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
+  <script type="text/javascript" src="../assets/js/redirect.js"></script>
 </body>
 
 </html>

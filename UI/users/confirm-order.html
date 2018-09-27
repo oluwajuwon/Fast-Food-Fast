@@ -35,7 +35,7 @@
           <a href="../login.html">Logout</a>
         </div>
       </div>
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      <a id="nav-icon" class="icon">&#9776;</a>
     </nav>
     <!-- Navigation bar Ends -->
   </header>
@@ -51,11 +51,11 @@
         </div>
         <div class="order-details">
           <h1>Traditional French dessert</h1>
-          <h3>Price: &#8358;1500</h3>
-          <h3>Quantity(packs):<input type="number" id="quantity" /></h3>
+          <h3><span class="price-figure">&#8358;1,500</span></h3>
+          <h3>Quantity(packs):<input type="number" min="0" id="quantity" /></h3>
 
           <h3>Total: &#8358;1500</h3>
-          <button class="primary-colour">
+          <button class="blue-bg-colour">
             <a href="order-successful.html" class="white-text">Confirm Order</a>
           </button>
 
@@ -71,7 +71,7 @@
 
 
   <footer>
-    <div class="primary-colour">
+    <div class="blue-bg-colour">
       <div class="text-center white-text">
         Fast-Food-Fast &copy; 2018 &nbsp; Developed by
         <b>Juwon.</b>

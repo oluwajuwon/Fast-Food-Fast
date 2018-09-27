@@ -35,7 +35,7 @@
           <a href="../login.html">Logout</a>
         </div>
       </div>
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      <a id="nav-icon" class="icon">&#9776;</a>
     </nav>
     <!-- Navigation bar Ends -->
   </header>
@@ -50,7 +50,7 @@
         <p>Sort by: <a href="#">Date,</a> <a href="#">Order No</a></p>
         <p>Filter by Date</p>
         <input type="date" class="datepicker" />
-        <button class="primary-colour white-text">Filter</button>
+        <button class="blue-bg-colour white-text">Filter</button>
 
         <!--Flex container for food item display starts here-->
         <div class="flex-container">
@@ -65,11 +65,13 @@
                 <p>23-08-2018 12:09:34PM</p>
                 <h3>Traditional French dessert</h3>
                 <p>
-                  <b>Price: </b> &#8358;1500</p>
+                  <span class="price-figure">&#8358;1500</span>
+                </p>
+                <b>Quantity: </b> 5
+                </p>
                 <p>
-                  <b>Quantity: </b> 5</p>
-                <p>
-                  <b>Amount Paid: </b> &#8358;7500</p>
+                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
+                </p>
                 <p>
                   <b>Status: </b>
                   <span class="red-text"> Pending</span>
@@ -82,7 +84,7 @@
           <div class="item">
             <div class="item-container">
               <div class="img-container">
-                <img class="img-fluid" src="../assets/images/pastery-2.jpg" />
+                <img class="img-fluid" src="../assets/images/pastery-2.jpg"/>
               </div>
               <div class="item-details">
 
@@ -90,11 +92,14 @@
                 <p>23-08-2018 12:09:34PM</p>
                 <h3>Sweet italian pastery</h3>
                 <p>
-                  <b>Price: </b> &#8358;1500</p>
+                  <span class="price-figure">&#8358;1500</span>
+                </p>
                 <p>
-                  <b>Quantity: </b> 5</p>
+                  <b>Quantity: </b> 5
+                </p>
                 <p>
-                  <b>Amount Paid: </b> &#8358;7500</p>
+                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
+                </p>
                 <p>
                   <b>Status: </b>
                   <span class="green-text"> Completed</span>
@@ -106,7 +111,7 @@
           <div class="item">
             <div class="item-container">
               <div class="img-container">
-                <img class="img-fluid" src="../assets/images/pastery-3.jpg" />
+                <img class="img-fluid" src="../assets/images/pastery-3.jpg"/>
               </div>
               <div class="item-details">
 
@@ -114,11 +119,14 @@
                 <p>23-08-2018 12:09:34PM</p>
                 <h3>Decadent Sugary Fruit Puff</h3>
                 <p>
-                  <b>Price: </b> &#8358;1500</p>
+                  <span class="price-figure">&#8358;1500</span>
+                </p>
                 <p>
-                  <b>Quantity: </b> 4</p>
+                  <b>Quantity: </b> 5
+                </p>
                 <p>
-                  <b>Amount Paid: </b> &#8358;6000</p>
+                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
+                </p>
                 <p>
                   <b>Status: </b>
                   <span class="green-text"> Completed</span>
@@ -129,7 +137,7 @@
           <div class="item">
             <div class="item-container">
               <div class="img-container">
-                <img class="img-fluid" src="../assets/images/pastery-4.jpg" />
+                <img class="img-fluid" src="../assets/images/pastery-4.jpg"/>
               </div>
               <div class="item-details">
 
@@ -137,11 +145,14 @@
                 <p>20-08-2018 10:09:34PM</p>
                 <h3>Freshly Baked Sausages</h3>
                 <p>
-                  <b>Price: </b> &#8358;1500</p>
+                  <span class="price-figure">&#8358;1500</span>
+                </p>
                 <p>
-                  <b>Quantity: </b> 5</p>
+                  <b>Quantity: </b> 5
+                </p>
                 <p>
-                  <b>Amount Paid: </b> &#8358;7500</p>
+                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
+                </p>
                 <p>
                   <b>Status: </b>
                   <span class="green-text"> Completed</span>
@@ -159,7 +170,7 @@
 
 
   <footer>
-    <div class="primary-colour">
+    <div class="blue-bg-colour">
       <div class="text-center white-text">
         Fast-Food-Fast &copy; 2018 &nbsp; Developed by
         <b>Juwon.</b>

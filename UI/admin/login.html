@@ -16,8 +16,7 @@
     <!-- Navigation bar Starts -->
     <nav class="navbar" id="myNav">
       <a href="../index.html" class="nav-brand">Fast-Food-Fast [Admin]</a>
-
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      <a id="nav-icon" class="icon">&#9776;</a>
     </nav>
     <!-- Navigation bar Ends -->
   </header>
@@ -29,23 +28,22 @@
         <div class="innerbox-container">
           <div class="form">
             <h2>Sign into your account</h2>
-            <form onsubmit="redirectTo('all-food-items.html'); return false;">
+            <form id="admin-login">
               <div>
                 <p class="">Email</p>
-                <input type="email" class="textbox" required placeholder="Enter email here..." />
+                <input type="email" class="textbox" required placeholder="Enter email here..."/>
               </div>
               <div>
                 <p class="">Password</p>
-                <input type="password" class="textbox" required placeholder="Enter password here..." />
+                <input type="password" class="textbox" required placeholder="Enter password here..."/>
               </div>
-              <div class="">
-                <a href="../users/forgotpassword.html" class="">forgot password?</a>
-              </div>
+              <p>
+                <a href="forgotpassword.html" class="">forgot password?</a>
+              </p>
               <br/>
               <div class="">
-                <input type="submit" class="btn primary-colour white-text" value="Sign In" />
+                <input type="submit" class="btn blue-bg-colour white-text" value="Sign In"/>
               </div>
-
             </form>
           </div>
         </div>
@@ -53,8 +51,9 @@
     </section>
   </main>
   <!-- Main content Ends -->
+  
   <footer>
-    <div class="primary-colour">
+    <div class="blue-bg-colour">
       <div class="text-center white-text">
         Fast-Food-Fast &copy; 2018 &nbsp; Developed by
         <b>Juwon.</b>
@@ -62,6 +61,7 @@
     </div>
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
+  <script type="text/javascript" src="../assets/js/redirect.js"></script>
 </body>
 
 </html>

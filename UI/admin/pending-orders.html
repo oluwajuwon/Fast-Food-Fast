@@ -23,9 +23,9 @@
         </div>
         <div class="">
           <h1>Are you sure?</h1>
-          <form onsubmit="redirectTo('decline-confirmation.html'); return false;">
-            <input type="submit" class="btn secondary-colour white-text" value="Yes" />
-            <button type="button" onclick="modalClosePopup(); return false;" class="btn btn-secondary modal-close">No</button>
+          <form id="admin-decline-pending">
+            <input type="submit" class="btn red-bg-colour white-text" value="Yes" />
+            <button type="button" id="close-modal" class="btn btn-secondary modal-close">No</button>
           </form>
           <br />
         </div>
@@ -66,7 +66,7 @@
           <a href="login.html">Logout</a>
         </div>
       </div>
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      <a id="nav-icon" class="icon">&#9776;</a>
     </nav>
     <!-- Navigation bar Ends -->
   </header>
@@ -87,16 +87,16 @@
               <div class="item-details">
                 <p>#1120 12-08-2018 12:09:00</p>
                 <h3>Shawarma and Sauce</h3>
-                <p>Price: &#8358;1500</p>
+                <p>Price: <span class="price-figure">&#8358;1500</span></p>
                 <p>Quantity: 4</p>
-                <p>Amount Paid: &#8358;6000</p>
+                <p>Amount Paid: <span class="price-figure">&#8358;6000</span></p>
                 <h5>Order by: Bruce Banner</h5>
               </div>
               <button class="green-bg white-text">
                 <a href="accept-order-successful.html" class="white-text">Accept</a>
               </button>
-              <button class="secondary-colour white-text">
-                <a href="" onclick="modalPopup(); return false;" class="white-text">Decline</a>
+              <button class="red-bg-colour white-text">
+                <a onclick="modalPopup()" class="white-text">Decline</a>
               </button>
             </div>
           </div>
@@ -109,43 +109,42 @@
               <div class="item-details">
                 <p>#1120 12-08-2018 12:09:00</p>
                 <h3>Ham Burger</h3>
-                <p>Price: &#8358;1500</p>
+                <p>Price: <span class="price-figure">&#8358;1500</span></p>
                 <p>Quantity: 4</p>
-                <p>Amount Paid: &#8358;6000</p>
+                <p>Amount Paid: <span class="price-figure">&#8358;6000</span></p>
                 <h5>Order by: Chris Evans</h5>
               </div>
               <button class="green-bg white-text">
                 <a href="accept-order-successful.html" class="white-text">Accept</a>
               </button>
-              <button class="secondary-colour white-text">
-                <a href="" onclick="modalPopup(); return false;" class="white-text">Decline</a>
+              <button class="red-bg-colour white-text">
+                <a onclick="modalPopup()" class="white-text">Decline</a>
               </button>
-
             </div>
           </div>
 
           <div class="item">
             <div class="item-container">
               <div class="img-container">
-                <img class="img-fluid" src="../assets/images/pastery-3.jpg" alt="pastery" />
+                <img class="img-fluid" src="../assets/images/pastery-3.jpg" alt="pastery"/>
               </div>
               <div class="item-details">
                 <p>#1120 12-08-2018 12:09:00</p>
                 <h3>Decadent Sugary Fruit Puff</h3>
-                <p>Price: &#8358;1500</p>
+                <p>Price: <span class="price-figure">&#8358;1500</span></p>
                 <p>Quantity: 4</p>
-                <p>Amount Paid: &#8358;6000</p>
+                <p>Amount Paid: <span class="price-figure">&#8358;6000</span></p>
                 <h5>Order by: Robert Downey</h5>
               </div>
               <button class="green-bg white-text">
                 <a href="accept-order-successful.html" class="white-text">Accept</a>
               </button>
-              <button class="secondary-colour white-text">
-                <a href="" onclick="modalPopup(); return false;" class="white-text">Decline</a>
+              <button class="red-bg-colour white-text">
+                <a onclick="modalPopup()" class="white-text">Decline</a>
               </button>
-
             </div>
           </div>
+
           <div class="item">
             <div class="item-container">
               <div class="img-container">
@@ -154,29 +153,27 @@
               <div class="item-details">
                 <p>#1120 12-08-2018 12:09:00</p>
                 <h3>Freshly Baked Sausages</h3>
-                <p>Price: &#8358;1500</p>
+                <p>Price: <span class="price-figure">&#8358;1500</span></p>
                 <p>Quantity: 4</p>
-                <p>Amount Paid: &#8358;6000</p>
+                <p>Amount Paid: <span class="price-figure">&#8358;6000</span></p>
                 <h5>Order by: Dr Strange</h5>
               </div>
               <button class="green-bg white-text">
                 <a href="accept-order-successful.html" class="white-text">Accept</a>
               </button>
-              <button class="secondary-colour white-text">
-                <a href="" onclick="modalPopup(); return false;" class="white-text">Decline</a>
+              <button class="red-bg-colour white-text">
+                <a onclick="modalPopup()" class="white-text">Decline</a>
               </button>
-
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </main>
   <!-- Main content Ends -->
 
   <footer>
-    <div class="primary-colour">
+    <div class="blue-bg-colour">
       <div class="text-center white-text">
         Fast-Food-Fast &copy; 2018 &nbsp; Developed by
         <b>Juwon.</b>
@@ -185,6 +182,7 @@
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
   <script type="text/javascript" src="../assets/js/modal.js"></script>
+  <script type="text/javascript" src="../assets/js/redirect.js"></script>
 </body>
 
 </html>

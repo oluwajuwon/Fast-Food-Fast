@@ -16,8 +16,7 @@
     <!-- Navigation bar Starts -->
     <nav class="navbar" id="myNav">
       <a href="index.html" class="nav-brand">Fast-Food-Fast</a>
-      <!--<a href="">About</a>-->
-      <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      <a id="nav-icon" class="icon">&#9776;</a>
     </nav>
     <!-- Navigation bar Ends -->
   </header>
@@ -29,47 +28,42 @@
         <div class="innerbox-container">
           <div class="form">
             <h2>Create an account</h2>
-            <form onsubmit="redirectTo('./users/all-food-items.html'); return false;">
+            <form id="user-Signup">
               <div>
                 <p class="">Full name</p>
-                <input type="text" class="textbox" required placeholder="Enter full name here..." />
+                <input type="text" class="textbox" required placeholder="Enter full name here..."/>
               </div>
               <div>
                 <p class="">Username</p>
-                <input type="text" class="textbox" required placeholder="Enter username here..." />
+                <input type="text" class="textbox" required placeholder="Enter username here..."/>
               </div>
               <div>
                 <p class="">Email</p>
-                <input type="email" class="textbox" required placeholder="Enter email here..." />
+                <input type="email" class="textbox" required placeholder="Enter email here..."/>
               </div>
               <div>
                 <p class="">Password</p>
-                <input type="password" class="textbox" required placeholder="Enter password here..." />
+                <input type="password" class="textbox" required placeholder="Enter password here..."/>
               </div>
               <div>
                 <p class="">Confirm Password</p>
-                <input type="password" class="textbox" required placeholder="Enter password again..." />
+                <input type="password" class="textbox" required placeholder="Enter password again..."/>
               </div>
               <br/>
               <div class="">
-                <input type="submit" class="btn primary-colour white-text" value="Sign Up" />
-              </div>
-              <br/>
-              <div class="">
+                <button type="submit" class="btn blue-bg-colour white-text">Sign Up</button>
                 <a href="login.html" class="secondary-text-color">Already have an account? Login</a>
               </div>
-              <br />
             </form>
           </div>
         </div>
       </div>
-
-
     </section>
   </main>
   <!-- Main content Ends -->
+  
   <footer>
-    <div class="primary-colour">
+    <div class="">
       <div class="text-center white-text">
         Fast-Food-Fast &copy; 2018 &nbsp; Developed by
         <b>Juwon.</b>
@@ -77,6 +71,7 @@
     </div>
   </footer>
   <script type="text/javascript" src="./assets/js/script.js"></script>
+  <script type="text/javascript" src="./assets/js/redirect.js"></script>
 </body>
 
 </html>
