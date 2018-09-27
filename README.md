@@ -9,18 +9,18 @@ A food delivery service application for a restaurant, to enable a restaurant man
 
 FFF has 2 categories of users - Admin and Customers
 
-## Features
-  ### Admin features
-    - Add, edit or delete the fast-food items
-    - See a list of all fast-food items
-    - See a list of orders
-    - Accept and decline orders
-    - Mark orders as completed
+# Features
+ ## Admin features
+   - Add, edit or delete the fast-food items
+   - See a list of all fast-food items
+   - See a list of orders
+   - Accept and decline orders
+   - Mark orders as completed
     
-  ### Customer features
-    - Create an account and log in
-    - Ability to order for food
-    - Ability to see history of ordered foods
+ ## Customer features
+   - Create an account and log in
+   - Ability to order for food
+   - Ability to see history of ordered foods
     
 ## Technology
   - Frontend - 
