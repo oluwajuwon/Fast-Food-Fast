@@ -21,6 +21,17 @@ FFF has 2 categories of users - Admin and Customers
    - Create an account and log in
    - Ability to order for food
    - Ability to see history of ordered foods
+
+The API endpoint for orders is hosted on Heroku, follow link below:
+https://fastfood-fast-app.herokuapp.com/api/v1/orders
+
+## UI Template
+To view the UI template designs, follow the link below:
+https://oluwajuwon.github.io/Fast-Food-Fast/UI/index.html
+ 
+## Pivotal Tracker 
+The project is being managed using pivotal tracker management tool, click the link below to view the stories:
+https://www.pivotaltracker.com/n/projects/2193674
     
 ## Technology
   - Frontend - 
