@@ -1,4 +1,5 @@
 import db from '../db/orders.db';
+import foodDb from '../db/food.db';
 
 class OrderControllers {
   //    controller to retrieve all orders
@@ -35,8 +36,25 @@ class OrderControllers {
   //  controller to place a new order
   createOrder(request, response) {
     const { body } = request;
-    const { quantity } = body;
-    if (!quantity) {
+    const { quantity, foodId } = body;
+    const foodNumber = parseInt(foodId, 10);
+    const foodFound = foodDb.find(food => food.foodId === foodNumber);
+    if (!foodId) {
+      return response.status(400).json({
+        success: 'false',
+        message: '"foodId" is required',
+      });
+    } else if (Number.isNaN(Number(foodId))) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'please foodId should be a number',
+      });
+    } else if (!foodFound) {
+      return response.status(400).json({
+        success: 'false',
+        message: `Food item with the ID: ${foodId} does not exist`,
+      });
+    } else if (!quantity) {
       return response.status(400).json({
         success: 'false',
         message: '"quantity" is required',
@@ -44,7 +62,7 @@ class OrderControllers {
     } else if (Number.isNaN(Number(quantity))) {
       return response.status(400).json({
         success: 'false',
-        message: 'please enter a number',
+        message: 'please quantity should be a number',
       });
     } else if (quantity < 0) {
       return response.status(400).json({
@@ -55,11 +73,12 @@ class OrderControllers {
     //  initialize the order object
     const newOrder = {
       orderId: db.length + 1,
-      foodId: 2,
+      foodId,
+      foodName: foodFound.foodName,
       userId: 3,
       quantity,
-      amount: '4000',
-      orderStatus: 'Pending',
+      amount: quantity * foodFound.price,
+      orderStatus: 'New',
       orderDatetime: Date(),
       updatedAt: Date(),
     };
@@ -85,7 +104,7 @@ class OrderControllers {
         itemIndex = index;
       }
     });
-
+    console.log(orderStatus);
     if (!orderFound) {
       return response.status(404).json({
         success: 'false',
@@ -96,10 +115,16 @@ class OrderControllers {
         success: 'false',
         message: '"orderStatus" is required',
       });
+    } else if (orderStatus !== 'New' && orderStatus !== 'Processing' && orderStatus !== 'Cancelled' && orderStatus !== 'Complete') {
+      return response.status(400).json({
+        success: 'false',
+        message: 'Please the orderStatus can only be New, Processing, Cancelled or Complete (case sensitive)',
+      });
     } else {
       const updatedOrder = {
         orderId: orderFound.orderId,
         foodId: orderFound.foodId,
+        foodName: orderFound.foodName,
         userId: orderFound.userId,
         amount: orderFound.amount,
         quantity: orderFound.quantity,

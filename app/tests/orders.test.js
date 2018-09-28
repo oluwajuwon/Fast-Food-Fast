@@ -4,11 +4,6 @@ import app from '../app';
 
 const request = require('supertest');
 
-const foodName = 'Chicken and chips';
-const price = '2000';
-const quantity = '2';
-const orderStatus = 'Completed';
-
 // run API test
 describe('Test suite for Order API endpoints', () => {
   describe('GET /api/v1/orders', () => {
@@ -110,9 +105,12 @@ describe('Test suite for Order API endpoints', () => {
 
   describe('POST /api/v1/orders/', () => {
     it('should return status code 201 if order was added succesfully', (done) => {
+      const foodId = 2;
+      const price = '2000';
+      const quantity = '2';
       request(app)
         .post('/api/v1/orders')
-        .send({ foodName, price, quantity })
+        .send({ foodId, price, quantity })
         .end((err, response) => {
           expect(response.status).to.equal(201);
           done();
@@ -120,9 +118,12 @@ describe('Test suite for Order API endpoints', () => {
     });
 
     it('should add new order', (done) => {
+      const foodId = 2;
+      const price = '2000';
+      const quantity = '2';
       request(app)
         .post('/api/v1/orders/')
-        .send({ foodName, price, quantity })
+        .send({ foodId, price, quantity })
         .end((err, response) => {
           expect(response.body).to.be.an('object').with.property('newOrder');
           expect(response.body).to.be.an('object').with.property('newOrder').to.be.an('object');
@@ -131,9 +132,12 @@ describe('Test suite for Order API endpoints', () => {
     });
 
     it('should return a message saying a new order was added succesfully', (done) => {
+      const foodId = 2;
+      const price = '2000';
+      const quantity = '2';
       request(app)
         .post('/api/v1/orders')
-        .send({ foodName, price, quantity })
+        .send({ foodId, price, quantity })
         .end((err, response) => {
           expect(response.body.message).to.equal('Your order has been placed successfully');
           done();
@@ -141,8 +145,24 @@ describe('Test suite for Order API endpoints', () => {
     });
   });
 
+  describe('POST /api/v1/orders/', () => {
+    it('should return a message saying please quantity should be a number', (done) => {
+      const foodId = 2;
+      const price = '2000';
+      const quantity = 'food';
+      request(app)
+        .post('/api/v1/orders')
+        .send({ foodId, price, quantity })
+        .end((err, response) => {
+          expect(response.body.message).to.equal('please quantity should be a number');
+          done();
+        });
+    });
+  });
+
   describe('PUT /api/v1/orders/:id', () => {
     it('should update an order', (done) => {
+      const orderStatus = 'Complete';
       request(app)
         .put('/api/v1/orders/1')
         .send({ orderStatus })
@@ -155,6 +175,7 @@ describe('Test suite for Order API endpoints', () => {
     });
 
     it('should return status code 201 if the order was updated successfully', (done) => {
+      const orderStatus = 'Complete';
       request(app)
         .put('/api/v1/orders/1')
         .send({ orderStatus })
@@ -165,11 +186,23 @@ describe('Test suite for Order API endpoints', () => {
     });
 
     it('should return status code 404 if order to be updated was not found', (done) => {
+      const orderStatus = 'Complete';
       request(app)
         .put('/api/v1/orders/7')
         .send({ orderStatus })
         .end((err, response) => {
           expect(response.status).to.equal(404);
+          done();
+        });
+    });
+
+    it('should return status code 400 if order status was not inputted', (done) => {
+      const orderStatus = '';
+      request(app)
+        .put('/api/v1/orders/1')
+        .send({ orderStatus })
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
           done();
         });
     });
