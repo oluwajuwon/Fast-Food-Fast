@@ -22,6 +22,40 @@ class SignUpMiddleware {
     return next();
   }
 
+  checkUndefined(request, response, next) {
+    const { body } = request;
+    const {
+      username, fullName, email, password, passwordMatch,
+    } = body;
+    if (username === undefined) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'Please enter a username',
+      });
+    } else if (fullName === undefined) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'please enter your full name',
+      });
+    } else if (email === undefined) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'please enter your email',
+      });
+    } else if (password === undefined) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'please enter a password',
+      });
+    } else if (passwordMatch === undefined) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'please confirm password',
+      });
+    }
+    return next();
+  }
+
   checkEmptyfield(request, response, next) {
     const { body } = request;
     const {
