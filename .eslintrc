@@ -1,0 +1,20 @@
+{
+    "env": {
+    "node": true,
+    "es6": true
+    },
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "rules": {
+        "array-callback-return":"off",
+        "class-methods-use-this":"off",
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
+        "linebreak-style": "off",
+        "no-console":"off",
+        "no-else-return":"off",
+        "no-undef": "off",
+        "no-empty": "off",
+        "prefer-destructuring":"off"
+    }
+}
