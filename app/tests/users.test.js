@@ -3,9 +3,9 @@ import request from 'supertest';
 import app from '../app';
 import db from '../db/users.db';
 
-const username = 'jay';
+const username = 'jay1';
 const fullName = 'Robert Downey';
-const email = 'juwon@gmail.com';
+const email = 'juwonzy@gmail.com';
 const password = '1234567';
 const passwordMatch = '1234567';
 
