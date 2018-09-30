@@ -22,8 +22,9 @@ FFF has 2 categories of users - Admin and Customers
    - Ability to order for food
    - Ability to see history of ordered foods
 
-The API endpoint for orders is hosted on Heroku, follow link below:
+The API endpoint for orders and menu is hosted on Heroku, follow links below:
 https://fastfood-fast-app.herokuapp.com/api/v1/orders
+https://fastfood-fast-app.herokuapp.com/api/v1/menu
 
 ## UI Template
 To view the UI template designs, follow the link below:
@@ -63,7 +64,7 @@ https://www.pivotaltracker.com/n/projects/2193674
 ## Testing
   To test the API endpoints Run `npm run test`
   
-###Test Tools
+### Test Tools
  - Mocha - A JavaScript Test Framework for API Tests
  - Chai - A TDD/BDD Assertion Library for Node
  - Supertest - A Super-agent driven library for testing node.js HTTP servers

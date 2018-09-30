@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import indexRoute from './routes/indexRoute';
 import orderRoute from './routes/orderRoute';
+import userRoute from './routes/userRoute';  
 import foodRoute from './routes/foodRoute';
 import userRoute from './routes/userRoute';
 //  setting up the express application
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(indexRoute);
 app.use(orderRoute);
+app.use(userRoute);
 app.use(foodRoute);
 app.use(userRoute);
 app.use((request, response) => {
