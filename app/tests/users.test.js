@@ -3,11 +3,11 @@ import request from 'supertest';
 import app from '../app';
 import db from '../db/users.db';
 
-const username = 'jay';
-const fullName = 'Robert Downey';
+
+
 const email = 'juwon@gmail.com';
 const password = '1234567';
-const passwordMatch = '123456';
+
 
 
 describe('POST /api/v1/auth/login', () => {
