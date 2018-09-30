@@ -16,6 +16,7 @@ app.use(indexRoute);
 app.use(orderRoute);
 app.use(userRoute);
 app.use(foodRoute);
+app.use(userRoute);
 app.use((request, response) => {
   response.status(404).send('404 page');
 });

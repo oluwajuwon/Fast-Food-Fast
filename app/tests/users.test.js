@@ -1,12 +1,13 @@
 import { expect } from 'chai';
 import request from 'supertest';
 import app from '../app';
+import db from '../db/users.db';
 
-const username = 'jay';
+const username = 'jay1';
 const fullName = 'Robert Downey';
-const email = 'jayy@gmail.com';
-const password = '123456';
-const passwordMatch = '123456';
+const email = 'juwonzy@gmail.com';
+const password = '1234567';
+const passwordMatch = '1234567';
 
 // run API endpoint test for user routes
 describe('Test suite for User API endpoints', () => {
@@ -18,7 +19,7 @@ describe('Test suite for User API endpoints', () => {
         done();
       });
   });
-
+  
   describe('POST /api/v1/auth/signup', () => {
     it('should return status code 201 if the new user was added succesfully', (done) => {
       request(app)
@@ -58,6 +59,43 @@ describe('Test suite for User API endpoints', () => {
         })
         .end((err, response) => {
           expect(response.body).to.be.an('object');
+          done();
+        });
+    });
+  });
+
+describe('POST /api/v1/auth/login', () => {
+  it('should return status code 200 if the login was successful ', (done) => {
+    request(app)
+      .post('/api/v1/auth/login')
+      .send({ email, password })
+      .end((err, response) => {
+        expect(response.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('should return status code 400 if the values were not entered', (done) => {
+    request(app)
+      .post('/api/v1/auth/login')
+      .send({})
+      .end((err, response) => {
+        expect(response.status).to.equal(400);
+        done();
+      });
+    });
+  });
+
+  describe('POST /api/v1/auth/login', () => {
+    beforeEach(() => {
+      db.pop();
+    });
+    it('should return status code 404 if the values entered do not exist', (done) => {
+      request(app)
+        .post('/api/v1/auth/login')
+        .send({ email, password })
+        .end((err, response) => {
+          expect(response.status).to.equal(404);
           done();
         });
     });
