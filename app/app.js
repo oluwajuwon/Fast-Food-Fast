@@ -4,7 +4,6 @@ import indexRoute from './routes/indexRoute';
 import orderRoute from './routes/orderRoute';
 import userRoute from './routes/userRoute';  
 import foodRoute from './routes/foodRoute';
-import userRoute from './routes/userRoute';
 //  setting up the express application
 const app = express();
 const PORT = process.env.PORT || 3000;
