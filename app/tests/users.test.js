@@ -64,15 +64,25 @@ describe('Test suite for User API endpoints', () => {
     });
   });
 
-  describe('POST /api/v1/auth/login', () => {
-    it('should return status code 200 if the login was successful ', (done) => {
-      request(app)
-        .post('/api/v1/auth/login')
-        .send({ email, password })
-        .end((err, response) => {
-          expect(response.status).to.equal(200);
-          done();
-        });
+describe('POST /api/v1/auth/login', () => {
+  it('should return status code 200 if the login was successful ', (done) => {
+    request(app)
+      .post('/api/v1/auth/login')
+      .send({ email, password })
+      .end((err, response) => {
+        expect(response.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('should return status code 400 if the values were not entered', (done) => {
+    request(app)
+      .post('/api/v1/auth/login')
+      .send({})
+      .end((err, response) => {
+        expect(response.status).to.equal(400);
+        done();
+      });
     });
   });
 
