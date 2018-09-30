@@ -1,4 +1,4 @@
-import db from '../db/food.db';
+import menu from '../db/food.db';
 
 class FoodControllers {
   //    controller to retrieve all food items
@@ -7,7 +7,7 @@ class FoodControllers {
       {
         success: 'true',
         message: 'Retrieved food items successfully',
-        db,
+        menu,
       },
     );
   }
