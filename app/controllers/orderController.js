@@ -33,6 +33,26 @@ class OrderControllers {
     }
   }
 
+  //  controller to get the  specific order of a specific user
+  getUserorder(request, response) {
+    const id = parseInt(request.params.userId, 10);
+    const userOrders = db.filter(order => order.userId === id);
+    if (userOrders) {
+      return response.status(200).json(
+        {
+          success: 'true',
+          message: 'The user orders were retrieved successfully',
+          userOrders,
+        },
+      );
+    } else {
+      return response.status(404).json({
+        success: 'false',
+        message: `Orders with the userID: ${id} does not exist`,
+      });
+    }
+  }
+
   //  controller to place a new order
   createOrder(request, response) {
     const { body } = request;
