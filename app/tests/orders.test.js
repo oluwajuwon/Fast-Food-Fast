@@ -103,6 +103,26 @@ describe('Test suite for Order API endpoints', () => {
     });
   });
 
+  describe('GET /api/v1/users/:userId/orders/', () => {
+    it('should return specific orders of a particular user', (done) => {
+      request(app)
+        .get('/api/v1/users/4/orders/')
+        .end((err, response) => {
+          expect(response.body).to.be.an('object').with.property('userOrders');
+          done();
+        });
+    });
+
+    it('should return status code 200 if the orders were found', (done) => {
+      request(app)
+        .get('/api/v1/users/4/orders/')
+        .end((err, response) => {
+          expect(response.status).to.equal(200);
+          done();
+        });
+    });
+  });
+
   describe('POST /api/v1/orders/', () => {
     it('should return status code 201 if order was added succesfully', (done) => {
       const foodId = 2;

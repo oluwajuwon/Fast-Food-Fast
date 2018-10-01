@@ -21,6 +21,17 @@ const orders = [
     orderDatetime: '24-08-2018 20:00:09',
     updatedAt: '24-08-2018 20:00:09',
   },
+  {
+    orderId: 3,
+    foodId: 1,
+    foodName: 'shawarma and chips',
+    userId: 4,
+    quantity: '6',
+    amount: '12000',
+    orderStatus: 'New',
+    orderDatetime: '24-08-2018 20:00:09',
+    updatedAt: '24-08-2018 20:00:09',
+  },
 ];
 
 export default orders;
