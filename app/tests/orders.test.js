@@ -2,6 +2,14 @@ import { expect } from 'chai';
 
 import app from '../app';
 
+import generateToken from '../controllers/generateToken';
+
+const customer = { user: { userId: 1, userType: 'Customer' } };
+const admin = { user: { userId: 2, userType: 'Admin' } };
+
+const adminToken = generateToken.createToken(admin);
+const customerToken = generateToken.createToken(customer);
+
 const request = require('supertest');
 
 // run API test
@@ -10,6 +18,7 @@ describe('Test suite for Order API endpoints', () => {
     it('should return status 200 if all orders were retrieved', (done) => {
       request(app)
         .get('/api/v1/orders')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.status).to.equal(200);
           done();
@@ -19,17 +28,19 @@ describe('Test suite for Order API endpoints', () => {
     it('should return an object containing the orders', (done) => {
       request(app)
         .get('/api/v1/orders')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
-          expect(response.body).to.be.an('object').with.property('db');
+          expect(response.body).to.be.an('object').with.property('orders');
           done();
         });
     });
 
-    it('should return an object with the db property', (done) => {
+    it('should return an object with the orders property', (done) => {
       request(app)
         .get('/api/v1/orders')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
-          expect(response.body).to.be.an('object').with.property('db');
+          expect(response.body).to.be.an('object').with.property('orders');
           done();
         });
     });
@@ -37,6 +48,7 @@ describe('Test suite for Order API endpoints', () => {
     it('should return an object with a message saying all the orders were retrieved successfully', (done) => {
       request(app)
         .get('/api/v1/orders')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.body.message).to.be.equal('Retrieved orders successfully');
           done();
@@ -46,10 +58,11 @@ describe('Test suite for Order API endpoints', () => {
     it('should return all orders', (done) => {
       request(app)
         .get('/api/v1/orders')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.body).to.be.an('object');
-          expect(response.body).to.be.an('object').with.property('db');
-          expect(response.body).to.be.an('object').with.property('db').to.be.an('array');
+          expect(response.body).to.be.an('object').with.property('orders');
+          expect(response.body).to.be.an('object').with.property('orders').to.be.an('array');
           done();
         });
     });
@@ -59,6 +72,7 @@ describe('Test suite for Order API endpoints', () => {
     it('should return a specific order', (done) => {
       request(app)
         .get('/api/v1/orders/1')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.body).to.be.an('object').with.property('result');
           expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('orderId');
@@ -69,6 +83,7 @@ describe('Test suite for Order API endpoints', () => {
     it('should return status code 200 if order was found', (done) => {
       request(app)
         .get('/api/v1/orders/1')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.status).to.equal(200);
           done();
@@ -78,6 +93,7 @@ describe('Test suite for Order API endpoints', () => {
     it('should return status code 404 if order was not found', (done) => {
       request(app)
         .get('/api/v1/orders/5')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.status).to.equal(404);
           done();
@@ -87,6 +103,7 @@ describe('Test suite for Order API endpoints', () => {
     it('should return a message saying the order was retrieved successfully', (done) => {
       request(app)
         .get('/api/v1/orders/1')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.body.message).to.be.equal('The order was retrieved successfully');
           done();
@@ -96,6 +113,7 @@ describe('Test suite for Order API endpoints', () => {
     it('should return a message saying the order does not exist if order was not found', (done) => {
       request(app)
         .get('/api/v1/orders/5')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.body.message).to.equal('Order with the ID: 5 does not exist');
           done();
@@ -104,9 +122,20 @@ describe('Test suite for Order API endpoints', () => {
   });
 
   describe('GET /api/v1/users/:userId/orders/', () => {
-    it('should return specific orders of a particular user', (done) => {
+    it('should return specific orders of a particular user if accessed by the admin', (done) => {
       request(app)
         .get('/api/v1/users/4/orders/')
+        .set('x-access-token', adminToken)
+        .end((err, response) => {
+          expect(response.body).to.be.an('object').with.property('anyUserorder');
+          done();
+        });
+    });
+
+    it('should return specific orders of a particular user', (done) => {
+      request(app)
+        .get('/api/v1/users/1/orders/')
+        .set('x-access-token', customerToken)
         .end((err, response) => {
           expect(response.body).to.be.an('object').with.property('userOrders');
           done();
@@ -116,6 +145,7 @@ describe('Test suite for Order API endpoints', () => {
     it('should return status code 200 if the orders were found', (done) => {
       request(app)
         .get('/api/v1/users/4/orders/')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.status).to.equal(200);
           done();
@@ -130,6 +160,7 @@ describe('Test suite for Order API endpoints', () => {
       const quantity = '2';
       request(app)
         .post('/api/v1/orders')
+        .set('x-access-token', customerToken)
         .send({ foodId, price, quantity })
         .end((err, response) => {
           expect(response.status).to.equal(201);
@@ -143,6 +174,7 @@ describe('Test suite for Order API endpoints', () => {
       const quantity = '2';
       request(app)
         .post('/api/v1/orders/')
+        .set('x-access-token', customerToken)
         .send({ foodId, price, quantity })
         .end((err, response) => {
           expect(response.body).to.be.an('object').with.property('newOrder');
@@ -157,6 +189,7 @@ describe('Test suite for Order API endpoints', () => {
       const quantity = '2';
       request(app)
         .post('/api/v1/orders')
+        .set('x-access-token', customerToken)
         .send({ foodId, price, quantity })
         .end((err, response) => {
           expect(response.body.message).to.equal('Your order has been placed successfully');
@@ -172,6 +205,7 @@ describe('Test suite for Order API endpoints', () => {
       const quantity = 'food';
       request(app)
         .post('/api/v1/orders')
+        .set('x-access-token', customerToken)
         .send({ foodId, price, quantity })
         .end((err, response) => {
           expect(response.body.message).to.equal('please quantity should be a number');
@@ -185,6 +219,7 @@ describe('Test suite for Order API endpoints', () => {
       const orderStatus = 'Complete';
       request(app)
         .put('/api/v1/orders/1')
+        .set('x-access-token', adminToken)
         .send({ orderStatus })
         .end((err, response) => {
           expect(response.body).to.be.an('object');
@@ -198,6 +233,7 @@ describe('Test suite for Order API endpoints', () => {
       const orderStatus = 'Complete';
       request(app)
         .put('/api/v1/orders/1')
+        .set('x-access-token', adminToken)
         .send({ orderStatus })
         .end((err, response) => {
           expect(response.status).to.equal(201);
@@ -209,6 +245,7 @@ describe('Test suite for Order API endpoints', () => {
       const orderStatus = 'Complete';
       request(app)
         .put('/api/v1/orders/7')
+        .set('x-access-token', adminToken)
         .send({ orderStatus })
         .end((err, response) => {
           expect(response.status).to.equal(404);
@@ -220,6 +257,7 @@ describe('Test suite for Order API endpoints', () => {
       const orderStatus = '';
       request(app)
         .put('/api/v1/orders/1')
+        .set('x-access-token', adminToken)
         .send({ orderStatus })
         .end((err, response) => {
           expect(response.status).to.equal(400);

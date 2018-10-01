@@ -1,10 +1,12 @@
 import db from '../db/users.db';
+import generateToken from './generateToken';
 
 
 class UserControllers {
   //  Controller to sign up a user
+
   signUp(request, response) {
-  //  initialize the new user object
+    //  initialize the new user object
     const { body } = request;
     const {
       username, fullName, email, password,
@@ -34,9 +36,18 @@ class UserControllers {
 
   //  Controller to login a user
   login(request, response) {
+    const { body } = request;
+    const { email } = body;
+    const findUser = db.find(user => user.email === email);
+    const user = { userId: findUser.userId, userType: findUser.userType };
+    const payload = {
+      user,
+    };
+    const token = generateToken.createToken(payload);
     return response.status(200).json({
       success: 'true',
       message: 'Your sign in was successful',
+      token,
     });
   }
 }
