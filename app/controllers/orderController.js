@@ -124,7 +124,6 @@ class OrderControllers {
         itemIndex = index;
       }
     });
-    console.log(orderStatus);
     if (!orderFound) {
       return response.status(404).json({
         success: 'false',
