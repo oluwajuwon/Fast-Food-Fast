@@ -8,7 +8,7 @@ class OrderControllers {
       {
         success: 'true',
         message: 'Retrieved orders successfully',
-        db,
+        orders: db,
       },
     );
   }
@@ -36,21 +36,25 @@ class OrderControllers {
   //  controller to get the  specific order of a specific user
   getUserorder(request, response) {
     const id = parseInt(request.params.userId, 10);
-    const userOrders = db.filter(order => order.userId === id);
-    if (userOrders) {
-      return response.status(200).json(
-        {
-          success: 'true',
-          message: 'The user orders were retrieved successfully',
-          userOrders,
-        },
-      );
-    } else {
-      return response.status(404).json({
-        success: 'false',
-        message: `Orders with the userID: ${id} does not exist`,
+    const anyUserorder = db.filter(order => order.userId === id);
+    const userOrders = db.filter(order => order.userId === request.decoded.user.userId);
+    if (request.decoded.user.userType === 'Customer' && request.decoded.user.userId === id) {
+      return response.status(200).json({
+        success: 'true',
+        message: 'The user orders were retrieved successfully',
+        userOrders,
+      });
+    } else if (request.decoded.user.userType === 'Admin') {
+      return response.status(200).json({
+        success: 'true',
+        message: 'The user orders were retrieved successfully',
+        anyUserorder,
       });
     }
+    return response.status(404).json({
+      success: 'false',
+      message: `Orders with the userID: ${id} does not exist`,
+    });
   }
 
   //  controller to place a new order
@@ -95,14 +99,13 @@ class OrderControllers {
       orderId: db.length + 1,
       foodId,
       foodName: foodFound.foodName,
-      userId: 3,
+      userId: request.decoded.user.userId,
       quantity,
       amount: quantity * foodFound.price,
       orderStatus: 'New',
       orderDatetime: Date(),
       updatedAt: Date(),
     };
-
     db.push(newOrder);
     return response.status(201).json({
       success: 'true',

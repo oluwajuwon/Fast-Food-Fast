@@ -14,7 +14,7 @@ const orders = [
     orderId: 2,
     foodId: 1,
     foodName: 'shawarma and chips',
-    userId: 4,
+    userId: 1,
     quantity: '5',
     amount: '2000',
     orderStatus: 'New',

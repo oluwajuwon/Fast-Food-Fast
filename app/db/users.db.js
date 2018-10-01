@@ -9,5 +9,15 @@ const users = [
     createdAt: '24-08-2018 20:00:09',
     updatedAt: '24-08-2018 20:00:09',
   },
+  {
+    userId: 2,
+    username: 'Admin',
+    fullName: 'Admin',
+    email: 'juwonzy@yahoo.com',
+    password: '1234567',
+    userType: 'Admin',
+    createdAt: '24-08-2018 20:00:09',
+    updatedAt: '24-08-2018 20:00:09',
+  },
 ];
 export default users;
