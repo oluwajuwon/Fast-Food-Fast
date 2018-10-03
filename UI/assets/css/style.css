@@ -74,6 +74,23 @@ header{
   width:100%
 }
 
+.cart-body {
+  padding: 20px
+}
+
+.cart-btn{
+  margin-top: 10px
+}
+
+.cart-btn > a{
+  padding: 0 !important;
+}
+
+.cart-btn > a:hover {
+  background-color: #4b3eff !important;
+  text-decoration: none !important;
+}
+
 footer{
   background-color: #4139ac;
   bottom:0;
