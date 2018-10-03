@@ -1,4 +1,3 @@
-<!--User pages Skeleton-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +34,20 @@
           <a href="../login.html">Logout</a>
         </div>
       </div>
+      <div class="dropdown profile">
+        <button class="dropbtn">Cart items (0)
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <div class="cart-body">
+            Your cart is empty
+            <br>
+            <button class="blue-bg-colour white-text cart-btn">
+              <a href="confirm-order.html" class="white-text">Proceed to checkout</a>
+            </button>
+          </div>
+        </div>
+      </div>
       <a id="nav-icon" class="icon">&#9776;</a>
     </nav>
     <!-- Navigation bar Ends -->
@@ -43,29 +56,81 @@
   <!-- Main content Starts -->
   <main>
     <div class="container">
-      <h2 class="text-center">Confirm Order</h2>
+      <h2 class="text-center">Checkout</h2>
       <hr>
-      <div class="order-container">
-        <div class="img-container">
-          <img class="img-fluid" src="../assets/images/pastery-1.jpg" />
-        </div>
-        <div class="order-details">
-          <h1>Traditional French dessert</h1>
-          <h3><span class="price-figure">&#8358;1,500</span></h3>
-          <h3>Quantity(packs):<input type="number" min="0" id="quantity" /></h3>
+      <div class="meals">
+        <div class="flex-container">
+          <div class="item">
+            <div class="item-container">
+              <div class="img-container">
+                <img class="img-fluid" src="../assets/images/item-3.jpg" />
+              </div>
+              <div class="item-details">
+                <h3>Ham Sandwiches</h3>
+                <p><span class="price-figure">&#8358;1,500</span></p>
+              </div>
+              <h3>Quantity: <input type="number" min="0" id="quantity" /></h3>
+              <button class="blue-bg-colour white-text">
+                <a href="#" class="white-text">Confirm</a>
+              </button>
+              <button class="red-bg-colour white-text">
+                <a href="#" class="white-text">Remove</a>
+              </button>
 
-          <h3>Total: &#8358;1500</h3>
-          <button class="blue-bg-colour">
-            <a href="order-successful.html" class="white-text">Confirm Order</a>
-          </button>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-container">
+              <div class="img-container">
+                <img class="img-fluid" src="../assets/images/item-4.jpg" />
+              </div>
+              <div class="item-details">
+                <h3>Ata-Rodo Pizza</h3>
+                <p><span class="price-figure">&#8358;1,500</span></p>
+              </div>
+              <h3>Quantity: <input type="number" min="0" id="quantity" /></h3>
+              <button class="blue-bg-colour white-text">
+                <a href="#" class="white-text">Confirm</a>
+              </button>
+              <button class="red-bg-colour white-text">
+                <a href="#" class="white-text">Remove</a>
+              </button>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="item-container">
+              <div class="img-container">
+                <img class="img-fluid" src="../assets/images/item-4.jpg" />
+              </div>
+              <div class="item-details">
+                <h3>Ata-Rodo Pizza</h3>
+                <p><span class="price-figure">&#8358;1,500</span></p>
+              </div>
+              <h3>Quantity: <input type="number" min="0" id="quantity" /></h3>
+              <button class="blue-bg-colour white-text">
+                <a href="#" class="white-text">Confirm</a>
+              </button>
+              <button class="red-bg-colour white-text">
+                <a href="#" class="white-text">Remove</a>
+              </button>
+
+            </div>
+          </div>
 
         </div>
-        <br>
+      </div>
+
+      <div class="text-center">
+        <h3>Total: &#8358;1500</h3>
+        <button class="blue-bg-colour white-text">
+          <a href="order-successful.html">Confirm Order</a>
+        </button>
         <div>
           <a href="all-food-items.html" class=""> << Back to Menu items</a>
         </div>
       </div>
-    </div>
   </main>
   <!-- Main content Ends -->
 
