@@ -1,4 +1,3 @@
-<!--User pages Skeleton-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="../assets/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../assets/css/modal.css" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Home ¦ Fast-Food-Fast</title>
 </head>
@@ -26,6 +26,7 @@
           <a href="order-history.html">Order history</a>
         </div>
       </div>
+
       <div class="dropdown profile">
         <button class="dropbtn">Howdy, Lebagerian
           <i class="fa fa-caret-down"></i>
@@ -35,10 +36,49 @@
           <a href="../login.html">Logout</a>
         </div>
       </div>
+      <div class="dropdown profile">
+        <button class="dropbtn">Cart items (0)
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <div class="cart-body">
+            Your cart is empty
+            <br>
+            <button class="blue-bg-colour white-text cart-btn">
+              <a href="confirm-order.html" class="white-text">Proceed to checkout</a>
+            </button>
+          </div>
+        </div>
+      </div>
       <a id="nav-icon" class="icon">&#9776;</a>
     </nav>
     <!-- Navigation bar Ends -->
   </header>
+
+  <!-- Modal Starts -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="container">
+        <h1 class="">Order items</h1>
+        <div class="">
+          <img src="../assets/images/pastery-1.jpg" height="150" width="150" alt="food item" />
+          <div class="item-details">
+            <p>#1 12-08-2018 12:09:00</p>
+            <p>Chocolate and burger</p>
+            <b>Price: </b><span class="price-figure">&#8358;1500</span>
+            <p><b>Quantity:</b> 5</p>
+          </div>
+        </div>
+        <div class="">
+          <form id="mark-complete">
+            <button type="button" id="close-modal" class="btn red-bg-colour white-text modal-close">Close</button>
+          </form>
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Ends -->
 
   <!-- Main content Starts -->
   <main>
@@ -59,19 +99,10 @@
               <div class="img-container">
                 <img class="img-fluid" src="../assets/images/pastery-1.jpg" />
               </div>
-
               <div class="item-details">
-                <h5>#1530</h5>
-                <p>23-08-2018 12:09:34PM</p>
-                <h3>Traditional French dessert</h3>
-                <p>
-                  <span class="price-figure">&#8358;1500</span>
-                </p>
-                <b>Quantity: </b> 5
-                </p>
-                <p>
-                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
-                </p>
+                <p>#1 12-08-2018 12:09:00</p>
+                <p>Items: 4 <a onclick="modalPopup()">View Items</a></p>
+                <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
                 <p>
                   <b>Status: </b>
                   <span class="red-text"> Pending</span>
@@ -84,25 +115,15 @@
           <div class="item">
             <div class="item-container">
               <div class="img-container">
-                <img class="img-fluid" src="../assets/images/pastery-2.jpg"/>
+                <img class="img-fluid" src="../assets/images/pastery-2.jpg" />
               </div>
               <div class="item-details">
-
-                <h5>#1390</h5>
-                <p>23-08-2018 12:09:34PM</p>
-                <h3>Sweet italian pastery</h3>
-                <p>
-                  <span class="price-figure">&#8358;1500</span>
-                </p>
-                <p>
-                  <b>Quantity: </b> 5
-                </p>
-                <p>
-                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
-                </p>
+                <p>#1 12-08-2018 12:09:00</p>
+                <p>Items: 4 <a onclick="modalPopup()">View Items</a></p>
+                <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
                 <p>
                   <b>Status: </b>
-                  <span class="green-text"> Completed</span>
+                  <span class="green-text">Completed</span>
                 </p>
               </div>
             </div>
@@ -111,25 +132,15 @@
           <div class="item">
             <div class="item-container">
               <div class="img-container">
-                <img class="img-fluid" src="../assets/images/pastery-3.jpg"/>
+                <img class="img-fluid" src="../assets/images/pastery-3.jpg" />
               </div>
               <div class="item-details">
-
-                <h5>#1230</h5>
-                <p>23-08-2018 12:09:34PM</p>
-                <h3>Decadent Sugary Fruit Puff</h3>
-                <p>
-                  <span class="price-figure">&#8358;1500</span>
-                </p>
-                <p>
-                  <b>Quantity: </b> 5
-                </p>
-                <p>
-                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
-                </p>
+                <p>#1 12-08-2018 12:09:00</p>
+                <p>Items: 6 <a onclick="modalPopup()">View Items</a></p>
+                <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
                 <p>
                   <b>Status: </b>
-                  <span class="green-text"> Completed</span>
+                  <span class="red-text"> Pending</span>
                 </p>
               </div>
             </div>
@@ -137,25 +148,15 @@
           <div class="item">
             <div class="item-container">
               <div class="img-container">
-                <img class="img-fluid" src="../assets/images/pastery-4.jpg"/>
+                <img class="img-fluid" src="../assets/images/pastery-4.jpg" />
               </div>
               <div class="item-details">
-
-                <h5>#1330</h5>
-                <p>20-08-2018 10:09:34PM</p>
-                <h3>Freshly Baked Sausages</h3>
-                <p>
-                  <span class="price-figure">&#8358;1500</span>
-                </p>
-                <p>
-                  <b>Quantity: </b> 5
-                </p>
-                <p>
-                  <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
-                </p>
+                <p>#1 12-08-2018 12:09:00</p>
+                <p>Items: 10 <a onclick="modalPopup()">View Items</a></p>
+                <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
                 <p>
                   <b>Status: </b>
-                  <span class="green-text"> Completed</span>
+                  <span class="red-text"> Pending</span>
                 </p>
               </div>
             </div>
@@ -178,6 +179,7 @@
     </div>
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
+  <script type="text/javascript" src="../assets/js/modal.js"></script>
 </body>
 
 </html>
