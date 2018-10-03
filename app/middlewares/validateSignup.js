@@ -1,4 +1,4 @@
-import db from '../db/users.db';
+//  import db from '../db/users.db';
 
 class SignUpMiddleware {
   checkExisting(request, response, next) {

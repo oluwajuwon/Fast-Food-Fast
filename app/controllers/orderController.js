@@ -59,8 +59,7 @@ class OrderControllers {
 
   //  controller to place a new order
   createOrder(request, response) {
-    const { body } = request;
-    const { quantity, foodId } = body;
+    const { quantity, foodId } = request.body;
     const foodNumber = parseInt(foodId, 10);
     const foodFound = foodDb.find(food => food.foodId === foodNumber);
     if (!foodId) {
