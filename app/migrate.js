@@ -2,8 +2,12 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
 dotenv.config();
+let sslValue = true;
+if (process.env.NODE_ENV === 'local') {
+  sslValue = false;
+}
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: sslValue });
 
 pool.on('connect', () => {
   console.log('connected to the db');
@@ -46,21 +50,42 @@ const createTables = () => {
       CREATE TABLE IF NOT EXISTS
       orders(
         order_id SERIAL PRIMARY KEY,
-        food_id INTEGER NOT NULL,
+        food_items VARCHAR NOT NULL,
         user_id INTEGER NOT NULL,
-        quantity INTEGER NOT NULL,
         amount NUMERIC NOT NULL,
         order_status VARCHAR(128) NOT NULL,
         created_at TIMESTAMP,
         updated_at TIMESTAMP,
-        FOREIGN KEY(food_id) REFERENCES foods(food_id) ON DELETE CASCADE,
         FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
       );
       INSERT INTO users(
         username, full_name, email, password, user_type, created_at, 
         updated_at)
         VALUES ('admin', 'admin', 'admin@mailinator.com', '1234567', 'Admin', '2018-10-02 13:07:58.188',
-        '2018-10-02 13:07:58.188');`;
+        '2018-10-02 13:07:58.188');
+        INSERT INTO users(
+          username, full_name, email, password, user_type, created_at, 
+          updated_at)
+          VALUES ('jayboy', 'juwon', 'juwon@mailinator.com', '1234567', 'Customer', '2018-10-02 13:07:58.188',
+          '2018-10-02 13:07:58.188');
+        INSERT INTO category(
+          category_name)
+          VALUES ('meals');
+          INSERT INTO foods(
+            food_name, category_id, price, description, image, created_at, 
+            updated_at)
+    VALUES ('Chicken and chips', '1', '3000', 'yummy', 'google.com', '2018-10-02 13:07:58.188', 
+    '2018-10-02 13:07:58.188');
+    INSERT INTO foods(
+      food_name, category_id, price, description, image, created_at, 
+      updated_at)
+VALUES ('Shawarma and turkey', '1', '5000', 'delicious', 'google.com', '2018-10-02 13:07:58.188', 
+'2018-10-02 13:07:58.188');
+INSERT INTO orders(
+  food_items, user_id, amount, order_status, created_at, 
+  updated_at)
+VALUES ('[{"food_id":1,"food_name":"Chicken and chips","price":"3000","quantity":2}]', '2',
+'6000', 'New', '2018-10-02 13:07:58.188', '2018-10-02 13:07:58.188');`;
   pool.query(queryText)
     .then((result) => {
       console.log(result);

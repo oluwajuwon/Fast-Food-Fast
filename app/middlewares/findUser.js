@@ -44,7 +44,7 @@ class FindUser {
     const value = [emailTrim, passwordTrim];
     return db.query(text, value, (err, result) => {
       if (result.rows.length === 0) {
-        return response.status(409).json({
+        return response.status(404).json({
           success: 'false',
           message: 'Please enter valid credentials',
         });

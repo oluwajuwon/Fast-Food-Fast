@@ -1,66 +1,43 @@
 //  import db from '../db/users.db';
 
 class SignUpMiddleware {
-  checkExisting(request, response, next) {
-    const { body } = request;
-    const { username, email } = body;
-    const userTrim = username.trim();
-    const emailTrim = email.trim();
-    const userFound = db.find(user => user.username === userTrim);
-    const emailFound = db.find(user => user.email === emailTrim);
-    if (userFound) {
-      return response.status(400).json({
-        success: 'false',
-        message: 'username already exists',
-      });
-    } else if (emailFound) {
-      return response.status(400).json({
-        success: 'false',
-        message: 'email already exists',
-      });
-    }
-    return next();
-  }
-
   checkUndefined(request, response, next) {
-    const { body } = request;
     const {
       username, fullName, email, password, passwordMatch,
-    } = body;
+    } = request.body;
     if (username === undefined) {
       return response.status(400).json({
         success: 'false',
-        message: 'Please enter a username',
+        message: 'Please enter a defined username',
       });
     } else if (fullName === undefined) {
       return response.status(400).json({
         success: 'false',
-        message: 'please enter your full name',
+        message: 'please enter a defined fullName',
       });
     } else if (email === undefined) {
       return response.status(400).json({
         success: 'false',
-        message: 'please enter your email',
+        message: 'please enter a defined email',
       });
     } else if (password === undefined) {
       return response.status(400).json({
         success: 'false',
-        message: 'please enter a password',
+        message: 'please enter a defined password',
       });
     } else if (passwordMatch === undefined) {
       return response.status(400).json({
         success: 'false',
-        message: 'please confirm password',
+        message: 'please a defined passwordMatch',
       });
     }
     return next();
   }
 
   checkEmptyfield(request, response, next) {
-    const { body } = request;
     const {
       username, fullName, email, password, passwordMatch,
-    } = body;
+    } = request.body;
     const userTrim = username.trim('');
     const nameTrim = fullName.trim();
     const emailTrim = email.trim();
@@ -96,34 +73,53 @@ class SignUpMiddleware {
   }
 
   checkDataformat(request, response, next) {
-    const { body } = request;
+    request.check('username', 'Please username should be a string').isString();
+    request.check('fullName', 'Your full name should be a string').isString();
+    request.check('email', 'Please enter a valid email address').isEmail();
+    request.check('email', 'Please your email address should be a string').isString();
+    request.check('passwordMatch', 'The passwords should match').equals(request.body.password);
+    const errors = request.validationErrors();
+
+    if (errors) {
+      return response.status(400).json({ errors });
+    }
+
+    return next();
+  }
+
+  checkDatalength(request, response, next) {
     const {
       username, fullName, email, password, passwordMatch,
-    } = body;
-    if (typeof (username) !== 'string') {
+    } = request.body;
+    if (fullName.length > 225) {
       return response.status(400).json({
         success: 'false',
-        message: 'email already exists',
+        message: 'Please Full name should not be more than 225 characters',
       });
-    } else if (typeof (fullName) !== 'string') {
+    } else if (username.length > 225) {
       return response.status(400).json({
         success: 'false',
-        message: 'email already exists',
+        message: 'Please username should not be more than 225 characters',
       });
-    } else if (typeof (email) !== 'string') {
+    } else if (email.length > 225) {
       return response.status(400).json({
         success: 'false',
-        message: 'Please enter a valid email',
+        message: 'Please email should not be more than 225 characters',
       });
-    } else if (password < 6) {
+    } else if (password.length > 225) {
       return response.status(400).json({
         success: 'false',
-        message: 'Password should not be less than 6',
+        message: 'Please password should not be more than 225 characters',
       });
-    } else if (passwordMatch !== password) {
+    } else if (password.length < 6) {
       return response.status(400).json({
         success: 'false',
-        message: 'Confirm password should be the same with the password',
+        message: 'Password should not be less than 6 characters',
+      });
+    } else if (passwordMatch.length > 225) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'Please confirm password should not be more than 225 characters',
       });
     }
     return next();

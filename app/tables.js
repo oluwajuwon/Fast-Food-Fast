@@ -2,9 +2,12 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
 dotenv.config();
+let sslValue = true;
+if (process.env.NODE_ENV === 'local') {
+  sslValue = false;
+}
 
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: sslValue });
 
 pool.on('connect', () => {
   console.log('connected to the db');

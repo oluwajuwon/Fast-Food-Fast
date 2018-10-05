@@ -4,8 +4,13 @@ import app from '../app';
 
 import generateToken from '../controllers/generateToken';
 
-const customer = { user: { userId: 1, userType: 'Customer' } };
-const admin = { user: { userId: 2, userType: 'Admin' } };
+/* const user = { userId: result.rows[0].user_id, userType: result.rows[0].user_type };
+const payload = {
+  user,
+}; */
+
+const customer = { user: { userId: 2, userType: 'Customer' } };
+const admin = { user: { userId: 1, userType: 'Admin' } };
 
 const adminToken = generateToken.createToken(admin);
 const customerToken = generateToken.createToken(customer);
@@ -14,6 +19,37 @@ const request = require('supertest');
 
 // run API test
 describe('Test suite for Order API endpoints', () => {
+  describe('POST /api/v1/orders/', () => {
+    it('should return status code 201 if order was added succesfully', (done) => {
+      const newOrder = {
+        foodItems: [{ food_id: 1, quantity: 2 }],
+      };
+      request(app)
+        .post('/api/v1/orders')
+        .set('x-access-token', customerToken)
+        .send({ foodItems: newOrder.foodItems })
+        .end((err, response) => {
+          expect(response.status).to.equal(201);
+          expect(response.body).to.be.an('object').with.property('result');
+          done();
+        });
+    });
+
+    it('should return a message saying Order not created succesfully', (done) => {
+      const newOrder = {
+        foodItems: [{ food_id: 1 }],
+      };
+      request(app)
+        .post('/api/v1/orders')
+        .set('x-access-token', adminToken)
+        .send({ foodItems: newOrder.foodItems })
+        .end((err, response) => {
+          expect(response.body.message).to.equal('Order not created succesfully, please check the format of the fooditems');
+          done();
+        });
+    });
+  });
+
   describe('GET /api/v1/orders', () => {
     it('should return status 200 if all orders were retrieved', (done) => {
       request(app)
@@ -35,22 +71,12 @@ describe('Test suite for Order API endpoints', () => {
         });
     });
 
-    it('should return an object with the orders property', (done) => {
-      request(app)
-        .get('/api/v1/orders')
-        .set('x-access-token', adminToken)
-        .end((err, response) => {
-          expect(response.body).to.be.an('object').with.property('orders');
-          done();
-        });
-    });
-
     it('should return an object with a message saying all the orders were retrieved successfully', (done) => {
       request(app)
         .get('/api/v1/orders')
         .set('x-access-token', adminToken)
         .end((err, response) => {
-          expect(response.body.message).to.be.equal('Retrieved orders successfully');
+          expect(response.body.message).to.be.equal('The orders were retrieved successfully');
           done();
         });
     });
@@ -68,14 +94,36 @@ describe('Test suite for Order API endpoints', () => {
     });
   });
 
+  describe('GET /api/v1/orders', () => {
+    it('should return status 403 if a user tries to access this admin route', (done) => {
+      request(app)
+        .get('/api/v1/orders')
+        .set('x-access-token', customerToken)
+        .end((err, response) => {
+          expect(response.status).to.equal(403);
+          done();
+        });
+    });
+
+    it('should return status 403 if a user tries to access this admin route', (done) => {
+      request(app)
+        .get('/api/v1/orders/1')
+        .set('x-access-token', customerToken)
+        .end((err, response) => {
+          expect(response.status).to.equal(403);
+          done();
+        });
+    });
+  });
+
+
   describe('GET /api/v1/orders/:id', () => {
     it('should return a specific order', (done) => {
       request(app)
         .get('/api/v1/orders/1')
         .set('x-access-token', adminToken)
         .end((err, response) => {
-          expect(response.body).to.be.an('object').with.property('result');
-          expect(response.body).to.be.an('object').with.property('result').to.be.an('object').with.property('orderId');
+          expect(response.body).to.be.an('object').with.property('orderFound');
           done();
         });
     });
@@ -92,7 +140,7 @@ describe('Test suite for Order API endpoints', () => {
 
     it('should return status code 404 if order was not found', (done) => {
       request(app)
-        .get('/api/v1/orders/5')
+        .get('/api/v1/orders/10')
         .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.status).to.equal(404);
@@ -122,93 +170,22 @@ describe('Test suite for Order API endpoints', () => {
   });
 
   describe('GET /api/v1/users/:userId/orders/', () => {
-    it('should return specific orders of a particular user if accessed by the admin', (done) => {
-      request(app)
-        .get('/api/v1/users/4/orders/')
-        .set('x-access-token', adminToken)
-        .end((err, response) => {
-          expect(response.body).to.be.an('object').with.property('anyUserorder');
-          done();
-        });
-    });
-
     it('should return specific orders of a particular user', (done) => {
       request(app)
-        .get('/api/v1/users/1/orders/')
+        .get('/api/v1/users/2/orders/')
         .set('x-access-token', customerToken)
         .end((err, response) => {
-          expect(response.body).to.be.an('object').with.property('userOrders');
+          expect(response.body).to.be.an('object').with.property('myOrders');
           done();
         });
     });
 
     it('should return status code 200 if the orders were found', (done) => {
       request(app)
-        .get('/api/v1/users/4/orders/')
-        .set('x-access-token', adminToken)
+        .get('/api/v1/users/2/orders/')
+        .set('x-access-token', customerToken)
         .end((err, response) => {
           expect(response.status).to.equal(200);
-          done();
-        });
-    });
-  });
-
-  describe('POST /api/v1/orders/', () => {
-    it('should return status code 201 if order was added succesfully', (done) => {
-      const foodId = 2;
-      const price = '2000';
-      const quantity = '2';
-      request(app)
-        .post('/api/v1/orders')
-        .set('x-access-token', customerToken)
-        .send({ foodId, price, quantity })
-        .end((err, response) => {
-          expect(response.status).to.equal(201);
-          done();
-        });
-    });
-
-    it('should add new order', (done) => {
-      const foodId = 2;
-      const price = '2000';
-      const quantity = '2';
-      request(app)
-        .post('/api/v1/orders/')
-        .set('x-access-token', customerToken)
-        .send({ foodId, price, quantity })
-        .end((err, response) => {
-          expect(response.body).to.be.an('object').with.property('newOrder');
-          expect(response.body).to.be.an('object').with.property('newOrder').to.be.an('object');
-          done();
-        });
-    });
-
-    it('should return a message saying a new order was added succesfully', (done) => {
-      const foodId = 2;
-      const price = '2000';
-      const quantity = '2';
-      request(app)
-        .post('/api/v1/orders')
-        .set('x-access-token', customerToken)
-        .send({ foodId, price, quantity })
-        .end((err, response) => {
-          expect(response.body.message).to.equal('Your order has been placed successfully');
-          done();
-        });
-    });
-  });
-
-  describe('POST /api/v1/orders/', () => {
-    it('should return a message saying please quantity should be a number', (done) => {
-      const foodId = 2;
-      const price = '2000';
-      const quantity = 'food';
-      request(app)
-        .post('/api/v1/orders')
-        .set('x-access-token', customerToken)
-        .send({ foodId, price, quantity })
-        .end((err, response) => {
-          expect(response.body.message).to.equal('please quantity should be a number');
           done();
         });
     });
@@ -223,8 +200,8 @@ describe('Test suite for Order API endpoints', () => {
         .send({ orderStatus })
         .end((err, response) => {
           expect(response.body).to.be.an('object');
-          expect(response.body.message).to.be.equal('Order updated successfully');
-          expect(response.body).to.be.an('object').with.property('updatedOrder');
+          expect(response.body.message).to.be.equal('The order item was updated successfully');
+          expect(response.body).to.be.an('object').with.property('order');
           done();
         });
     });
@@ -244,7 +221,7 @@ describe('Test suite for Order API endpoints', () => {
     it('should return status code 404 if order to be updated was not found', (done) => {
       const orderStatus = 'Complete';
       request(app)
-        .put('/api/v1/orders/7')
+        .put('/api/v1/orders/10')
         .set('x-access-token', adminToken)
         .send({ orderStatus })
         .end((err, response) => {
@@ -255,6 +232,18 @@ describe('Test suite for Order API endpoints', () => {
 
     it('should return status code 400 if order status was not inputted', (done) => {
       const orderStatus = '';
+      request(app)
+        .put('/api/v1/orders/1')
+        .set('x-access-token', adminToken)
+        .send({ orderStatus })
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
+          done();
+        });
+    });
+
+    it('should return status code 400 if the order status is not supported', (done) => {
+      const orderStatus = 'Completing';
       request(app)
         .put('/api/v1/orders/1')
         .set('x-access-token', adminToken)

@@ -27,5 +27,3 @@ window.onclick = () => {
     modal.style.display = 'none';
   }
 };
-
-

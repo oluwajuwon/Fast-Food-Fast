@@ -1,3 +1,4 @@
+import db from '../models/db.connect';
 
 class MenuMiddleware {
   checkEmptyfields(request, response, next) {
@@ -66,6 +67,67 @@ class MenuMiddleware {
       });
     }
     return next();
+  }
+
+  checkDataitemFormat(request, response, next) {
+    const { body } = request;
+    const {
+      foodName, categoryId, price, image,
+    } = body;
+    if (foodName.length > 225) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'Please food name should not be more than 225 characters',
+      });
+    } else if (categoryId.length > 225) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'Please category Id should not be more than 225 characters',
+      });
+    } else if (price.length > 225) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'Please item price should not be more than 225 characters',
+      });
+    } else if (image.length > 400) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'Please image URL should not be more than 400 characters',
+      });
+    }
+    return next();
+  }
+
+  checkFoodname(request, response, next) {
+    const { foodName } = request.body;
+    const foodNameTrim = foodName.trim();
+    const text = 'SELECT * FROM foods WHERE food_name = $1';
+    const value = [foodNameTrim];
+    return db.query(text, value, (err, result) => {
+      if (result.rows.length > 0) {
+        return response.status(409).json({
+          success: 'false',
+          message: `Food with name ${foodName} already exists`,
+        });
+      }
+      return next();
+    });
+  }
+
+  checkCategory(request, response, next) {
+    const { categoryId } = request.body;
+    const text = 'SELECT * FROM category WHERE category_id = $1';
+    const id = parseInt(categoryId, 10);
+    const value = [id];
+    return db.query(text, value, (err, result) => {
+      if (result.rows.length === 0) {
+        return response.status(409).json({
+          success: 'false',
+          message: `Category with ID ${id} does not exist`,
+        });
+      }
+      return next();
+    });
   }
 }
 

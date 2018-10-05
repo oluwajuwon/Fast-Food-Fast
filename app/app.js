@@ -1,8 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import expressValidator from 'express-validator';
 import indexRoute from './routes/indexRoute';
 import orderRoute from './routes/orderRoute';
-import userRoute from './routes/userRoute';  
+import userRoute from './routes/userRoute';
 import foodRoute from './routes/foodRoute';
 //  setting up the express application
 const app = express();
@@ -11,6 +12,9 @@ const PORT = process.env.PORT || 3000;
 //  parse incoming requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//  Initialize the express validator to validate the incoming requests
+app.use(expressValidator());
 
 app.use(indexRoute);
 app.use(orderRoute);

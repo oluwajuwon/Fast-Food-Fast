@@ -18,10 +18,9 @@ class LoginMiddleware {
   }
 
   loginCheckundefined(request, response, next) {
-    const { body } = request;
     const {
       email, password,
-    } = body;
+    } = request.body;
     if (email === undefined) {
       return response.status(400).json({
         success: 'false',
@@ -37,10 +36,9 @@ class LoginMiddleware {
   }
 
   loginCheckemptyField(request, response, next) {
-    const { body } = request;
     const {
       email, password,
-    } = body;
+    } = request.body;
     const emailTrim = email.trim();
     const passwordTrim = password.trim();
     if (emailTrim === '') {
@@ -58,13 +56,11 @@ class LoginMiddleware {
   }
 
   loginCheckdataFormat(request, response, next) {
-    const { body } = request;
-    const { email } = body;
-    if (typeof (email) !== 'string') {
-      return response.status(400).json({
-        success: 'false',
-        message: 'Please enter a valid email',
-      });
+    request.check('email', 'Please enter a valid email address').isEmail();
+    const errors = request.validationErrors();
+
+    if (errors) {
+      return response.status(400).json({ errors });
     }
     return next();
   }

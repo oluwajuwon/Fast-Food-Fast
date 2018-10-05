@@ -23,16 +23,32 @@ class UserControllers {
     const text = 'INSERT INTO users(username, full_name, email, password, user_type, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
     return db.query(text, values, (err, result) => {
       if (err) {
-        console.log(err);
         return response.status(400).json({
           success: 'false',
           message: 'Cant add user',
+          errorMessage: err,
         });
       }
-      return response.status(200).json({
+      const addedUser = {
+        user_id: result.rows[0].user_id,
+        username: result.rows[0].username,
+        fullname: result.rows[0].full_name,
+        email: result.rows[0].email,
+        password: '*****',
+        user_type: result.rows[0].user_type,
+        created_at: result.rows[0].created_at,
+        updated_at: result.rows[0].updated_at,
+      };
+      const user = { userId: result.rows[0].user_id, userType: result.rows[0].user_type };
+      const payload = {
+        user,
+      };
+      const token = generateToken.createToken(payload);
+      return response.status(201).json({
         success: 'true',
         message: 'Sign up successful',
-        newUser: result.rows[0],
+        newUser: addedUser,
+        userToken: token,
       });
     });
   }
@@ -49,7 +65,6 @@ class UserControllers {
           message: 'cannot get email',
         });
       }
-      //  console.log(getUser);
       const user = { userId: result.rows[0].user_id, userType: result.rows[0].user_type };
       const payload = {
         user,

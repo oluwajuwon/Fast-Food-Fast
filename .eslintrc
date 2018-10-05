@@ -15,6 +15,7 @@
         "no-else-return":"off",
         "no-undef": "off",
         "no-empty": "off",
-        "prefer-destructuring":"off"
+        "prefer-destructuring":"off",
+        "no-loop-func" :"off"
     }
 }
