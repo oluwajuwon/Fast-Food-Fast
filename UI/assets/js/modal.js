@@ -14,7 +14,7 @@ const modalPopup = () => {
 //  On click event listener to close modal box
 closeModal.onclick = () => {
   modalClosePopup();
-}
+};
 
 // function to close modal box
 const modalClosePopup = () => {
@@ -27,3 +27,5 @@ window.onclick = () => {
     modal.style.display = 'none';
   }
 };
+
+
