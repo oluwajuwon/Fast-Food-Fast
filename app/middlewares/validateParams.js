@@ -27,7 +27,7 @@ class ParamsMiddleware {
     if (Number.isNaN(Number(id))) {
       return response.status(400).json({
         success: 'false',
-        message: 'please order id parameter should be a number',
+        message: 'please menu id parameter should be a number',
       });
     }
     return next();

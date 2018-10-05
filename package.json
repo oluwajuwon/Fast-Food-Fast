@@ -6,8 +6,9 @@
   "scripts": {
     "build": "babel src -d lib",
     "migrate": "npx babel-node ./app/migrate.js ",
+    "pretest": "npx babel-node ./app/migrate.js ",
     "start": "npm run migrate && nodemon ./app/app.js --exec babel-node --",
-    "start-prod": "npm run migrate && nodemon ./app/app.js --exec babel-node --",
+    "start-prod": "nodemon ./app/app.js --exec babel-node --",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --compilers js:babel-core/register ./app/tests/**/*.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./app/tests/**/*.test.js --timeout 10000 --exit"
