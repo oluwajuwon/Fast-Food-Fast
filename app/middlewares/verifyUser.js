@@ -4,7 +4,7 @@ class VerifyUser {
     if (request.decoded.user.userType !== 'Admin') {
       return response.status(403).json({
         success: 'false',
-        message: 'Forbidden from this route.',
+        message: 'Forbidden from this route, please contact the administrator',
       });
     }
     return next();

@@ -5,7 +5,10 @@
   "main": "app.js",
   "scripts": {
     "build": "babel src -d lib",
-    "start": "nodemon ./app/app.js --exec babel-node --",
+    "migrate": "npx babel-node ./app/migrate.js ",
+    "pretest": "npx babel-node ./app/migrate.js ",
+    "start": "npm run migrate && nodemon ./app/app.js --exec babel-node --",
+    "start-prod": "nodemon ./app/app.js --exec babel-node --",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --compilers js:babel-core/register ./app/tests/**/*.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:babel-core/register ./app/tests/**/*.test.js --timeout 10000 --exit"
@@ -35,6 +38,7 @@
     "chai": "^4.1.2",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "express-validator": "^5.3.0",
     "jsonwebtoken": "^8.3.0",
     "pg": "^7.4.3",
     "supertest": "^3.2.0"
