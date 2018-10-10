@@ -2,31 +2,35 @@ import db from '../models/db.connect';
 
 class MenuMiddleware {
   checkEmptyfields(request, response, next) {
-    const { body } = request;
     const {
       foodName, categoryId, price, description, image,
-    } = body;
-    if (!foodName) {
+    } = request.body;
+    const foodNameTrim = foodName.trim('');
+    const categoryIdtrim = categoryId.trim('');
+    const priceTrim = price.trim('');
+    const descriptionTrim = description.trim('');
+    const imageTrim = image.trim('');
+    if (!foodNameTrim) {
       return response.status(400).json({
         success: 'false',
         message: 'Please enter a food name',
       });
-    } else if (!categoryId) {
+    } else if (!categoryIdtrim) {
       return response.status(400).json({
         success: 'false',
         message: 'Please enter a category Id',
       });
-    } else if (!price) {
+    } else if (!priceTrim) {
       return response.status(400).json({
         success: 'false',
         message: 'Please enter a price for the food item',
       });
-    } else if (!description) {
+    } else if (!descriptionTrim) {
       return response.status(400).json({
         success: 'false',
         message: 'Please enter a description for the food item',
       });
-    } else if (!image) {
+    } else if (!imageTrim) {
       return response.status(400).json({
         success: 'false',
         message: 'Please add an image for the food item',

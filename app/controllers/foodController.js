@@ -111,6 +111,7 @@ class FoodControllers {
           return response.status(400).json({
             success: 'false',
             message: 'Cant update food',
+            errorMessage: error,
           });
         }
         return response.status(200).json({
@@ -137,12 +138,10 @@ class FoodControllers {
           },
         );
       } else if (result.rows.length === 0) {
-        return response.status(400).json(
-          {
-            success: 'false',
-            message: 'Item couldn not be found',
-          },
-        );
+        return response.status(404).json({
+          success: 'false',
+          message: 'Item could not be found',
+        });
       }
       return response.status(200).json(
         {
