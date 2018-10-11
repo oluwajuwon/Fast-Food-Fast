@@ -115,7 +115,7 @@ class FoodControllers {
             errorMessage: error,
           });
         }
-        return response.status(201).json({
+        return response.status(200).json({
           success: 'true',
           message: 'The food item was updated successfully',
           updatedMenuItem: menuItem.rows[0],
