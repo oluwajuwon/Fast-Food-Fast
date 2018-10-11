@@ -87,8 +87,8 @@ class FoodControllers {
     const findOneQuery = 'SELECT * FROM foods WHERE food_id=$1';
     const foodId = [id];
     const updateOneQuery = `UPDATE foods
-      SET food_name=$1, category_id=$2,price=$3,description=$4,image=$5, updated_at=$6
-      WHERE food_id=$7 returning *`;
+      SET food_name=$1, category_id=$2,price=$3,description=$4,image=$5, created_at=$6, updated_at=$7
+      WHERE food_id=$8 returning *`;
     db.query(findOneQuery, foodId, (err, result) => {
       if (result.rows.length === 0) {
         return response.status(404).json({
@@ -103,10 +103,11 @@ class FoodControllers {
         request.body.price || result.rows[0].price,
         request.body.description || result.rows[0].description,
         request.body.image || result.rows[0].image,
+        result.rows[0].created_at,
         updatedAt,
-        result.rows[0].foodId,
+        result.rows[0].food_id,
       ];
-      return db.query(updateOneQuery, values, (error, result) => {
+      return db.query(updateOneQuery, values, (error, menuItem) => {
         if (error) {
           return response.status(400).json({
             success: 'false',
@@ -114,10 +115,10 @@ class FoodControllers {
             errorMessage: error,
           });
         }
-        return response.status(200).json({
+        return response.status(201).json({
           success: 'true',
           message: 'The food item was updated successfully',
-          result: result.rows[0],
+          updatedMenuItem: menuItem.rows[0],
         });
       });
     });
