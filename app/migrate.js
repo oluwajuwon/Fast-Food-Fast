@@ -54,6 +54,7 @@ const createTables = () => {
         user_id INTEGER NOT NULL,
         amount NUMERIC NOT NULL,
         order_status VARCHAR(128) NOT NULL,
+        decline_reason text NULL,
         created_at TIMESTAMP,
         updated_at TIMESTAMP,
         FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE

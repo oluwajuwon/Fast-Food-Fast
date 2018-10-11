@@ -20,11 +20,10 @@ describe('Test suite for User API endpoints', () => {
       const fullName = 'juwon now';
       const email = 'now@mailinator.com';
       const password = '123456887';
-      const passwordMatch = '123456887';
       request(app)
         .post('/api/v1/auth/signup')
         .send({
-          username, fullName, email, password, passwordMatch,
+          username, fullName, email, password,
         })
         .end((err, response) => {
           expect(response.status).to.equal(201);
@@ -32,16 +31,14 @@ describe('Test suite for User API endpoints', () => {
         });
     });
 
-    it('should return status code 400 if the passwords do not match', (done) => {
+    it('should return status code 400 if the email is not defined', (done) => {
       const username = 'uncle';
       const fullName = 'juwon now';
-      const email = 'now@mailinator.com';
       const password = '123456887';
-      const passwordMatch = '1234567887';
       request(app)
         .post('/api/v1/auth/signup')
         .send({
-          username, fullName, email, password, passwordMatch,
+          username, fullName, password,
         })
         .end((err, response) => {
           expect(response.status).to.equal(400);
@@ -49,32 +46,15 @@ describe('Test suite for User API endpoints', () => {
         });
     });
 
-    it('should return status code 400 if the email is not defined', (done) => {
-      const username = 'uncle';
-      const fullName = 'juwon now';
-      const password = '123456887';
-      const passwordMatch = '1234567887';
-      request(app)
-        .post('/api/v1/auth/signup')
-        .send({
-          username, fullName, password, passwordMatch,
-        })
-        .end((err, response) => {
-          expect(response.status).to.equal(400);
-          done();
-        });
-    });
-
-    it('should return status code 400 if the email is not defined', (done) => {
+    it('should return status code 400 if the email exceeds character limit', (done) => {
       const username = 'user stuff';
       const email = 'moifb erg nreg ergnergnegoermgomergrgnrjlnklrhrthjrtkr rjthr tjhr trjhrthrt kwermtmet tkretmtmktemgemrg egenmg egengoe egengeo egrnegr egegergrekjgmrgmrjekmgrlknmrgrgrgrk';
       const fullName = 'juwon now';
       const password = '123456887';
-      const passwordMatch = '1234567887';
       request(app)
         .post('/api/v1/auth/signup')
         .send({
-          username, email, fullName, password, passwordMatch,
+          username, email, fullName, password,
         })
         .end((err, response) => {
           expect(response.status).to.equal(400);
@@ -98,17 +78,6 @@ describe('Test suite for User API endpoints', () => {
           done();
         });
     });
-
-    it('should return status code 400 if the fields were left empty', (done) => {
-      request(app)
-        .post('/api/v1/auth/signup')
-        .send({})
-        .end((err, response) => {
-          expect(response.status).to.equal(400);
-          done();
-        });
-    });
-
 
     it('should return status code 400 if the fields were left empty', (done) => {
       request(app)

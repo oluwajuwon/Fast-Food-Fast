@@ -21,7 +21,7 @@ describe('Test suite for food API endpoints', () => {
         });
     });
 
-    it('should return status 200 if food items were retrieved by the customer', (done) => {
+    it('should return status 200 if food items were retrieved successfully', (done) => {
       request(app)
         .get('/api/v1/menu')
         .end((err, response) => {
@@ -29,17 +29,36 @@ describe('Test suite for food API endpoints', () => {
           done();
         });
     });
+
+    it('should return status 200 if the food item were retrieved successfully', (done) => {
+      request(app)
+        .get('/api/v1/menu/1')
+        .end((err, response) => {
+          expect(response.status).to.equal(200);
+          done();
+        });
+    });
+
+    it('should return status 404 if the food item does not exist', (done) => {
+      request(app)
+        .get('/api/v1/menu/200')
+        .set('x-access-token', adminToken)
+        .end((err, response) => {
+          expect(response.status).to.equal(404);
+          done();
+        });
+    });
   });
 
   describe('POST /api/v1/menu', () => {
-    const foodName = 'shawarman and chicken';
-    const categoryId = '1';
-    const price = '3000';
-    const description = 'Sweet and yummy';
-    const image = 'https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg';
-    const createdAt = new Date();
-    const updatedAt = new Date();
     it('should return status 201 if the new food item was added', (done) => {
+      const foodName = 'shawarman and chicken';
+      const categoryId = '1';
+      const price = '3000';
+      const description = 'Sweet and yummy';
+      const image = 'https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg';
+      const createdAt = new Date();
+      const updatedAt = new Date();
       request(app)
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
@@ -53,12 +72,73 @@ describe('Test suite for food API endpoints', () => {
     });
 
     it('should return status 400 if the fields were not filled', (done) => {
+      const foodName = '';
+      const categoryId = '';
+      const price = '';
+      const description = '';
+      const image = '';
       request(app)
         .post('/api/v1/menu')
         .set('x-access-token', adminToken)
-        .send({})
+        .send({
+          foodName, categoryId, price, description, image,
+        })
         .end((err, response) => {
           expect(response.status).to.equal(400);
+          done();
+        });
+    });
+  });
+
+  describe('PUT /api/v1/menu/foodId', () => {
+    it('should return status 404 if the food item does not exist', (done) => {
+      request(app)
+        .put('/api/v1/menu/200')
+        .set('x-access-token', adminToken)
+        .end((err, response) => {
+          expect(response.status).to.equal(404);
+          done();
+        });
+    });
+
+    it('should return status 200 if the food item was updated successfully', (done) => {
+      const foodName = 'Turkey and chicken';
+      const categoryId = '1';
+      const price = '5000';
+      const description = 'Sweet and yummy';
+      const image = 'https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg';
+      const updatedAt = new Date();
+      request(app)
+        .put('/api/v1/menu/2')
+        .set('x-access-token', adminToken)
+        .send({
+          foodName, categoryId, price, description, image, updatedAt,
+        })
+        .end((err, response) => {
+          expect(response.status).to.equal(200);
+          done();
+        });
+    });
+  });
+
+
+  describe('DELETE /api/v1/menu/foodId', () => {
+    it('should return status 404 if the food item does not exist', (done) => {
+      request(app)
+        .delete('/api/v1/menu/200')
+        .set('x-access-token', adminToken)
+        .end((err, response) => {
+          expect(response.status).to.equal(404);
+          done();
+        });
+    });
+
+    it('should return status 200 if the food item was deleted successfully', (done) => {
+      request(app)
+        .delete('/api/v1/menu/3')
+        .set('x-access-token', adminToken)
+        .end((err, response) => {
+          expect(response.status).to.equal(200);
           done();
         });
     });

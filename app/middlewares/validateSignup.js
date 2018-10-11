@@ -3,7 +3,7 @@
 class SignUpMiddleware {
   checkUndefined(request, response, next) {
     const {
-      username, fullName, email, password, passwordMatch,
+      username, fullName, email, password,
     } = request.body;
     if (username === undefined) {
       return response.status(400).json({
@@ -25,24 +25,18 @@ class SignUpMiddleware {
         success: 'false',
         message: 'please enter a defined password',
       });
-    } else if (passwordMatch === undefined) {
-      return response.status(400).json({
-        success: 'false',
-        message: 'please a defined passwordMatch',
-      });
     }
     return next();
   }
 
   checkEmptyfield(request, response, next) {
     const {
-      username, fullName, email, password, passwordMatch,
+      username, fullName, email, password,
     } = request.body;
     const userTrim = username.trim('');
     const nameTrim = fullName.trim();
     const emailTrim = email.trim();
     const passwordTrim = password.trim();
-    const passwordMatchtrim = passwordMatch.trim();
     if (userTrim === '') {
       return response.status(400).json({
         success: 'false',
@@ -63,11 +57,6 @@ class SignUpMiddleware {
         success: 'false',
         message: 'please enter a password',
       });
-    } else if (passwordMatchtrim === '') {
-      return response.status(400).json({
-        success: 'false',
-        message: 'please confirm password',
-      });
     }
     return next();
   }
@@ -77,7 +66,6 @@ class SignUpMiddleware {
     request.check('fullName', 'Your full name should be a string').isString();
     request.check('email', 'Please enter a valid email address').isEmail();
     request.check('email', 'Please your email address should be a string').isString();
-    request.check('passwordMatch', 'The passwords should match').equals(request.body.password);
     const errors = request.validationErrors();
 
     if (errors) {
@@ -89,7 +77,7 @@ class SignUpMiddleware {
 
   checkDatalength(request, response, next) {
     const {
-      username, fullName, email, password, passwordMatch,
+      username, fullName, email, password,
     } = request.body;
     if (fullName.length > 225) {
       return response.status(400).json({
@@ -115,11 +103,6 @@ class SignUpMiddleware {
       return response.status(400).json({
         success: 'false',
         message: 'Password should not be less than 6 characters',
-      });
-    } else if (passwordMatch.length > 225) {
-      return response.status(400).json({
-        success: 'false',
-        message: 'Please confirm password should not be more than 225 characters',
       });
     }
     return next();

@@ -2,10 +2,7 @@
 import db from '../models/db.connect';
 
 
-const testTotal = 0;
-
 class OrderControllers {
-
   //    controller to retrieve all orders
   getAllorders(request, response) {
     const text = 'SELECT * FROM orders';
@@ -33,12 +30,10 @@ class OrderControllers {
     const value = [id];
     db.query(text, value, (err, result) => {
       if (result.rows.length === 0) {
-        return response.status(404).json(
-          {
-            success: 'false',
-            message: `Order with the ID: ${id} does not exist`,
-          },
-        );
+        return response.status(404).json({
+          success: 'false',
+          message: `Order with the ID: ${id} does not exist`,
+        });
       }
       const order = {
         order_id: result.rows[0].order_id,
@@ -183,14 +178,13 @@ class OrderControllers {
 
   //  controller to update an order -- works fine
   updateOrder(request, response) {
-    const { body } = request;
-    const { orderStatus } = body;
+    const { orderStatus, declineReason } = request.body;
     const id = parseInt(request.params.id, 10);
     const findOneQuery = 'SELECT * FROM orders WHERE order_id=$1';
     const orderId = [id];
     const updateOneQuery = `UPDATE orders
-      SET order_status=$1, updated_at=$2
-      WHERE order_id=$3 returning *`;
+      SET order_status=$1, decline_reason=$2, updated_at=$3
+      WHERE order_id=$4 returning *`;
     db.query(findOneQuery, orderId, (err, result) => {
       if (result.rows.length === 0) {
         return response.status(404).json({
@@ -201,6 +195,7 @@ class OrderControllers {
       const updatedAt = new Date();
       const values = [
         orderStatus || result.rows[0].order_status,
+        declineReason || result.rows[0].decline_reason,
         updatedAt,
         result.rows[0].order_id,
       ];

@@ -34,7 +34,6 @@ class UserControllers {
         username: result.rows[0].username,
         fullname: result.rows[0].full_name,
         email: result.rows[0].email,
-        password: '*****',
         user_type: result.rows[0].user_type,
         created_at: result.rows[0].created_at,
         updated_at: result.rows[0].updated_at,
