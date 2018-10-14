@@ -7,12 +7,10 @@ class FoodControllers {
     const text = 'SELECT * FROM foods';
     db.query(text, (err, result) => {
       if (result.rows.length === 0) {
-        return response.status(404).json(
-          {
-            success: 'false',
-            message: 'no food item available',
-          },
-        );
+        return response.status(404).json({
+          success: 'false',
+          message: 'no food item available',
+        });
       }
       return response.status(200).json({
         success: 'true',
@@ -30,12 +28,10 @@ class FoodControllers {
     const value = [id];
     db.query(text, value, (err, result) => {
       if (result.rows.length === 0) {
-        return response.status(404).json(
-          {
-            success: 'false',
-            message: `food with ${id} does not exist`,
-          },
-        );
+        return response.status(404).json({
+          success: 'false',
+          message: `food with ${id} does not exist`,
+        });
       }
       return response.status(200).json({
         success: 'true',
@@ -63,21 +59,17 @@ class FoodControllers {
     const text = 'INSERT INTO foods(food_name, category_id, price, description, image, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
     return db.query(text, values, (err, result) => {
       if (err) {
-        return response.status(400).json(
-          {
-            success: 'false',
-            message: 'Cant add food, error connecting to the database',
-            errorMessage: err,
-          },
-        );
+        return response.status(400).json({
+          success: 'false',
+          message: 'Cant add food, error connecting to the database',
+          errorMessage: err,
+        });
       }
-      return response.status(201).json(
-        {
-          success: 'true',
-          message: 'The food item was added successfully',
-          result: result.rows[0],
-        },
-      );
+      return response.status(201).json({
+        success: 'true',
+        message: 'The food item was added successfully',
+        result: result.rows[0],
+      });
     });
   }
 
@@ -151,6 +143,27 @@ class FoodControllers {
           result: result.rows[0],
         },
       );
+    });
+  }
+
+  addNewcategory(request, response) {
+    const { categoryName } = request.body;
+    const categoryNameTrim = categoryName.trim('');
+    const values = [categoryNameTrim];
+    const text = 'INSERT INTO category(category_name) VALUES($1) RETURNING *';
+    return db.query(text, values, (error, result) => {
+      if (error) {
+        return response.status(400).json({
+          success: 'false',
+          message: 'Cant add category, error connecting to the database',
+          errorMessage: error,
+        });
+      }
+      return response.status(201).json({
+        success: 'true',
+        message: 'The category was added successfully',
+        newCategory: result.rows[0],
+      });
     });
   }
 }

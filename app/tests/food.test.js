@@ -71,6 +71,130 @@ describe('Test suite for food API endpoints', () => {
         });
     });
 
+    it('should return status 404 if the category id does not exist', (done) => {
+      const foodName = 'Rice and stew';
+      const categoryId = '1000';
+      const price = '3000';
+      const description = 'Sweet and yummy';
+      const image = 'https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg';
+      const createdAt = new Date();
+      const updatedAt = new Date();
+      request(app)
+        .post('/api/v1/menu')
+        .set('x-access-token', adminToken)
+        .send({
+          foodName, categoryId, price, description, image, createdAt, updatedAt,
+        })
+        .end((err, response) => {
+          expect(response.status).to.equal(404);
+          done();
+        });
+    });
+
+    it('should return status 400 if the food name entered is more than 225 characters', (done) => {
+      const foodName = `https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg`;
+      const categoryId = '1';
+      const price = '3000';
+      const description = 'Sweet and yummy';
+      const image = 'https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg';
+      const createdAt = new Date();
+      const updatedAt = new Date();
+      request(app)
+        .post('/api/v1/menu')
+        .set('x-access-token', adminToken)
+        .send({
+          foodName, categoryId, price, description, image, createdAt, updatedAt,
+        })
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
+          done();
+        });
+    });
+
+    it('should return status 400 if the category Id entered is more than 225 characters', (done) => {
+      const foodName = 'yam and beans';
+      const categoryId = `https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg`;
+      const price = '3000';
+      const description = 'Sweet and yummy';
+      const image = 'https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg';
+      const createdAt = new Date();
+      const updatedAt = new Date();
+      request(app)
+        .post('/api/v1/menu')
+        .set('x-access-token', adminToken)
+        .send({
+          foodName, categoryId, price, description, image, createdAt, updatedAt,
+        })
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
+          done();
+        });
+    });
+
+    it('should return status 400 if the price entered is more than 225 characters', (done) => {
+      const foodName = 'yam and beans';
+      const categoryId = '1';
+      const price = `https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg`;
+      const description = 'Sweet and yummy';
+      const image = 'https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg';
+      const createdAt = new Date();
+      const updatedAt = new Date();
+      request(app)
+        .post('/api/v1/menu')
+        .set('x-access-token', adminToken)
+        .send({
+          foodName, categoryId, price, description, image, createdAt, updatedAt,
+        })
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
+          done();
+        });
+    });
+
+    it('should return status 400 if the image url is more than 400 characters', (done) => {
+      const foodName = 'yam and beans';
+      const categoryId = '1';
+      const price = '3000';
+      const description = 'Sweet and yummy';
+      const image = `https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg
+      https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpghttps://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863__340.jpg`;
+      const createdAt = new Date();
+      const updatedAt = new Date();
+      request(app)
+        .post('/api/v1/menu')
+        .set('x-access-token', adminToken)
+        .send({
+          foodName, categoryId, price, description, image, createdAt, updatedAt,
+        })
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
+          done();
+        });
+    });
+
     it('should return status 400 if the fields were not filled', (done) => {
       const foodName = '';
       const categoryId = '';
@@ -139,6 +263,44 @@ describe('Test suite for food API endpoints', () => {
         .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.status).to.equal(200);
+          done();
+        });
+    });
+  });
+
+  describe('POST /api/v1/category', () => {
+    it('should return status 201 if the new category was added successfully', (done) => {
+      const categoryName = 'Drinks';
+      request(app)
+        .post('/api/v1/category')
+        .set('x-access-token', adminToken)
+        .send({ categoryName })
+        .end((err, response) => {
+          expect(response.status).to.equal(201);
+          done();
+        });
+    });
+
+    it('should return status 409 if the category name already exists', (done) => {
+      const categoryName = 'Drinks';
+      request(app)
+        .post('/api/v1/category')
+        .set('x-access-token', adminToken)
+        .send({ categoryName })
+        .end((err, response) => {
+          expect(response.status).to.equal(409);
+          done();
+        });
+    });
+
+    it('should return status 400 if the new category name was not filled', (done) => {
+      const categoryName = '';
+      request(app)
+        .post('/api/v1/category')
+        .set('x-access-token', adminToken)
+        .send({ categoryName })
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
           done();
         });
     });
