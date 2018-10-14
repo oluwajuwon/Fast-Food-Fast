@@ -125,9 +125,47 @@ class MenuMiddleware {
     const value = [id];
     return db.query(text, value, (err, result) => {
       if (result.rows.length === 0) {
-        return response.status(409).json({
+        return response.status(404).json({
           success: 'false',
           message: `Category with ID ${id} does not exist`,
+        });
+      }
+      return next();
+    });
+  }
+
+  checkCategoryfield(request, response, next) {
+    const { categoryName } = request.body;
+    const categoryNameTrim = categoryName.trim('');
+    if (categoryName === undefined) {
+      return response.status(400).json({
+        success: 'false',
+        message: 'Please add "categoryName"',
+      });
+    } else if (categoryNameTrim === '') {
+      return response.status(400).json({
+        success: 'false',
+        message: 'Please enter a category name',
+      });
+    } else if (typeof (categoryNameTrim) !== 'string') {
+      return response.status(400).json({
+        success: 'false',
+        message: 'Please enter a valid category',
+      });
+    }
+    return next();
+  }
+
+  checkCategoryname(request, response, next) {
+    const { categoryName } = request.body;
+    const categoryNameTrim = categoryName.trim('');
+    const text = 'SELECT * FROM category WHERE category_name = $1';
+    const value = [categoryNameTrim];
+    return db.query(text, value, (err, result) => {
+      if (result.rows.length > 0) {
+        return response.status(409).json({
+          success: 'false',
+          message: `Category ${categoryNameTrim} already exists`,
         });
       }
       return next();
