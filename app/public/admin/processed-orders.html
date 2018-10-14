@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../assets/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../assets/css/modal.css" type="text/css" />
+  <link rel="stylesheet" href="../assets/css/box.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Home ¦ Fast-Food-Fast</title>
+</head>
+
+<body>
+
+  <!-- Modal Starts -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="text-center">
+        <h1 class="">Complete Order</h1>
+        <div class="">
+          <img src="../assets/images/check.png" alt="Cancel" />
+        </div>
+        <div class="">
+          <h1>Are you sure ?</h1>
+          <form id="mark-complete">
+            <input type="submit" class="btn green-bg white-text" value="Yes" />
+            <button type="button" id="close-modal" class="btn red-bg-colour white-text modal-close">No</button>
+          </form>
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Ends -->
+  
+  <header>
+    <!-- Navigation bar Starts -->
+    <nav class="navbar" id="myNav">
+      <a href="all-food-items.html" class="nav-brand">Fast-Food-Fast [Admin]</a>
+      <div class="dropdown">
+        <button class="dropbtn">Food Menu
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="add-food.html">Add item</a>
+          <a href="all-food-items.html">View all items</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Orders
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="all-orders.html">All Orders</a>
+          <a href="pending-orders.html">Pending Orders</a>
+          <a href="processed-orders.html">In-Process Orders</a>
+        </div>
+      </div>
+      <div class="dropdown profile">
+        <button class="dropbtn">Howdy, Admin
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="admin-account.html">My Account</a>
+          <a href="login.html">Logout</a>
+        </div>
+      </div>
+      <a id="nav-icon" class="icon">&#9776;</a>
+    </nav>
+    <!-- Navigation bar Ends -->
+  </header>
+
+  <!-- Main content Starts -->
+  <main>
+    <section class="box-section">
+      <div class="box-container">
+        <div class="table-container">
+          <h2>In-Process Orders</h2>
+          <div>
+            <h3>Filter orders by date</h3>
+            <input type="date" class="datepicker" />
+            <button class="blue-bg-colour white-text">Filter</button>
+          </div>
+          <!--Table for orders starts here-->
+          <table>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer's name</th>
+              <th>Total Amount Paid</th>
+              <th>Items</th>
+              <th>Status</th>
+              <th>Manage</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td class="text-wrap">Bruce Banner</td>
+              <td>&#8358;6000</td>
+              <td><a href="#">View items</a></td>
+              <td class="text-wrap">in progress...</td>
+              <td>
+                <a onclick="modalPopup()">Mark as Complete</a>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td class="text-wrap">Robert Downey</td>
+              <td>&#8358;6000</td>
+              <td><a href="#">View items</a></td>
+              <td class="text-wrap">in progress...</td>
+              <td>
+                <a onclick="modalPopup()">Mark as Complete</a>
+              </td>
+            </tr>
+          </table>
+          <!--Table for orders ends here-->
+          <div class="container">
+            <div class="pagination text-center">
+              <a href="#">&laquo;</a>
+              <a href="#">1</a>
+              <a href="#">...</a>
+              <a href="#">&raquo;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Main content Ends -->
+
+  <footer>
+    <div class="blue-bg-colour">
+      <div class="text-center white-text">
+        Fast-Food-Fast &copy; 2018 &nbsp; Developed by
+        <b>Juwon.</b>
+      </div>
+    </div>
+  </footer>
+  <script type="text/javascript" src="../assets/js/script.js"></script>
+  <script type="text/javascript" src="../assets/js/modal.js"></script>
+  <script type="text/javascript" src="../assets/js/redirect.js"></script>
+</body>
+
+</html>
