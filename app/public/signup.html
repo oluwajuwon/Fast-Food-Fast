@@ -31,27 +31,27 @@
             <form id="user-Signup">
               <div>
                 <p class="">Full name</p>
-                <input type="text" class="textbox" required placeholder="Enter full name here..."/>
+                <input type="text" class="textbox" id="full-name" required placeholder="Enter full name here..."/>
               </div>
               <div>
                 <p class="">Username</p>
-                <input type="text" class="textbox" required placeholder="Enter username here..."/>
+                <input type="text" class="textbox" id="username" required placeholder="Enter username here..."/>
               </div>
               <div>
                 <p class="">Email</p>
-                <input type="email" class="textbox" required placeholder="Enter email here..."/>
+                <input type="email" class="textbox" id="email" required placeholder="Enter email here..."/>
               </div>
               <div>
                 <p class="">Password</p>
-                <input type="password" class="textbox" required placeholder="Enter password here..."/>
+                <input type="password" class="textbox" id="password" required placeholder="Enter password here..."/>
               </div>
               <div>
                 <p class="">Confirm Password</p>
-                <input type="password" class="textbox" required placeholder="Enter password again..."/>
+                <input type="password" class="textbox" id="password-match" required placeholder="Enter password again..."/>
               </div>
               <br/>
               <div class="">
-                <button type="submit" class="btn blue-bg-colour white-text">Sign Up</button>
+                <button type="submit" id="submit-signup" class="btn blue-bg-colour white-text">Sign Up</button>
                 <a href="login.html" class="secondary-text-color">Already have an account? Login</a>
               </div>
             </form>
@@ -71,6 +71,7 @@
     </div>
   </footer>
   <script type="text/javascript" src="./assets/js/script.js"></script>
+  <script type="text/javascript" src="./fetch/signup.js"></script>
   <script type="text/javascript" src="./assets/js/redirect.js"></script>
 </body>
 
