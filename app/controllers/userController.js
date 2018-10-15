@@ -72,6 +72,9 @@ class UserControllers {
       return response.status(200).json({
         success: 'true',
         message: 'Your sign in was successful',
+        username: result.rows[0].username,
+        userId: result.rows[0].user_id,
+        userType: result.rows[0].user_type,
         userToken: token,
       });
     });
