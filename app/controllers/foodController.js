@@ -4,7 +4,7 @@ import db from '../models/db.connect';
 class FoodControllers {
   //    controller to retrieve all food items
   getAllfood(request, response) {
-    const text = 'SELECT * FROM foods';
+    const text = 'SELECT * FROM foods INNER JOIN category ON foods.category_id = category.category_id';
     db.query(text, (err, result) => {
       if (result.rows.length === 0) {
         return response.status(404).json({
@@ -24,7 +24,7 @@ class FoodControllers {
   getFood(request, response) {
     const id = parseInt(request.params.foodId, 10);
     //  foodModel.getOne(id, request, response);
-    const text = 'SELECT * FROM foods WHERE food_id = $1';
+    const text = 'SELECT * FROM foods INNER JOIN category ON foods.category_id = category.category_id WHERE food_id = $1';
     const value = [id];
     db.query(text, value, (err, result) => {
       if (result.rows.length === 0) {
