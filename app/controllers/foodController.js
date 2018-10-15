@@ -36,7 +36,7 @@ class FoodControllers {
       return response.status(200).json({
         success: 'true',
         message: 'The food item was retrieved successfully',
-        result: result.rows[0],
+        menuItem: result.rows[0],
       });
     });
   }

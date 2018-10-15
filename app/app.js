@@ -33,6 +33,9 @@ app.use(userRoute);
 app.use((request, response) => {
   response.status(404).send('404 page');
 });
+app.use((request, response) => {
+  response.status(403).send('Forbidden');
+});
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
 });
