@@ -5,15 +5,14 @@ import db from '../models/db.connect';
 class OrderControllers {
   //    controller to retrieve all orders
   getAllorders(request, response) {
-    const text = 'SELECT * FROM orders';
+    const text = `SELECT order_id, food_items, orders.user_id, full_name, amount, order_status, decline_reason, orders.created_at, orders.updated_at
+    FROM orders INNER JOIN users ON orders.user_id = users.user_id`;
     db.query(text, (err, result) => {
       if (result.rows.length === 0) {
-        return response.status(404).json(
-          {
-            success: 'false',
-            message: 'no order item available',
-          },
-        );
+        return response.status(404).json({
+          success: 'false',
+          message: 'no order item available',
+        });
       }
       return response.status(200).json({
         success: 'true',
@@ -26,7 +25,8 @@ class OrderControllers {
   //  controller to get a specific order
   getOrder(request, response) {
     const id = parseInt(request.params.id, 10);
-    const text = 'SELECT * FROM orders WHERE order_id =$1';
+    const text = `SELECT order_id, food_items, orders.user_id, full_name, amount, order_status, decline_reason, orders.created_at, orders.updated_at
+    FROM orders INNER JOIN users ON orders.user_id = users.user_id WHERE order_id =$1`;
     const value = [id];
     db.query(text, value, (err, result) => {
       if (result.rows.length === 0) {
@@ -39,6 +39,7 @@ class OrderControllers {
         order_id: result.rows[0].order_id,
         food_items: JSON.parse(result.rows[0].food_items),
         user_id: result.rows[0].user_id,
+        full_name: result.rows[0].full_name,
         amount_paid: result.rows[0].amount,
         order_status: result.rows[0].order_status,
         created_at: result.rows[0].created_at,
@@ -71,19 +72,10 @@ class OrderControllers {
           myOrders: result.rows,
         });
       } else {
-        const userOrders = {
-          order_id: result.rows[0].order_id,
-          food_items: JSON.parse(result.rows[0].food_items),
-          user_id: result.rows[0].user_id,
-          amount_paid: result.rows[0].amount,
-          order_status: result.rows[0].order_status,
-          created_at: result.rows[0].created_at,
-          updated_at: result.rows[0].updated_at,
-        };
         return response.status(200).json({
           success: 'true',
           message: 'Your orders were retrieved successfully',
-          myOrders: userOrders,
+          myOrders: result.rows,
         });
       }
     });

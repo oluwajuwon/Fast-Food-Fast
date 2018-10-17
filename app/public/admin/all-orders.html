@@ -88,55 +88,8 @@
             <button class="blue-bg-colour white-text">Filter</button>
           </div>
           <!--Table for orders starts here-->
-          <table>
-            <tr>
-              <th>Order ID</th>
-              <th>Customer's name</th>
-              <th>Total Amount Paid</th>
-              <th>items</th>
-              <th>Status</th>
-              <th>Manage</th>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td class="text-wrap">Juwon Lebagerian</td>
-              <td>&#8358;6000</td>
-              <td><a onclick="modalPopup()">View items</a></td>
-              <td class="red-text text-wrap">Pending</td>
-              <td>
-                <a href="view-order.html">View</a>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td class="text-wrap">Ade Dayo</td>
-              <td>&#8358;6000</td>
-              <td><a onclick="modalPopup()">View items</a></td>
-              <td class="green-text text-wrap">Completed</td>
-              <td>
-                <a href="view-order.html">View</a>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td class="text-wrap">Stephen </td>
-              <td>&#8358;6000</td>
-              <td><a onclick="modalPopup()">View items</a></td>
-              <td class="red-text text-wrap">Pending</td>
-              <td>
-                <a href="view-order.html">View</a>
-              </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td class="text-wrap">Andela Developer</td>
-              <td>&#8358;9000</td>
-              <td><a onclick="modalPopup()">View items</a></td>
-              <td class="green-text text-wrap">Completed</td>
-              <td>
-                <a href="view-order.html">View</a>
-              </td>
-            </tr>
+          <table id="order-output">
+
           </table>
           <!--Table for orders ends here-->
           <div class="container">
@@ -163,6 +116,7 @@
   <script type="text/javascript" src="../assets/js/script.js"></script>
   <script type="text/javascript" src="../assets/js/modal.js"></script>
   <script type="text/jsvascript" src="../fetch/userPage.js"></script>
+  <script type="text/javascript" src="../fetch/orders.js"></script>
 </body>
 
 </html>
