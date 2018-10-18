@@ -55,31 +55,6 @@
     <!-- Navigation bar Ends -->
   </header>
 
-  <!-- Modal Starts -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <div class="container">
-        <h1 class="">Order items</h1>
-        <div class="">
-          <img src="../assets/images/pastery-1.jpg" height="150" width="150" alt="food item" />
-          <div class="item-details">
-            <p>#1 12-08-2018 12:09:00</p>
-            <p>Chocolate and burger</p>
-            <b>Price: </b><span class="price-figure">&#8358;1500</span>
-            <p><b>Quantity:</b> 5</p>
-          </div>
-        </div>
-        <div class="">
-          <form id="mark-complete">
-            <button type="button" id="close-modal" class="btn red-bg-colour white-text modal-close">Close</button>
-          </form>
-          <br />
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal Ends -->
-
   <!-- Main content Starts -->
   <main>
     <div class="container">
@@ -94,72 +69,8 @@
 
         <!--Flex container for food item display starts here-->
         <div class="flex-container">
-          <div class="item">
-            <div class="item-container">
-              <div class="img-container">
-                <img class="img-fluid" src="../assets/images/pastery-1.jpg" />
-              </div>
-              <div class="item-details">
-                <p>#1 12-08-2018 12:09:00</p>
-                <p>Items: 4 <a onclick="modalPopup()">View Items</a></p>
-                <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
-                <p>
-                  <b>Status: </b>
-                  <span class="red-text"> Pending</span>
-                </p>
-              </div>
+          <div id="order-history-output">
 
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="item-container">
-              <div class="img-container">
-                <img class="img-fluid" src="../assets/images/pastery-2.jpg" />
-              </div>
-              <div class="item-details">
-                <p>#1 12-08-2018 12:09:00</p>
-                <p>Items: 4 <a onclick="modalPopup()">View Items</a></p>
-                <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
-                <p>
-                  <b>Status: </b>
-                  <span class="green-text">Completed</span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="item-container">
-              <div class="img-container">
-                <img class="img-fluid" src="../assets/images/pastery-3.jpg" />
-              </div>
-              <div class="item-details">
-                <p>#1 12-08-2018 12:09:00</p>
-                <p>Items: 6 <a onclick="modalPopup()">View Items</a></p>
-                <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
-                <p>
-                  <b>Status: </b>
-                  <span class="red-text"> Pending</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="item-container">
-              <div class="img-container">
-                <img class="img-fluid" src="../assets/images/pastery-4.jpg" />
-              </div>
-              <div class="item-details">
-                <p>#1 12-08-2018 12:09:00</p>
-                <p>Items: 10 <a onclick="modalPopup()">View Items</a></p>
-                <b>Amount Paid: </b><span class="price-figure">&#8358;7500</span>
-                <p>
-                  <b>Status: </b>
-                  <span class="red-text"> Pending</span>
-                </p>
-              </div>
-            </div>
           </div>
         </div>
         <!--Flex container for food item display ends here-->
@@ -179,8 +90,8 @@
     </div>
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
-  <script type="text/javascript" src="../assets/js/modal.js"></script>
   <script type="text/javascript" src="../fetch/userPage.js"></script>
+  <script type="text/javascript" src="../fetch/orders.js"></script>
 </body>
 
 </html>
