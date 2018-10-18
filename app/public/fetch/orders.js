@@ -23,7 +23,6 @@ const getAllorders = () => {
     </tr>`;
       orders.forEach((order) => {
         const foodItems = JSON.parse(order.food_items);
-        console.log(foodItems);
         output += `
           <tr>
               <td>${order.order_id}</td>
@@ -44,6 +43,52 @@ const getAllorders = () => {
     });
 };
 
+const getOrderHistory = () => {
+  const orderHistoryDiv = document.getElementById('order-history-output');
+  const myId = localStorage.getItem('user_id');
+  fetch(`https://fast-foodfastapp.herokuapp.com/api/v1/users/${myId}/orders`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': myToken,
+    },
+  }).then(response => response.json())
+    .then((data) => {
+      const { myOrders } = data;
+      let output = '';
+      myOrders.forEach((order) => {
+        const foodItems = JSON.parse(order.food_items);
+        output += `
+            <div class="item">
+            <div class="item-container">
+              <div class="img-container">
+                <img class="img-fluid" src="../assets/images/pastery-4.jpg" />
+              </div>
+              <div class="item-details">
+                <p><b>Order Date/Time: </b>${order.created_at}</p>
+                <p><b>Items:</b>&nbsp; <b>Item name:</b> ${foodItems[0].food_name}, <b>Quantity: </b> ${foodItems[0].quantity} </p>
+                <b>Amount Paid: </b><span class="price-figure">&#8358;${order.amount}</span>
+                <p>
+                  <b>Status: </b>
+                  <span> ${order.order_status}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      if (orderHistoryDiv === null) {
+      } else {
+        document.getElementById('order-history-output').innerHTML = output;
+      }
+    });
+
+};
+
 window.addEventListener('load', () => {
-  getAllorders();
+  const userType = localStorage.getItem('user_type');
+  if (userType === 'Admin') {
+    getAllorders();
+  }
+  getOrderHistory();
 });
