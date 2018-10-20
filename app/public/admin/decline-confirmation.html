@@ -56,16 +56,16 @@
         <div class="innerbox-container">
           <div class="form">
             <h2>Decline confirmation</h2>
-            <p>Please state in the box below the reason for declining</p>
-            <p>reason will be sent to user</p>
+            <p>Please state in the box below the reason for declining this order</p>
+            <p>The reason will be sent to the user</p>
             <form id="decline-confirm">
               <div>
                 <p class="">Reason</p>
-                <textarea></textarea>
+                <textarea id="decline-reason"></textarea>
               </div>
               <br />
               <div class="">
-                <input type="submit" class="btn blue-bg-colour white-text" value="Submit" />
+                <input type="submit" id="submit-decline" class="btn blue-bg-colour white-text" value="Submit" />
               </div>
               <br/>
               <br />
@@ -86,7 +86,7 @@
     </div>
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
-  <script type="text/javascript" src="../assets/js/redirect.js"></script>
+  <script type="text/javascript" src="../fetch/orders.js"></script>
   <script type="text/javascript" src="../fetch/userPage.js"></script>
 </body>
 
