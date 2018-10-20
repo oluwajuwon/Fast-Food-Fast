@@ -87,6 +87,28 @@ const getOrderHistory = () => {
   }
 };
 
+
+const acceptOrder = () => {
+  const urlString = window.location.href;
+  const url = new URL(urlString);
+  const orderId = url.searchParams.get('order_id');
+  console.log('works', orderId);
+  const status = 'Processing';
+  fetch(`https://fast-foodfastapp.herokuapp.com/api/v1/orders/${orderId}`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+      'x-access-token': myToken,
+    },
+    body: JSON.stringify({ orderStatus: status }),
+  }).then(response => response.json())
+    .then((data) => {
+      console.log(data);
+      window.location.href = '/admin/accept-order-successful.html';
+    });
+};
+
 const getSpecificOrder = () => {
   const urlString = window.location.href;
   const url = new URL(urlString);
@@ -103,10 +125,11 @@ const getSpecificOrder = () => {
       const { orderFound } = data;
       let output = '';
       // const foodItems = JSON.parse(orderFound.food_items);
-      output += `
+      if (orderFound.order_status === 'New') {
+        output += `
         <div class="order-details">
           <p><b>Order ID: </b> ${orderFound.order_id}</p>
-          <p><b>Order date and time:</b>${orderFound.created_at} </p>
+          <p><b>Order date and time: </b>${orderFound.created_at} </p>
           <h3>Items:</h3>
           <p><b>food: </b> ${orderFound.food_items[0].food_name}, <b>Quantity: </b> ${orderFound.food_items[0].quantity} </p>
           <p><b>Amount Paid:</b> &#8358;${orderFound.amount_paid}</p>
@@ -115,16 +138,40 @@ const getSpecificOrder = () => {
             <a id="btn-accept-order" class="white-text">Accept</a>
           </button>
           <button class="red-bg-colour white-text">
-            <a onclick="modalPopup()" class="white-text">Decline</a>
+            <a onclick="modalPopup()" id="btn-decline-order" class="white-text">Decline</a>
           </button>
         </div>
         `;
+      } else {
+        output += `
+        <div class="order-details">
+          <p><b>Order ID: </b> ${orderFound.order_id}</p>
+          <p><b>Order date and time: </b>${orderFound.created_at} </p>
+          <h3>Items:</h3>
+          <p><b>food: </b> ${orderFound.food_items[0].food_name}, <b>Quantity: </b> ${orderFound.food_items[0].quantity} </p>
+          <p><b>Amount Paid:</b> &#8358;${orderFound.amount_paid}</p>
+          <h3>Order by: ${orderFound.full_name}</h3>
+          <p><b>Status: </b> ${orderFound.order_status}</p>
+        </div>
+        `;
+      }
       if (specificOrderDiv === null) {
       } else {
         document.getElementById('specific-order').innerHTML = output;
+        const btnAccept = document.getElementById('btn-accept-order');
+        if (btnAccept === null) {
+        } else {
+          btnAccept.addEventListener('click', () => {
+            const result = window.confirm('Do you really want to accept this order?');
+            if (result === true) {
+              acceptOrder();
+            }
+          });
+        }
       }
     });
 };
+
 
 window.addEventListener('load', () => {
   const userType = localStorage.getItem('user_type');
