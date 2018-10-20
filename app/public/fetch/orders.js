@@ -74,6 +74,7 @@ const getOrderHistory = () => {
                     <b>Status: </b>
                     <span> ${order.order_status}</span>
                   </p>
+                  <p>${order.decline_reason}</p>
                 </div>
               </div>
             </div>
@@ -103,73 +104,113 @@ const acceptOrder = () => {
     },
     body: JSON.stringify({ orderStatus: status }),
   }).then(response => response.json())
-    .then((data) => {
-      console.log(data);
+    .then(() => {
       window.location.href = '/admin/accept-order-successful.html';
     });
 };
+
+const declineUserOrder = () => {
+  const urlString = window.location.href;
+  const url = new URL(urlString);
+  const orderId = url.searchParams.get('order_id');
+  const declineText = document.getElementById('decline-reason').value;
+  const status = 'Cancelled';
+  fetch(`https://fast-foodfastapp.herokuapp.com/api/v1/orders/${orderId}`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+      'x-access-token': myToken,
+    },
+    body: JSON.stringify({ orderStatus: status, declineReason: declineText }),
+  }).then(response => response.json())
+    .then(() => {
+      window.alert('Order declined Successfully');
+      window.location.href = '/admin/all-orders.html';
+    });
+};
+
+const btnDeclineorder = document.getElementById('submit-decline');
+if (btnDeclineorder === null) {
+} else {
+  btnDeclineorder.addEventListener('click', (event) => {
+    event.preventDefault();
+    declineUserOrder();
+  });
+}
+
 
 const getSpecificOrder = () => {
   const urlString = window.location.href;
   const url = new URL(urlString);
   const orderId = url.searchParams.get('order_id');
   const specificOrderDiv = document.getElementById('specific-order');
-  fetch(`https://fast-foodfastapp.herokuapp.com/api/v1/orders/${orderId}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-access-token': myToken,
-    },
-  }).then(response => response.json())
-    .then((data) => {
-      const { orderFound } = data;
-      let output = '';
-      // const foodItems = JSON.parse(orderFound.food_items);
-      if (orderFound.order_status === 'New') {
-        output += `
-        <div class="order-details">
-          <p><b>Order ID: </b> ${orderFound.order_id}</p>
-          <p><b>Order date and time: </b>${orderFound.created_at} </p>
-          <h3>Items:</h3>
-          <p><b>food: </b> ${orderFound.food_items[0].food_name}, <b>Quantity: </b> ${orderFound.food_items[0].quantity} </p>
-          <p><b>Amount Paid:</b> &#8358;${orderFound.amount_paid}</p>
-          <h3>Order by: ${orderFound.full_name}</h3>
-          <button class="green-bg white-text">
-            <a id="btn-accept-order" class="white-text">Accept</a>
-          </button>
-          <button class="red-bg-colour white-text">
-            <a onclick="modalPopup()" id="btn-decline-order" class="white-text">Decline</a>
-          </button>
-        </div>
-        `;
-      } else {
-        output += `
-        <div class="order-details">
-          <p><b>Order ID: </b> ${orderFound.order_id}</p>
-          <p><b>Order date and time: </b>${orderFound.created_at} </p>
-          <h3>Items:</h3>
-          <p><b>food: </b> ${orderFound.food_items[0].food_name}, <b>Quantity: </b> ${orderFound.food_items[0].quantity} </p>
-          <p><b>Amount Paid:</b> &#8358;${orderFound.amount_paid}</p>
-          <h3>Order by: ${orderFound.full_name}</h3>
-          <p><b>Status: </b> ${orderFound.order_status}</p>
-        </div>
-        `;
-      }
-      if (specificOrderDiv === null) {
-      } else {
-        document.getElementById('specific-order').innerHTML = output;
-        const btnAccept = document.getElementById('btn-accept-order');
-        if (btnAccept === null) {
+  if (orderId === null) {
+  } else {
+    fetch(`https://fast-foodfastapp.herokuapp.com/api/v1/orders/${orderId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': myToken,
+      },
+    }).then(response => response.json())
+      .then((data) => {
+        const { orderFound } = data;
+        let output = '';
+        // const foodItems = JSON.parse(orderFound.food_items);
+        if (orderFound.order_status === 'New') {
+          output += `
+          <div class="order-details">
+            <p><b>Order ID: </b> ${orderFound.order_id}</p>
+            <p><b>Order date and time: </b>${orderFound.created_at} </p>
+            <h3>Items:</h3>
+            <p><b>food: </b> ${orderFound.food_items[0].food_name}, <b>Quantity: </b> ${orderFound.food_items[0].quantity} </p>
+            <p><b>Amount Paid:</b> &#8358;${orderFound.amount_paid}</p>
+            <h3>Order by: ${orderFound.full_name}</h3>
+            <button class="green-bg white-text">
+              <a id="btn-accept-order" class="white-text">Accept</a>
+            </button>
+            <button class="red-bg-colour white-text">
+              <a id="btn-decline-order" class="white-text">Decline</a>
+            </button>
+          </div>
+          `;
         } else {
-          btnAccept.addEventListener('click', () => {
-            const result = window.confirm('Do you really want to accept this order?');
-            if (result === true) {
-              acceptOrder();
-            }
-          });
+          output += `
+          <div class="order-details">
+            <p><b>Order ID: </b> ${orderFound.order_id}</p>
+            <p><b>Order date and time: </b>${orderFound.created_at} </p>
+            <h3>Items:</h3>
+            <p><b>food: </b> ${orderFound.food_items[0].food_name}, <b>Quantity: </b> ${orderFound.food_items[0].quantity} </p>
+            <p><b>Amount Paid:</b> &#8358;${orderFound.amount_paid}</p>
+            <h3>Order by: ${orderFound.full_name}</h3>
+            <p><b>Status: </b> ${orderFound.order_status}</p>
+          </div>
+          `;
         }
-      }
-    });
+        if (specificOrderDiv === null) {
+        } else {
+          document.getElementById('specific-order').innerHTML = output;
+          const btnAccept = document.getElementById('btn-accept-order');
+          const declineOrder = document.getElementById('btn-decline-order');
+          if (btnAccept === null) {
+          } else {
+            btnAccept.addEventListener('click', () => {
+              const acceptConfirm = window.confirm('Do you really want to accept this order?');
+              if (acceptConfirm === true) {
+                acceptOrder();
+              }
+            });
+            declineOrder.addEventListener('click', () => {
+              const declineConfirm = window.confirm('Do you really want to decline this order?');
+              if (declineConfirm === true) {
+                window.location.href = `/admin/decline-confirmation.html?order_id=${orderFound.order_id}`;
+              }
+            });
+          }
+        }
+      });
+  }
 };
 
 
