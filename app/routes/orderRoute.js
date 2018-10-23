@@ -6,7 +6,7 @@ import validateOrder from '../middlewares/validateOrder';
 import validateParams from '../middlewares/validateParams';
 
 const {
-  getAllorders, getOrder, createOrder, updateOrder,
+  getAllorders, getOrder, createOrder, updateOrder, getOrdersbyStatus,
 } = orderController;
 
 const { checkIfadmin } = verifyUser;
@@ -20,6 +20,7 @@ const { checkOrderparams } = validateParams;
 const router = express.Router();
 router.get('/api/v1/orders', checkToken, checkIfadmin, getAllorders);
 router.get('/api/v1/orders/:id', checkToken, checkOrderparams, checkIfadmin, getOrder);
+router.get('/api/v1/orders/status/:orderStatus', checkToken, checkIfadmin, getOrdersbyStatus);
 router.post('/api/v1/orders', checkToken, checkItems, createOrder);
 router.put('/api/v1/orders/:id', checkToken, checkIfadmin, checkOrderparams, checkUpdatefields, updateOrder);
 
