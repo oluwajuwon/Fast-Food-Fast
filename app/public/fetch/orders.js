@@ -213,12 +213,83 @@ const getSpecificOrder = () => {
   }
 };
 
+const completeOrder = (orderId) => {
+  console.log('works', orderId);
+  const status = 'Complete';
+  fetch(`https://fast-foodfastapp.herokuapp.com/api/v1/orders/${orderId}`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+      'x-access-token': myToken,
+    },
+    body: JSON.stringify({ orderStatus: status }),
+  }).then(response => response.json())
+    .then(() => {
+      window.location.href = '/admin/order-complete.html';
+    });
+};
+
+const getAcceptedorders = () => {
+  const acceptedOrderDiv = document.getElementById('accepted-order-output');
+  if (acceptedOrderDiv === null) {
+  } else {
+    fetch('https://fast-foodfastapp.herokuapp.com/api/v1/orders/status/Processing', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': myToken,
+      },
+    }).then(response => response.json())
+      .then((data) => {
+        const { Orders } = data;
+        let output = `
+        <tr>
+        <th>Order ID</th>
+        <th>Customer's name</th>
+        <th>Total Amount Paid</th>
+        <th>items</th>
+        <th>Status</th>
+        <th>Manage</th>
+      </tr>`;
+        Orders.forEach((order) => {
+          const foodItems = JSON.parse(order.food_items);
+          output += `
+            <tr>
+                <td>${order.order_id}</td>
+                <td class="text-wrap">${order.full_name}</td>
+                <td>&#8358;${order.amount}</td>
+                <td><b>food: </b> ${foodItems[0].food_name}, <b>Quantity: </b> ${foodItems[0].quantity} </td>
+                <td class="green-text text-wrap">${order.order_status}</td>
+                <td>
+                  <a id="btn-complete-order" data-id="${order.order_id}">Mark as Complete</a>
+                </td>
+              </tr>
+          `;
+        });
+        if (acceptedOrderDiv === null) {
+        } else {
+          document.getElementById('accepted-order-output').innerHTML = output;
+          const btnCompleteorder = document.getElementById('btn-complete-order');
+          const orderId = btnCompleteorder.getAttribute('data-id');
+          btnCompleteorder.addEventListener('click', () => {
+            const acceptConfirm = window.confirm('Do you really want to mark this order as completed?');
+            if (acceptConfirm === true) {
+              completeOrder(orderId);
+            }
+          });
+        }
+      });
+  }
+};
+
 
 window.addEventListener('load', () => {
   const userType = localStorage.getItem('user_type');
   if (userType === 'Admin') {
     getAllorders();
     getSpecificOrder();
+    getAcceptedorders();
   }
   getOrderHistory();
 });

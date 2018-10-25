@@ -4,11 +4,6 @@ import app from '../app';
 
 import generateToken from '../controllers/generateToken';
 
-/* const user = { userId: result.rows[0].user_id, userType: result.rows[0].user_type };
-const payload = {
-  user,
-}; */
-
 const customer = { user: { userId: 2, userType: 'Customer' } };
 const admin = { user: { userId: 1, userType: 'Admin' } };
 
@@ -248,6 +243,26 @@ describe('Test suite for Order API endpoints', () => {
         .put('/api/v1/orders/1')
         .set('x-access-token', adminToken)
         .send({ orderStatus })
+        .end((err, response) => {
+          expect(response.status).to.equal(400);
+          done();
+        });
+    });
+
+    it('should return status code 200 if the route works fine', (done) => {
+      request(app)
+        .get('/api/v1/orders/status/Complete')
+        .set('x-access-token', adminToken)
+        .end((err, response) => {
+          expect(response.status).to.equal(200);
+          done();
+        });
+    });
+
+    it('should return status code 400 if an incorrect status was entered', (done) => {
+      request(app)
+        .get('/api/v1/orders/status/Completed')
+        .set('x-access-token', adminToken)
         .end((err, response) => {
           expect(response.status).to.equal(400);
           done();

@@ -81,6 +81,33 @@ class OrderControllers {
     });
   }
 
+  //  Controller to get orders based on their status
+  getOrdersbyStatus(request, response) {
+    const accepted = request.params.orderStatus;
+    if (accepted !== 'New' && accepted !== 'Processing' && accepted !== 'Cancelled' && accepted !== 'Complete') {
+      return response.status(400).json({
+        success: 'false',
+        message: 'Please the orderStatus parameter can only be New, Processing, Cancelled or Complete (case-sensitive)',
+      });
+    }
+    const text = 'SELECT * FROM orders WHERE order_status =$1';
+    const value = [accepted];
+    return db.query(text, value, (err, result) => {
+      if (result.rows.length === 0) {
+        return response.status(404).json({
+          success: 'false',
+          message: `There are no ${accepted} orders available yet`,
+        });
+      } else {
+        return response.status(200).json({
+          success: 'true',
+          message: 'The orders were retrieved successfully',
+          Orders: result.rows,
+        });
+      }
+    });
+  }
+
 
   //  controller to place a new order
   createOrder(request, response) {
