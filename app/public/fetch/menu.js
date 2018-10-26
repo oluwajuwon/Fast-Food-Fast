@@ -1,3 +1,8 @@
+const foodItems = [];
+let cartCount = 0;
+document.getElementById('cart-count').innerHTML = cartCount;
+
+
 //  Function to retrieve menu items for guests
 const getMenu = () => {
   const menuDiv = document.getElementById('output');
@@ -38,6 +43,21 @@ const getMenu = () => {
     });
 };
 
+//  function to add new food objects to cart
+const addTocart = (newFood) => {
+  const result = foodItems.find(food => food.food_id === newFood.food_id);
+  if (result) {
+    window.alert('You have added this item already');
+  } else {
+    foodItems.push(newFood);
+    cartCount = foodItems.length;
+    document.getElementById('cart-count').innerHTML = cartCount;
+    const foodItemsstring = JSON.stringify(foodItems);
+    console.log('theyve been stringed', foodItemsstring);
+    localStorage.setItem('food_items', foodItemsstring);
+  }
+};
+
 //  function to retrieve menu items for logged in users
 const getUsermenu = () => {
   const userMenudiv = document.getElementById('user-output');
@@ -52,11 +72,10 @@ const getUsermenu = () => {
       let output = '';
       menu.forEach((food) => {
         output += `
-        <div class="flex-container">
           <div class="item">
             <div class="item-container">
               <div class="img-container">
-                <img class="img-fluid" src="./assets/images/drink-1.jpg" />
+                <img class="img-fluid" src="${food.image}" />
               </div>
               <div class="item-details">
                 <h3>${food.food_name}</h3>
@@ -65,7 +84,7 @@ const getUsermenu = () => {
                 <p>Category: ${food.category_name}</p>
               </div>
               <button class="blue-bg-colour white-text">
-                <a href="confirm-order.html" class="white-text" data-id="${food.food_id}">Add to cart</a>
+                <a class="btn-add-cart" class="white-text" data-id="${food.food_id}" data-name="${food.food_name}" data-price="${food.price}" data-image="${food.image}">Add to cart</a>
               </button>
             </div>
           </div>
@@ -74,6 +93,24 @@ const getUsermenu = () => {
       if (userMenudiv === null) {
       } else {
         document.getElementById('user-output').innerHTML = output;
+        const flexDiv = document.getElementById('user-output');
+
+        flexDiv.addEventListener('click', (event) => {
+          if (event.target && event.target.matches('a.btn-add-cart')) {
+            const btnAddtoCart = event.target;
+            const foodId = btnAddtoCart.getAttribute('data-id');
+            const foodName = btnAddtoCart.getAttribute('data-name');
+            const foodPrice = btnAddtoCart.getAttribute('data-price');
+            const foodImage = btnAddtoCart.getAttribute('data-image');
+            const newFood = {
+              food_id: foodId,
+              food_name: foodName,
+              food_price: foodPrice,
+              food_image: foodImage,
+            };
+            addTocart(newFood);
+          }
+        });
       }
     });
 };

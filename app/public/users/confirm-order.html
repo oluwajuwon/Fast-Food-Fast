@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="dropdown profile">
-        <button class="dropbtn">Cart items (0)
+        <button class="dropbtn">Cart items (<span id="cart-count"></span>)
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
@@ -59,7 +59,7 @@
       <h2 class="text-center">Checkout</h2>
       <hr>
       <div class="meals">
-        <div class="flex-container">
+        <div class="flex-container" id="checkout-output">
           <div class="item">
             <div class="item-container">
               <div class="img-container">
@@ -145,6 +145,7 @@
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
   <script type="text/javascript" src="../fetch/userPage.js"></script>
+  <script type="text/javascript" src="../fetch/checkout.js"></script>
 </body>
 
 </html>
