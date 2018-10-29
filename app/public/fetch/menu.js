@@ -2,7 +2,6 @@ const foodItems = [];
 let cartCount = 0;
 document.getElementById('cart-count').innerHTML = cartCount;
 
-
 //  Function to retrieve menu items for guests
 const getMenu = () => {
   const menuDiv = document.getElementById('output');

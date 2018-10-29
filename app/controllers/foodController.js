@@ -166,6 +166,23 @@ class FoodControllers {
       });
     });
   }
+
+  gettAllcategories(request, response) {
+    const text = 'SELECT * FROM category';
+    db.query(text, (error, result) => {
+      if (result.rows.length === 0) {
+        return response.status(404).json({
+          success: 'false',
+          message: 'no category available',
+        });
+      }
+      return response.status(200).json({
+        success: 'true',
+        message: 'The categories were retrieved successfully',
+        categories: result.rows,
+      });
+    });
+  }
 }
 
 const foodController = new FoodControllers();
