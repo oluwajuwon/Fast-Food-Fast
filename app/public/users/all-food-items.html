@@ -36,12 +36,12 @@
         </div>
       </div>
       <div class="dropdown profile">
-        <button class="dropbtn">Cart items (0)
+        <button class="dropbtn">Cart items (<span id="cart-count"></span>)
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
           <div class="cart-body">
-            Your cart is empty
+            <span id="cart-text">Your cart is empty</span>
             <br>
             <button class="blue-bg-colour white-text cart-btn">
               <a href="confirm-order.html" class="white-text">Proceed to checkout</a>
@@ -61,7 +61,7 @@
       <hr>
       <div class="meals">
         <!--Div for generated food items starts here-->
-        <div id="user-output">
+        <div class="flex-container" id="user-output">
 
         </div>
 
