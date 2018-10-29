@@ -53,8 +53,12 @@ const addTocart = (newFood) => {
     cartCount = foodItems.length;
     document.getElementById('cart-count').innerHTML = cartCount;
     const foodItemsstring = JSON.stringify(foodItems);
-    console.log('theyve been stringed', foodItemsstring);
     localStorage.setItem('food_items', foodItemsstring);
+    if (cartCount < 1) {
+      document.getElementById('cart-text').innerHTML = 'Your cart is empty';
+    } else {
+      document.getElementById('cart-text').innerHTML = `Your cart contains ${cartCount} items`;
+    }
   }
 };
 
@@ -102,10 +106,12 @@ const getUsermenu = () => {
             const foodName = btnAddtoCart.getAttribute('data-name');
             const foodPrice = btnAddtoCart.getAttribute('data-price');
             const foodImage = btnAddtoCart.getAttribute('data-image');
+            const quantity = 1;
             const newFood = {
               food_id: foodId,
               food_name: foodName,
               food_price: foodPrice,
+              food_quantity: quantity,
               food_image: foodImage,
             };
             addTocart(newFood);
