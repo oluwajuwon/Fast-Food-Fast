@@ -4,7 +4,7 @@ document.getElementById('cart-count').innerHTML = cartCount;
 
 //  Function to retrieve menu items for guests
 const getMenu = () => {
-  const menuDiv = document.getElementById('output');
+  const menuDiv = document.getElementById('menu-output');
   fetch('https://fast-foodfastapp.herokuapp.com/api/v1/menu', {
     method: 'GET',
     headers: {
@@ -16,7 +16,6 @@ const getMenu = () => {
       let output = '';
       menu.forEach((food) => {
         output += `
-        <div class="flex-container">
           <div class="item">
             <div class="item-container">
               <div class="img-container">
@@ -37,7 +36,7 @@ const getMenu = () => {
       });
       if (menuDiv === null) {
       } else {
-        document.getElementById('output').innerHTML = output;
+        document.getElementById('menu-output').innerHTML = output;
       }
     });
 };
@@ -177,7 +176,6 @@ const getLatestmenu = () => {
       let output = '';
       menu.slice(-4).forEach((food) => {
         output += `
-        <div class="flex-container">
           <div class="item">
             <div class="item-container">
               <div class="img-container">
