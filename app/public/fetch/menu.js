@@ -1,11 +1,41 @@
+const myToken = localStorage.getItem('user_token');
 const foodItems = [];
 let cartCount = 0;
-document.getElementById('cart-count').innerHTML = cartCount;
+const cartCountDiv = document.getElementById('cart-count');
+if (cartCountDiv === null) { } else {
+  document.getElementById('cart-count').innerHTML = cartCount;
+}
+const btnAddFood = document.getElementById('btn-add-food');
+
+
+//  Function to load the category list to the add new menu item page
+const loadCategories = () => {
+  const addFooddiv = document.getElementById('add-food-div');
+  fetch('https://fast-foodfastapp.herokuapp.com/api/v1/category', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then(response => response.json())
+    .then((data) => {
+      const { categories } = data;
+      let output = '<option>...Select...</option>';
+      categories.forEach((category) => {
+        output += `
+        <option value="${category.category_id}">${category.category_name}</option>
+        `;
+      });
+      if (addFooddiv === null) {
+      } else {
+        document.getElementById('category-list').innerHTML = output;
+      }
+    });
+};
 
 
 //  Function to retrieve menu items for guests
 const getMenu = () => {
-  const menuDiv = document.getElementById('output');
+  const menuDiv = document.getElementById('menu-output');
   fetch('https://fast-foodfastapp.herokuapp.com/api/v1/menu', {
     method: 'GET',
     headers: {
@@ -17,7 +47,6 @@ const getMenu = () => {
       let output = '';
       menu.forEach((food) => {
         output += `
-        <div class="flex-container">
           <div class="item">
             <div class="item-container">
               <div class="img-container">
@@ -38,7 +67,7 @@ const getMenu = () => {
       });
       if (menuDiv === null) {
       } else {
-        document.getElementById('output').innerHTML = output;
+        document.getElementById('menu-output').innerHTML = output;
       }
     });
 };
@@ -135,11 +164,10 @@ const getAdminmenu = () => {
       let adminOutput = '';
       menu.forEach((food) => {
         adminOutput += `
-        <div class="flex-container">
           <div class="item">
             <div class="item-container">
               <div class="img-container">
-                <img class="img-fluid" src="../assets/images/drink-4.jpg" alt="pastery" />
+                <img class="img-fluid" src="${food.image}" alt="pastery" />
               </div>
               <div class="item-details">
                 <h5>ID: ${food.food_id}</h5>
@@ -165,6 +193,7 @@ const getAdminmenu = () => {
     });
 };
 
+//  Function to get the latest menu items on the homepage
 const getLatestmenu = () => {
   const latestMenudiv = document.getElementById('latest-output');
   fetch('https://fast-foodfastapp.herokuapp.com/api/v1/menu', {
@@ -178,11 +207,10 @@ const getLatestmenu = () => {
       let output = '';
       menu.slice(-4).forEach((food) => {
         output += `
-        <div class="flex-container">
           <div class="item">
             <div class="item-container">
               <div class="img-container">
-                <img class="img-fluid" src="./assets/images/drink-1.jpg" />
+                <img class="img-fluid" src="${food.image}" />
               </div>
               <div class="item-details">
                 <h3>${food.food_name}</h3>
@@ -204,9 +232,49 @@ const getLatestmenu = () => {
     });
 };
 
+//  Function to add a new menu item
+const addMenu = () => {
+  const name = document.getElementById('food-name').value;
+  const foodPrice = document.getElementById('food-price').value;
+  const foodImage = document.getElementById('food-image').value;
+  const category = document.getElementById('category-list').value;
+  const foodDescription = document.getElementById('food-description').value;
+  fetch('https://fast-foodfastapp.herokuapp.com/api/v1/menu', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-type': 'application/json',
+      'x-access-token': myToken,
+    },
+    body: JSON.stringify({
+      foodName: name,
+      categoryId: category,
+      price: foodPrice,
+      description: foodDescription,
+      image: foodImage,
+    }),
+  })
+    .then(response => response.json())
+    .then(() => {
+      window.location.href = '/admin/add-food-successful.html';
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+if (btnAddFood === null) { } else {
+  btnAddFood.addEventListener('click', (event) => {
+    event.preventDefault();
+    addMenu();
+  });
+}
+
+
 window.addEventListener('load', () => {
   getMenu();
   getUsermenu();
   getAdminmenu();
   getLatestmenu();
+  loadCategories();
 });

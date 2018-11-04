@@ -30,7 +30,7 @@ describe('Test suite for food API endpoints', () => {
         });
     });
 
-    it('should return status 200 if the food item were retrieved successfully', (done) => {
+    it('should return status 200 if the food item was retrieved successfully', (done) => {
       request(app)
         .get('/api/v1/menu/1')
         .end((err, response) => {
@@ -269,6 +269,15 @@ describe('Test suite for food API endpoints', () => {
   });
 
   describe('POST /api/v1/category', () => {
+    it('should return status 200 if the categories were retrieved successfully', (done) => {
+      request(app)
+        .get('/api/v1/category')
+        .end((err, response) => {
+          expect(response.status).to.equal(200);
+          done();
+        });
+    });
+
     it('should return status 201 if the new category was added successfully', (done) => {
       const categoryName = 'Drinks';
       request(app)

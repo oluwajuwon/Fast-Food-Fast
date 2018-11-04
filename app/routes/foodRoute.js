@@ -15,7 +15,7 @@ const {
 } = validateMenuitem;
 
 const {
-  getAllfood, addNewfood, getFood, updateFood, deleteFood, addNewcategory,
+  getAllfood, addNewfood, getFood, updateFood, deleteFood, addNewcategory, gettAllcategories,
 } = foodController;
 
 const { checkFoodparams } = validateParams;
@@ -24,6 +24,8 @@ const router = express.Router();
 router.get('/api/v1/menu', getAllfood);
 
 router.get('/api/v1/menu/:foodId', checkFoodparams, getFood);
+
+router.get('/api/v1/category', gettAllcategories);
 
 router.post('/api/v1/menu', checkToken, checkIfadmin, checkEmptyfields, checkDataFormat,
   checkDataitemFormat, checkFoodname, checkCategory, addNewfood);
