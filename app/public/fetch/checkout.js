@@ -1,5 +1,7 @@
+const myToken = localStorage.getItem('user_token');
 
 let cartCount = 0;
+const btnConfirmOrder = document.getElementById('place-order');
 
 //  Function to count the number of items in the cart
 const countCartitems = () => {
@@ -18,7 +20,7 @@ const countCartitems = () => {
 const calculateTotalamount = (cart) => {
   let totalAmount = 0;
   cart.forEach((food) => {
-    totalAmount += food.food_price * food.food_quantity;
+    totalAmount += food.food_price * food.quantity;
   });
   document.getElementById('total-amount').innerHTML = totalAmount;
 };
@@ -29,7 +31,7 @@ const loadTotalamount = () => {
   const cart = JSON.parse(foodItems);
   let totalAmount = 0;
   cart.forEach((food) => {
-    totalAmount += food.food_price * food.food_quantity;
+    totalAmount += food.food_price * food.quantity;
   });
   document.getElementById('total-amount').innerHTML = totalAmount;
 };
@@ -38,7 +40,8 @@ const loadTotalamount = () => {
 const updateItemQuantity = (foodId, qtyValue) => {
   const foodItems = localStorage.getItem('food_items');
   const cart = JSON.parse(foodItems);
-  const newQty = parseInt(qtyValue, 10);
+  //  const newQty = parseInt(qtyValue, 10);
+  newQty = qtyValue;
   let foodFound;
   let itemIndex;
   cart.map((food, index) => {
@@ -51,7 +54,7 @@ const updateItemQuantity = (foodId, qtyValue) => {
     food_id: foodFound.food_id,
     food_name: foodFound.food_name,
     food_price: foodFound.food_price,
-    food_quantity: newQty || foodFound.food_quantity,
+    quantity: newQty || foodFound.quantity,
     food_image: foodFound.food_image,
   };
   cart.splice(itemIndex, 1, updatedFooditem);
@@ -90,11 +93,10 @@ const loadCartitems = () => {
             <h3>${food.food_name}</h3>
             <p><span class="price-figure">&#8358;${food.food_price}</span></p>
           </div>
-          <h3>Quantity: <input type="number" class="txt-quantity" data-id="${food.food_id}" min="0" id="quantity" /></h3>
+          <h3>Quantity: <input type="number" class="txt-quantity" data-id="${food.food_id}" min="0" id="quantity" value="${food.quantity}"/></h3>
           <button class="red-bg-colour white-text">
             <a data-id="${food.food_id}" class="white-text remove-item">Remove</a>
           </button>
-
         </div>
       </div>
         `;
@@ -120,6 +122,39 @@ const loadCartitems = () => {
     }
   });
 };
+
+//  Function to place order of selected menu items
+const placeOrder = () => {
+  const foodItemsArray = localStorage.getItem('food_items');
+  const cartItems = JSON.parse(foodItemsArray);
+  fetch('https://fast-foodfastapp.herokuapp.com/api/v1/orders', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+      'x-access-token': myToken,
+    },
+    body: JSON.stringify({
+      foodItems: cartItems,
+    }),
+  }).then(response => response.json())
+    .then(() => {
+      window.location.href = '/users/order-successful.html';
+      localStorage.removeItem('food_items');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+if (btnConfirmOrder === null) { } else {
+  btnConfirmOrder.addEventListener('click', () => {
+    const acceptConfirm = window.confirm('Are you sure you want to place this order?');
+    if (acceptConfirm === true) {
+      placeOrder();
+    }
+  });
+}
 
 window.addEventListener('load', () => {
   countCartitems();

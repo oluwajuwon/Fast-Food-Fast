@@ -178,12 +178,12 @@ const getUsermenu = () => {
             const foodName = btnAddtoCart.getAttribute('data-name');
             const foodPrice = btnAddtoCart.getAttribute('data-price');
             const foodImage = btnAddtoCart.getAttribute('data-image');
-            const quantity = 1;
+            const foodQuantity = '1';
             const newFood = {
               food_id: foodId,
               food_name: foodName,
               food_price: foodPrice,
-              food_quantity: quantity,
+              quantity: foodQuantity,
               food_image: foodImage,
             };
             addTocart(newFood);
