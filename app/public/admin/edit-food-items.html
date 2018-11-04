@@ -55,32 +55,34 @@
       <div class="box-container">
         <div class="innerbox-container">
           <div class="form">
-            <h2>Edit food item</h2>
-            <h3>Item No: 1230</h3>
-            <form id="edit-food-form">
+            <h2>Edit food item (Item No: <span id="item-no"></span>)</h2>
+            <h3><h3>
+            <form id="edit-food-div">
               <div>
                 <p class="">Name of food</p>
-                <input type="text" class="textbox" required placeholder="Enter the new food name here..." />
+                <input type="text" class="textbox" id="food-name" required placeholder="Enter the new food name here..." />
               </div>
               <div>
                 <p class="">Price</p>
-                <input type="text" class="textbox" required placeholder="Enter the new price of food here..." />
+                <input type="number" class="textbox" id="food-price" required placeholder="Enter the new price of food here..." />
               </div>
               <div>
-                <p class="">Item Image</p>
-                <input type="file" class="textbox" required placeholder="Upload the new food image here..." />
+                <p class="">Image URL</p>
+                <input type="text" class="textbox" id="food-image" required placeholder="Enter URL of the image here (e.g. http://pixabay.com/food.jpg)" />
               </div>
               <div>
                 <p class="">Category</p>
-                <select class="textbox" required>
-                  <option>Pasteries</option>
-                  <option>Breakfast</option>
-                  <option>Drinks</option>
+                <select class="textbox" id="category-list" required>
                 </select>
+                <span id="category-id"></span>
+              </div>
+              <div>
+                <p class="">Description</p>
+                <textarea class="textbox" id="food-description" required></textarea>
               </div>
               <br/>
               <div class="">
-                <input type="submit" class="btn blue-bg-colour white-text" value="Modify food" />
+                <input type="submit" id="btn-edit-food" class="btn blue-bg-colour white-text" value="Modify food" />
               </div>
             </form>
           </div>
@@ -99,8 +101,8 @@
     </div>
   </footer>
   <script type="text/javascript" src="../assets/js/script.js"></script>
-  <script type="text/javascript" src="../assets/js/redirect.js"></script>
   <script type="text/javascript" src="../fetch/userPage.js"></script>
+  <script type="text/javascript" src="../fetch/menu.js"></script>
 </body>
 
 </html>

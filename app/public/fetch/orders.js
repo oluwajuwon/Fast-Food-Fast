@@ -93,7 +93,6 @@ const acceptOrder = () => {
   const urlString = window.location.href;
   const url = new URL(urlString);
   const orderId = url.searchParams.get('order_id');
-  console.log('works', orderId);
   const status = 'Processing';
   fetch(`https://fast-foodfastapp.herokuapp.com/api/v1/orders/${orderId}`, {
     method: 'PUT',
