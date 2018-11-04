@@ -29,7 +29,6 @@ const login = () => {
     })
     .catch((error) => {
       console.log(error);
-      document.getElementById('error').innerHTML = error;
     });
 };
 
