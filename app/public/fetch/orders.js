@@ -61,7 +61,7 @@ const getOrderHistory = () => {
         myOrders.forEach((order) => {
           const foodItems = JSON.parse(order.food_items);
           output += `
-              <div class="item">
+            <div class="item">
               <div class="item-container">
                 <div class="img-container">
                   <img class="img-fluid" src="../assets/images/pastery-4.jpg" />

@@ -54,7 +54,7 @@ const getMenu = () => {
           <div class="item">
             <div class="item-container">
               <div class="img-container">
-                <img class="img-fluid" src="./assets/images/drink-1.jpg" />
+                <img class="img-fluid" src="${food.image}" />
               </div>
               <div class="item-details">
                 <h3>${food.food_name}</h3>
@@ -193,6 +193,23 @@ const getUsermenu = () => {
     });
 };
 
+//  function to delete a selected menu item from the menu list
+const deleteMenuItem = (foodId) => {
+  fetch(`https://fast-foodfastapp.herokuapp.com/api/v1/menu/${foodId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-type': 'application/json',
+      'x-access-token': myToken,
+    },
+  }).then(response => response.json())
+    .then(() => {
+      window.location.href = '/admin/delete-food-successful.html';
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 //  Function to retrieve menu items on admin frontend
 const getAdminmenu = () => {
   const adminMenudiv = document.getElementById('admin-output');
@@ -223,7 +240,7 @@ const getAdminmenu = () => {
                 <a href="edit-food-items.html?food_id=${food.food_id}" data-id="${food.food_id} class="white-text">Edit</a>
               </button>
               <button class="red-bg-colour">
-                <a href="" class="white-text" data-id="${food.food_id} onclick="modalPopup(); return false;">Delete</a>
+                <a href="" class="white-text delete-item" data-id="${food.food_id}">Delete</a>
               </button>
             </div>
           </div>
@@ -233,6 +250,18 @@ const getAdminmenu = () => {
       } else {
         document.getElementById('admin-output').innerHTML = adminOutput;
       }
+      adminMenudiv.addEventListener('click', (event) => {
+        if (event.target && event.target.matches('a.delete-item')) {
+          const btnDeleteItem = event.target;
+          const foodId = btnDeleteItem.getAttribute('data-id');
+          console.log(foodId);
+          const acceptConfirm = window.confirm('Do you really want to delete this menu item?');
+          if (acceptConfirm === true) {
+            console.log('does it get here?');
+            deleteMenuItem(foodId);
+          }
+        }
+      });
     });
 };
 
@@ -291,8 +320,8 @@ const loadMenuDetails = () => {
     }).then(response => response.json())
       .then((data) => {
         const { menuItem } = data;
-        if (editMenuDiv === null) {} else {
-          document.getElementById('item-no').value = `${menuItem.food_id}`;
+        if (editMenuDiv === null) { } else {
+          document.getElementById('item-no').innerHTML = `${menuItem.food_id}`;
           document.getElementById('category-list').value = `${menuItem.category_name}`;
           document.getElementById('food-name').value = `${menuItem.food_name}`;
           document.getElementById('food-price').value = `${menuItem.price}`;
