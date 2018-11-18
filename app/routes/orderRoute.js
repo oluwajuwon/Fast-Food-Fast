@@ -13,7 +13,9 @@ const { checkIfadmin } = verifyUser;
 
 const { checkToken } = verifyToken;
 
-const { checkUpdatefields, checkItems } = validateOrder;
+const {
+  checkUpdatefields, checkItems, checkFields, checkExistingFood,
+} = validateOrder;
 
 const { checkOrderparams } = validateParams;
 
@@ -21,7 +23,7 @@ const router = express.Router();
 router.get('/api/v1/orders', checkToken, checkIfadmin, getAllorders);
 router.get('/api/v1/orders/:id', checkToken, checkOrderparams, checkIfadmin, getOrder);
 router.get('/api/v1/orders/status/:orderStatus', checkToken, checkIfadmin, getOrdersbyStatus);
-router.post('/api/v1/orders', checkToken, checkItems, createOrder);
+router.post('/api/v1/orders', checkToken, checkItems, checkFields, checkExistingFood, createOrder);
 router.put('/api/v1/orders/:id', checkToken, checkIfadmin, checkOrderparams, checkUpdatefields, updateOrder);
 
 export default router;

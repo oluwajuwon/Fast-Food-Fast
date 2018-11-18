@@ -1,5 +1,6 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
 
 dotenv.config();
 let sslValue = true;
@@ -13,6 +14,8 @@ pool.on('connect', () => {
   console.log('connected to the db');
 });
 
+const adminPass = bcrypt.hashSync('1234567', 10);
+const userPass = bcrypt.hashSync('1234567', 10);
 const createTables = () => {
   const queryText = `
   DROP TABLE IF EXISTS category CASCADE;
@@ -62,12 +65,12 @@ const createTables = () => {
       INSERT INTO users(
         username, full_name, email, password, user_type, created_at, 
         updated_at)
-        VALUES ('admin', 'admin', 'admin@mailinator.com', '1234567', 'Admin', '2018-10-02 13:07:58.188',
+        VALUES ('admin', 'admin', 'admin@mailinator.com', '${adminPass}', 'Admin', '2018-10-02 13:07:58.188',
         '2018-10-02 13:07:58.188');
         INSERT INTO users(
           username, full_name, email, password, user_type, created_at, 
           updated_at)
-          VALUES ('jayboy', 'juwon', 'juwon@mailinator.com', '1234567', 'Customer', '2018-10-02 13:07:58.188',
+          VALUES ('jayboy', 'juwon', 'juwon@mailinator.com', '${userPass}', 'Customer', '2018-10-02 13:07:58.188',
           '2018-10-02 13:07:58.188');
         INSERT INTO category(
           category_name)
@@ -87,7 +90,8 @@ INSERT INTO orders(
   updated_at)
 VALUES ('[{"food_id":1,"food_name":"Chicken and chips","price":"3000","quantity":2}]', '2',
 '6000', 'New', '2018-10-02 13:07:58.188', '2018-10-02 13:07:58.188');`;
-  pool.query(queryText)
+  pool
+    .query(queryText)
     .then((result) => {
       console.log(result);
       pool.end();
@@ -97,7 +101,6 @@ VALUES ('[{"food_id":1,"food_name":"Chicken and chips","price":"3000","quantity"
       pool.end();
     });
 };
-
 
 pool.on('remove', () => {
   console.log('client removed');

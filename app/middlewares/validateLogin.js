@@ -1,9 +1,9 @@
+import bcrypt from 'bcrypt';
+import db from '../models/db.connect';
 
 class LoginMiddleware {
   loginCheckundefined(request, response, next) {
-    const {
-      email, password,
-    } = request.body;
+    const { email, password } = request.body;
     if (email === undefined) {
       return response.status(400).json({
         success: 'false',
@@ -19,9 +19,7 @@ class LoginMiddleware {
   }
 
   loginCheckemptyField(request, response, next) {
-    const {
-      email, password,
-    } = request.body;
+    const { email, password } = request.body;
     const emailTrim = email.trim();
     const passwordTrim = password.trim();
     if (emailTrim === '') {
@@ -46,6 +44,25 @@ class LoginMiddleware {
       return response.status(400).json({ errors });
     }
     return next();
+  }
+
+  loginCheckUser(request, response, next) {
+    const { body } = request;
+    const { email, password } = body;
+    const emailTrim = email.trim();
+    const passwordTrim = password.trim();
+    const text = 'SELECT * FROM users WHERE email = $1';
+    const value = [emailTrim];
+    return db.query(text, value, (err, result) => {
+      if (result.rows.length === 0 || !bcrypt.compareSync(passwordTrim, result.rows[0].password)) {
+        response.status(404).json({
+          success: 'false',
+          message: 'Please enter valid credentials',
+        });
+      } else {
+        next();
+      }
+    });
   }
 }
 

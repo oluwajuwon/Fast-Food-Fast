@@ -1,6 +1,4 @@
-
 import db from '../models/db.connect';
-
 
 class OrderControllers {
   //    controller to retrieve all orders
@@ -84,10 +82,16 @@ class OrderControllers {
   //  Controller to get orders based on their status
   getOrdersbyStatus(request, response) {
     const accepted = request.params.orderStatus;
-    if (accepted !== 'New' && accepted !== 'Processing' && accepted !== 'Cancelled' && accepted !== 'Complete') {
+    if (
+      accepted !== 'New'
+      && accepted !== 'Processing'
+      && accepted !== 'Cancelled'
+      && accepted !== 'Complete'
+    ) {
       return response.status(400).json({
         success: 'false',
-        message: 'Please the orderStatus parameter can only be New, Processing, Cancelled or Complete (case-sensitive)',
+        message:
+          'Please the orderStatus parameter can only be New, Processing, Cancelled or Complete (case-sensitive)',
       });
     }
     const text = 'SELECT * FROM orders WHERE order_status =$1';
@@ -108,82 +112,44 @@ class OrderControllers {
     });
   }
 
-
   //  controller to place a new order
   createOrder(request, response) {
     const { foodItems } = request.body;
     const userId = request.decoded.user.userId;
-    const submittedFoodItems = foodItems;
+    const orderedFoodItems = foodItems;
     const orderedItems = [];
     let totalAmount = 0;
-    for (let i = 0; i < submittedFoodItems.length; i += 1) {
-      const [foodId] = [submittedFoodItems[i].food_id];
-      const [quantity] = [submittedFoodItems[i].quantity];
-
-      if (!foodId || !quantity) {
-        i = submittedFoodItems.length;
-        return response.status(400).json({
-          success: 'false',
-          message: 'Order not created succesfully, please check the format of the fooditems',
-          description: `foodItems should be an array containing object literals which have
-            food_id and quantity as parameters, example: \n { foodItems: [{ foodId: 1, quantity: 2 }] }.`,
-        });
-      } if (Number.isNaN(Number(foodId))) {
-        i = submittedFoodItems.length;
-        return response.status(400).json({
-          success: 'false',
-          message: 'please foodId should be a number',
-        });
-      } else if (Number.isNaN(Number(quantity))) {
-        i = submittedFoodItems.length;
-        return response.status(400).json({
-          success: 'false',
-          message: 'please foodId should be a number',
-        });
-      }
-
+    let count = 0;
+    for (let i = 0; i < orderedFoodItems.length; i += 1) {
       const queryText = 'SELECT * FROM foods WHERE food_id = $1';
-      const value = [submittedFoodItems[i].food_id];
+      const value = [orderedFoodItems[i].food_id];
       db.query(queryText, value, (err, result) => {
-        if (result.rows.length === 0) {
-          i = submittedFoodItems.length;
-          return response.status(404).json({
-            success: 'false',
-            message: `Food item with id ${value} is unavailable`,
-          });
-        }
         const foundFood = {
           food_id: result.rows[0].food_id,
           food_name: result.rows[0].food_name,
           price: result.rows[0].price,
-          quantity: submittedFoodItems[i].quantity,
+          quantity: orderedFoodItems[i].quantity,
         };
         totalAmount += foundFood.price * foundFood.quantity;
         orderedItems.push(foundFood);
+        count += 1;
 
-        const orders = JSON.stringify(orderedItems);
-        const orderStatus = 'New';
-        const createdAt = new Date();
-        const updatedAt = new Date();
-        const text = 'INSERT INTO orders(food_items, user_id, amount, order_status, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
-        const newOrder = [
-          orders,
-          userId,
-          totalAmount,
-          orderStatus,
-          createdAt,
-          updatedAt,
-        ];
-        if (i + 1 === submittedFoodItems.length) {
+        if (count === orderedFoodItems.length) {
+          const orders = JSON.stringify(orderedItems);
+          const orderStatus = 'New';
+          const createdAt = new Date();
+          const updatedAt = new Date();
+          const text = 'INSERT INTO orders(food_items, user_id, amount, order_status, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
+          const newOrder = [orders, userId, totalAmount, orderStatus, createdAt, updatedAt];
           return db.query(text, newOrder, (error, result) => {
             if (error) {
-              return response.status(400).json({
+              response.status(400).json({
                 success: 'false',
                 message: 'Cant place order',
                 errorMessage: error,
               });
             } else {
-              return response.status(201).json({
+              response.status(201).json({
                 success: 'true',
                 message: 'Your order has been placed successfully',
                 result: result.rows[0],

@@ -1,4 +1,4 @@
-//  import db from '../db/users.db';
+import bcrypt from 'bcrypt';
 import generateToken from './generateToken';
 import db from '../models/db.connect';
 
@@ -18,8 +18,9 @@ class UserControllers {
     const userType = 'Customer';
     const createdAt = new Date();
     const updatedAt = new Date();
+    const passHash = bcrypt.hashSync(passTrim, 10);
 
-    const values = [userTrim, fullNameTrim, emailTrim, passTrim, userType, createdAt, updatedAt];
+    const values = [userTrim, fullNameTrim, emailTrim, passHash, userType, createdAt, updatedAt];
     const text = 'INSERT INTO users(username, full_name, email, password, user_type, created_at, updated_at) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
     return db.query(text, values, (err, result) => {
       if (err) {

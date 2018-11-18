@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/oluwajuwon/Fast-Food-Fast#readme",
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "cors": "^2.8.4",
