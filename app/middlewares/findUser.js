@@ -35,23 +35,23 @@ class FindUser {
     });
   }
 
-  loginFinduser(request, response, next) {
-    const { body } = request;
-    const { email, password } = body;
-    const emailTrim = email.trim();
-    const passwordTrim = password.trim();
-    const text = 'SELECT * FROM users WHERE email = $1 and password = $2';
-    const value = [emailTrim, passwordTrim];
-    return db.query(text, value, (err, result) => {
-      if (result.rows.length === 0) {
-        return response.status(404).json({
-          success: 'false',
-          message: 'Please enter valid credentials',
-        });
-      }
-      return next();
-    });
-  }
+  // loginFinduser(request, response, next) {
+  //   const { body } = request;
+  //   const { email, password } = body;
+  //   const emailTrim = email.trim();
+  //   const passwordTrim = password.trim();
+  //   const text = 'SELECT * FROM users WHERE email = $1 and password = $2';
+  //   const value = [emailTrim, passwordTrim];
+  //   return db.query(text, value, (err, result) => {
+  //     if (result.rows.length === 0) {
+  //       return response.status(404).json({
+  //         success: 'false',
+  //         message: 'Please enter valid credentials',
+  //       });
+  //     }
+  //     return next();
+  //   });
+  // }
 
   /* getEmail(email) {
 
