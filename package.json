@@ -14,7 +14,8 @@
     "start-prod": "webpack --config ./webpack.config.prod.js --mode production && nodemon ./app/app.js --exec babel-node --",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --compilers js:@babel/register ./app/tests/**/*.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:@babel/register ./app/tests/**/*.test.js --timeout 10000 --exit"
+    "test:server": "npm run pretest && nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:@babel/register ./app/tests/**/*.test.js --timeout 10000 --exit",
+    "test:client": "jest"
   },
   "engines": {
     "node": "8.9.3",
@@ -23,6 +24,16 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oluwajuwon/Fast-Food-Fast.git"
+  },
+  "nyc": {
+    "report-dir": "./server-coverage"
+  },
+  "jest": {
+    "coverageDirectory": "./client-coverage/",
+    "collectCoverage": true,
+    "testRegex": "./client/__tests__/.*.test.js",
+    "rootDir": ".",
+    "setupTestFrameworkScriptFile": "./client/__tests__/main.js"
   },
   "keywords": [
     "order",
@@ -60,10 +71,15 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.5",
     "babel-polyfill": "^6.26.0",
     "coveralls": "^3.0.2",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "enzyme-to-json": "^3.3.5",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -71,10 +87,12 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "istanbul": "^0.4.5",
+    "jest": "^23.6.0",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.4",
     "nyc": "^13.0.1",
+    "regenerator-runtime": "^0.13.1",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.1.2"
   }

@@ -10,7 +10,8 @@ addons:
         secure: "9894e7b58a743078c9316e16e3456ba1565a8a054eae857c03150a0d7d3aca31"
 
 script:
-  - npm run test
+  - npm run test:server
+  - npm run test:client
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
