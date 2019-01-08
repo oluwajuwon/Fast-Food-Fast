@@ -26,5 +26,6 @@ module.exports = {
   },
   devServer: {
     contentBase: `${__dirname}/client/public`,
+    port: 3000,
   },
 };

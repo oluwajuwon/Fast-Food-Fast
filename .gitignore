@@ -5,3 +5,5 @@ coverage
 .env
 vim.exe.stackdump
 /client/dist/
+server-coverage
+client-coverage
