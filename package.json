@@ -8,12 +8,12 @@
     "build": "npm run pre-build babel-node src -d lib",
     "build-client": "webpack --config ./webpack.config.dev.js --mode development",
     "migrate": "babel-node ./app/migrate.js ",
-    "pretest": "babel-node ./app/migrate.js ",
     "start-client": "webpack-dev-server --config ./webpack.config.dev.js --mode development",
     "start-dev": "npm run migrate && nodemon ./app/app.js --exec babel-node --",
     "start-prod": "webpack --config ./webpack.config.prod.js --mode production && nodemon ./app/app.js --exec babel-node --",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --compilers js:@babel/register ./app/tests/**/*.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "pretest": "babel-node ./app/migrate.js ",
     "test:server": "npm run pretest && nyc --reporter=html --reporter=text --reporter=lcov mocha --compilers js:@babel/register ./app/tests/**/*.test.js --timeout 10000 --exit",
     "test:client": "jest"
   },
@@ -31,6 +31,18 @@
   "jest": {
     "coverageDirectory": "./client-coverage/",
     "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "**/components/**",
+      "!**/node_modules/**",
+      "!**/app/**",
+      "!**/UI/**",
+      "!**/server-coverage/**",
+      "!**/client-coverage/**",
+      "!**/coverage/**",
+      "!**/client/dist/**",
+      "!**/*.config.{dev|prod}.js"
+    ],
     "testRegex": "./client/__tests__/.*.test.js",
     "rootDir": ".",
     "setupTestFrameworkScriptFile": "./client/__tests__/main.js"
@@ -60,6 +72,10 @@
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "save-dev": "^2.0.0",
     "supertest": "^3.2.0",
     "webpack-dev-server": "^3.1.14"
@@ -77,6 +93,7 @@
     "babel-loader": "^8.0.5",
     "babel-polyfill": "^6.26.0",
     "coveralls": "^3.0.2",
+    "css-loader": "^2.1.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "enzyme-to-json": "^3.3.5",
@@ -93,6 +110,7 @@
     "nodemon": "^1.18.4",
     "nyc": "^13.0.1",
     "regenerator-runtime": "^0.13.1",
+    "style-loader": "^0.23.1",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.1.2"
   }

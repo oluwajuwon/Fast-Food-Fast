@@ -14,7 +14,10 @@ module.exports = {
         query: {
           presets: ['@babel/preset-env', '@babel/react'],
         },
-
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -26,6 +29,7 @@ module.exports = {
   },
   devServer: {
     contentBase: `${__dirname}/client/public`,
-    port: 3000,
+    port: 5000,
+    historyApiFallback: true,
   },
 };
