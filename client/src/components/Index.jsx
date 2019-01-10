@@ -1,10 +1,10 @@
 import React from 'react';
 
-const App = () => (
+const Index = () => (
   <div>
-  Hello Everybody
+  This is index
     <p className="Class-inro">Hello my people</p>
   </div>
 );
 
-export default App;
+export default Index;
