@@ -200,6 +200,34 @@ class OrderControllers {
       });
     });
   }
+
+  async deleteOrder(request, response) {
+    const { decoded } = request;
+    const id = parseInt(request.params.id, 10);
+    const findOneQuery = 'SELECT * FROM orders WHERE order_id=$1';
+    const orderId = [id];
+    try {
+      const foundOrder = await db.query(findOneQuery, orderId);
+      if (foundOrder.rowCount === 0) {
+        return response.status(404).json({
+          success: 'false',
+          message: 'Sorry that order does not exist',
+        });
+      }
+      const deleteOneQuery = 'DELETE FROM orders WHERE order_id=$1 AND user_id=$2';
+      const neededIds = [id, decoded.user.userId];
+      await db.query(deleteOneQuery, neededIds);
+      return response.status(200).json({
+        success: 'true',
+        message: 'Your order has been deleted successfully',
+      });
+    } catch (error) {
+      return response.status(500).json({
+        success: 'false',
+        message: 'something went wrong, please try again',
+      });
+    }
+  }
 }
 
 const orderController = new OrderControllers();

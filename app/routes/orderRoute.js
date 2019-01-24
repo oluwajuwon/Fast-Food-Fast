@@ -6,7 +6,7 @@ import validateOrder from '../middlewares/validateOrder';
 import validateParams from '../middlewares/validateParams';
 
 const {
-  getAllorders, getOrder, createOrder, updateOrder, getOrdersbyStatus,
+  getAllorders, getOrder, createOrder, updateOrder, getOrdersbyStatus, deleteOrder,
 } = orderController;
 
 const { checkIfadmin } = verifyUser;
@@ -25,5 +25,6 @@ router.get('/api/v1/orders/:id', checkToken, checkOrderparams, checkIfadmin, get
 router.get('/api/v1/orders/status/:orderStatus', checkToken, checkIfadmin, getOrdersbyStatus);
 router.post('/api/v1/orders', checkToken, checkItems, checkFields, checkExistingFood, createOrder);
 router.put('/api/v1/orders/:id', checkToken, checkIfadmin, checkOrderparams, checkUpdatefields, updateOrder);
+router.delete('/api/v1/orders/:id', checkToken, deleteOrder);
 
 export default router;
