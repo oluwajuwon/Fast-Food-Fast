@@ -10,7 +10,7 @@
     "migrate": "babel-node ./app/migrate.js ",
     "start-client": "webpack-dev-server --config ./webpack.config.dev.js --mode development",
     "start-dev": "npm run migrate && nodemon ./app/app.js --exec babel-node --",
-    "start-prod": "./app/app.js --exec babel-node --",
+    "start-prod": "babel-node ./app/app.js",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --compilers js:@babel/register ./app/tests/**/*.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "pretest": "babel-node ./app/migrate.js ",
