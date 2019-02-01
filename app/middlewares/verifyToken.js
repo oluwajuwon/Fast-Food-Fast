@@ -23,7 +23,7 @@ class VerifyToken {
     }
     return response.status(403).json({
       success: false,
-      message: 'No token provided.',
+      message: 'Please login or signup',
     });
   }
 }

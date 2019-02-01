@@ -18,7 +18,7 @@ const {
   loginCheckUser,
 } = validateLogin;
 
-const { signUp, login } = userController;
+const { signUp, login, getCurrentUser } = userController;
 
 const { getUserorder } = orderController;
 
@@ -52,5 +52,7 @@ router.post(
 );
 
 router.get('/api/v1/users/:userId/orders', checkToken, checkUserparams, getUserorder);
+
+router.get('/api/v1/user', checkToken, getCurrentUser);
 
 export default router;

@@ -80,6 +80,37 @@ class UserControllers {
       });
     });
   }
+
+  async getCurrentUser(request, response) {
+    const { user: { userId } } = request.decoded;
+    const text = 'SELECT * FROM users WHERE user_id = $1';
+    const value = [userId];
+    try {
+      const foundUser = await db.query(text, value);
+      if (foundUser) {
+        const currentUser = {
+          userId: foundUser.rows[0].user_id,
+          username: foundUser.rows[0].username,
+          email: foundUser.rows[0].email,
+          userType: foundUser.rows[0].user_type,
+        };
+        return response.status(200).json({
+          success: 'true',
+          message: 'User retrieved successfully',
+          currentUser,
+        });
+      }
+      return response.status(400).json({
+        success: 'false',
+        message: 'Sorry User doesn\'t exist',
+      });
+    } catch (error) {
+      return response.status(500).json({
+        success: 'false',
+        message: 'Something went wrong',
+      });
+    }
+  }
 }
 
 const userController = new UserControllers();
